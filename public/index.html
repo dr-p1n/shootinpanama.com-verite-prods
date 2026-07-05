@@ -185,6 +185,36 @@
       transition:border-color .25s;cursor:pointer}
     .btn-ghost:hover{border-color:rgba(238,236,234,.7)}
 
+    /* ── HERO SLATE (designed film-slate overlay — replaces the stock clapperboard) ── */
+    #hero-section{position:relative}
+    .slate{position:absolute;z-index:19;right:3rem;bottom:3rem;width:clamp(258px,23vw,326px);
+      background:rgba(3,6,10,.66);backdrop-filter:blur(16px) saturate(1.1);
+      border:1px solid rgba(238,236,234,.13);box-shadow:0 34px 80px -34px rgba(0,0,0,.85);
+      opacity:0;transform:translateY(14px);animation:slateIn .9s .5s cubic-bezier(.2,.7,.2,1) forwards}
+    @keyframes slateIn{to{opacity:1;transform:none}}
+    .slate-clap{display:flex;height:15px;overflow:hidden;border-bottom:1px solid rgba(238,236,234,.13)}
+    .slate-clap i{flex:1 0 auto;width:15px;transform:skewX(-26deg) scaleX(1.5)}
+    .slate-clap i:nth-child(odd){background:rgba(238,236,234,.88)}
+    .slate-body{padding:1.1rem 1.2rem 1.15rem}
+    .slate-logo{font-family:'Playfair Display',serif;font-style:italic;font-weight:400;
+      font-size:1.55rem;line-height:1;color:var(--paper)}
+    .slate-logo b{display:block;font-family:'DM Sans',sans-serif;font-style:normal;font-weight:200;
+      font-size:.48rem;letter-spacing:.4em;text-transform:uppercase;color:var(--muted);margin-top:.55rem}
+    .slate-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.55rem;margin:1.1rem 0 .95rem}
+    .slate-cell .k{font-size:.44rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+    .slate-cell .v{font-size:1.05rem;font-weight:200;color:var(--paper);margin-top:.26rem;
+      font-variant-numeric:tabular-nums}
+    .slate-rule{height:1px;background:rgba(238,236,234,.11)}
+    .slate-tc{display:flex;align-items:center;justify-content:space-between;margin-top:.85rem}
+    .slate-tc .tc{font-size:1.02rem;font-weight:400;color:var(--accent);
+      font-variant-numeric:tabular-nums;letter-spacing:.06em}
+    .slate-tc .rec{display:flex;align-items:center;gap:.42rem;font-size:.46rem;
+      letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+    .slate-tc .rec::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);
+      animation:recblink 1.4s steps(1,end) infinite}
+    @keyframes recblink{0%,50%{opacity:1}51%,100%{opacity:.2}}
+    .slate-meta{font-size:.46rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:.7rem}
+
     /* ── SECTION HEADERS ── */
     .page-header{padding:4rem 3rem 3rem;border-bottom:1px solid var(--rule)}
     .page-header-eyebrow{font-size:.58rem;font-weight:400;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
@@ -418,6 +448,25 @@
         </div>
       </div>
     </div>
+
+    <!-- Designed film slate (PLACEHOLDER wordmark — swap for real Verite logo SVG) -->
+    <aside class="slate" aria-label="Production slate">
+      <div class="slate-clap"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="slate-body">
+        <div class="slate-logo">Verité<b>Producciones · Panamá</b></div>
+        <div class="slate-grid">
+          <div class="slate-cell"><div class="k">Roll</div><div class="v">A24</div></div>
+          <div class="slate-cell"><div class="k">Scene</div><div class="v">14</div></div>
+          <div class="slate-cell"><div class="k">Take</div><div class="v">03</div></div>
+        </div>
+        <div class="slate-rule"></div>
+        <div class="slate-tc">
+          <span class="tc" id="slate-tc">01:00:14:03</span>
+          <span class="rec">Rec</span>
+        </div>
+        <div class="slate-meta">24 FPS · S35 · Panama City</div>
+      </div>
+    </aside>
   </section>
 
   <!-- Quick services preview -->
@@ -796,6 +845,18 @@
   // Init from URL hash
   const initHash = location.hash.replace('#','') || 'home';
   if(pages.includes(initHash)) showPage(initHash);
+
+  // ── HERO SLATE: running timecode (HH:MM:SS:FF @ 24fps) ──
+  (function(){
+    const el = document.getElementById('slate-tc');
+    if(!el || window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+    let h = 1, m = 0, s = 14, f = 3;
+    const p = n => String(n).padStart(2,'0');
+    setInterval(() => {
+      if(++f >= 24){ f = 0; if(++s >= 60){ s = 0; if(++m >= 60){ m = 0; if(++h >= 24) h = 0; } } }
+      el.textContent = p(h)+':'+p(m)+':'+p(s)+':'+p(f);
+    }, 1000/24);
+  })();
 
   // ── MOBILE MENU ──
   function toggleMenu(force) {
