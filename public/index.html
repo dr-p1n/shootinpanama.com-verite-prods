@@ -123,6 +123,23 @@
       border-bottom:1px solid rgba(238,236,234,.35);transition:border-color .2s}
     .nav-cta:hover{border-color:var(--paper)}
 
+    /* ── MOBILE NAV (hamburger + overlay) ── */
+    .nav-toggle{display:none;flex-direction:column;justify-content:center;gap:6px;
+      width:34px;height:34px;background:none;border:none;cursor:pointer;padding:0}
+    .nav-toggle span{display:block;width:24px;height:1px;background:var(--paper);
+      transition:transform .3s ease,opacity .2s ease}
+    .nav-toggle.open span:nth-child(1){transform:translateY(3.5px) rotate(45deg)}
+    .nav-toggle.open span:nth-child(2){transform:translateY(-3.5px) rotate(-45deg)}
+    .mobile-menu{position:fixed;inset:0;z-index:250;background:rgba(3,6,10,.97);
+      backdrop-filter:blur(20px);display:flex;flex-direction:column;align-items:center;
+      justify-content:center;gap:1.75rem;opacity:0;visibility:hidden;
+      transition:opacity .35s ease,visibility .35s ease}
+    .mobile-menu.open{opacity:1;visibility:visible}
+    .mobile-link{font-size:1.5rem;font-weight:200;letter-spacing:.02em;color:var(--paper);
+      background:none;border:none;cursor:pointer;font-family:inherit;opacity:.75;transition:opacity .2s}
+    .mobile-link:hover,.mobile-link.active{opacity:1}
+    .mobile-link.mm-cta{margin-top:.75rem;font-family:'Playfair Display',serif;font-style:italic;color:var(--accent);opacity:1}
+
     /* ── PAGE SYSTEM ── */
     .page{display:none;min-height:100vh;padding-top:5rem}
     .page.active{display:block}
@@ -308,7 +325,8 @@
     @media(max-width:768px){
       #nav{padding:1.25rem 1.5rem}
       #nav.scrolled{padding:.9rem 1.5rem}
-      .nav-link:not(.nav-cta){display:none}
+      .nav-links{display:none}
+      .nav-toggle{display:flex}
       .hero-content{padding:0 1.5rem 3.5rem}
       .hero-bottom{flex-direction:column;align-items:flex-start;gap:1.5rem}
       .hero-cta-group{flex-direction:column;align-items:flex-start}
@@ -318,6 +336,7 @@
       .wc:first-child{grid-column:span 2!important;aspect-ratio:16/9!important}
       .wc-label{transform:translateY(0)}
       .stats-grid{grid-template-columns:1fr}
+      .home-svc{grid-template-columns:1fr!important;padding:3rem 1.5rem!important}
       .stat{padding:3rem 1.5rem}
       .contact-grid{grid-template-columns:1fr;gap:2.5rem}
       .rfq-form{grid-template-columns:1fr}
@@ -344,7 +363,19 @@
     <button class="nav-link" id="nav-resources" onclick="showPage('resources')">Resources</button>
     <button class="nav-cta" id="nav-contact" onclick="showPage('contact')">Get in Touch</button>
   </div>
+  <button class="nav-toggle" id="navToggle" onclick="toggleMenu()" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+    <span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-link" onclick="showPage('home')">Home</button>
+  <button class="mobile-link" onclick="showPage('work')">Work</button>
+  <button class="mobile-link" onclick="showPage('services')">Services</button>
+  <button class="mobile-link" onclick="showPage('resources')">Resources</button>
+  <button class="mobile-link mm-cta" onclick="showPage('contact')">Get in Touch</button>
+</div>
 
 <!-- ════════════════════ HOME ════════════════════ -->
 <div id="page-home" class="page active">
@@ -390,7 +421,7 @@
   </section>
 
   <!-- Quick services preview -->
-  <section style="padding:5rem 3rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border-top:1px solid var(--rule)">
+  <section class="home-svc" style="padding:5rem 3rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border-top:1px solid var(--rule)">
     <div style="background:var(--ink);padding:2.5rem 2rem">
       <p style="font-size:.58rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem">We Scout</p>
       <p style="font-weight:200;font-size:1.2rem;letter-spacing:-.01em;color:var(--paper);margin-bottom:.6rem">Production <span style="font-family:'Playfair Display',serif;font-style:italic;font-weight:400;color:rgba(238,236,234,.4)">Services</span></p>
@@ -743,6 +774,12 @@
     document.getElementById('page-' + id).classList.add('active');
     const btn = document.getElementById('nav-' + id);
     if(btn) btn.classList.add('active');
+    // Sync mobile menu highlight + close it on navigation
+    document.querySelectorAll('.mobile-link').forEach(l => l.classList.remove('active'));
+    const mIdx = pages.indexOf(id);
+    const mLinks = document.querySelectorAll('.mobile-link');
+    if(mIdx > -1 && mLinks[mIdx]) mLinks[mIdx].classList.add('active');
+    toggleMenu(false);
     window.scrollTo({top:0,behavior:'instant'});
     // Trigger reveals on new page
     setTimeout(() => initReveal(), 50);
@@ -759,6 +796,20 @@
   // Init from URL hash
   const initHash = location.hash.replace('#','') || 'home';
   if(pages.includes(initHash)) showPage(initHash);
+
+  // ── MOBILE MENU ──
+  function toggleMenu(force) {
+    const menu = document.getElementById('mobileMenu');
+    const toggle = document.getElementById('navToggle');
+    const open = (typeof force === 'boolean') ? force : !menu.classList.contains('open');
+    menu.classList.toggle('open', open);
+    toggle.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', open);
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  // Close menu on Escape
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') toggleMenu(false); });
 
   // ── NAV SCROLL ──
   const nav = document.getElementById('nav');
