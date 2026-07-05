@@ -18,5 +18,5 @@ Hosted on Cloudflare Pages. Every push to `main` redeploys automatically via Git
 Manual deploy:
 
 ```bash
-wrangler pages deploy . --project-name shootinpanama-verite
+wrangler pages deploy public --project-name shootinpanama-verite
 ```
