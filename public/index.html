@@ -3,8 +3,93 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Verite Producciones — Full-service production partner for international film, advertising and documentary projects in Panama.">
+  <meta name="description" content="Verite Producciones — Full-service production partner for international film, advertising and documentary projects in Panama. Fixers, crew, permits, locations and equipment in Panama City.">
+  <meta name="keywords" content="film production Panama, production services Panama, line producer Panama, fixer Panama, film permits Panama, documentary Panama, commercial production Panama, Verite Producciones">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#03060a">
+  <link rel="canonical" href="https://shootinpanama-verite.pages.dev/">
   <title>Shoot In Panama · Verite Producciones</title>
+
+  <!-- Open Graph / social preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Shoot In Panama · Verite Producciones">
+  <meta property="og:title" content="Shoot In Panama · Verite Producciones">
+  <meta property="og:description" content="Full-service production partner for international film, advertising and documentary projects in Panama.">
+  <meta property="og:url" content="https://shootinpanama-verite.pages.dev/">
+  <meta property="og:image" content="https://shootinpanama-verite.pages.dev/assets/hero-1920.jpg">
+  <meta property="og:image:width" content="1920">
+  <meta property="og:image:height" content="1298">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Shoot In Panama · Verite Producciones">
+  <meta name="twitter:description" content="Full-service production partner for international film, advertising and documentary projects in Panama.">
+  <meta name="twitter:image" content="https://shootinpanama-verite.pages.dev/assets/hero-1920.jpg">
+
+  <!-- Structured data (JSON-LD) for search & AI crawlers -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://shootinpanama-verite.pages.dev/#organization",
+        "name": "Verite Producciones",
+        "alternateName": "Shoot In Panama",
+        "url": "https://shootinpanama-verite.pages.dev/",
+        "description": "Full-service production partner for international film, advertising and documentary projects in Panama.",
+        "email": "rbarria@veriteproducciones.net",
+        "telephone": "+507-6612-7525",
+        "memberOf": {
+          "@type": "Organization",
+          "name": "International Quorum of Motion Picture Producers"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Panama City",
+          "addressCountry": "PA"
+        },
+        "areaServed": {
+          "@type": "Country",
+          "name": "Panama"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "sales",
+          "name": "Ricardo Barria",
+          "email": "rbarria@veriteproducciones.net",
+          "telephone": "+507-6612-7525",
+          "availableLanguage": ["en", "es"]
+        }
+      },
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://shootinpanama-verite.pages.dev/#service",
+        "name": "Verite Producciones — Film Production Services in Panama",
+        "image": "https://shootinpanama-verite.pages.dev/assets/hero-1920.jpg",
+        "url": "https://shootinpanama-verite.pages.dev/",
+        "priceRange": "$$$",
+        "parentOrganization": { "@id": "https://shootinpanama-verite.pages.dev/#organization" },
+        "areaServed": { "@type": "Country", "name": "Panama" },
+        "serviceType": [
+          "Film production services",
+          "Line producing",
+          "Location scouting",
+          "Film permits",
+          "Crew and equipment",
+          "Fixer services"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://shootinpanama-verite.pages.dev/#website",
+        "url": "https://shootinpanama-verite.pages.dev/",
+        "name": "Shoot In Panama · Verite Producciones",
+        "publisher": { "@id": "https://shootinpanama-verite.pages.dev/#organization" },
+        "inLanguage": "en"
+      }
+    ]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@200;300;400;500&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
@@ -266,12 +351,18 @@
 
   <section id="hero-section">
     <div class="hero-frame">
-      <!-- Full-bleed BTS photograph -->
-      <img
-        src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=1920&q=80"
-        alt="Behind the scenes — production set"
-        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;filter:brightness(.55) contrast(1.1) saturate(.85)"
-      >
+      <!-- Full-bleed BTS photograph (self-hosted, responsive WebP + JPEG fallback) -->
+      <picture>
+        <source type="image/webp" srcset="assets/hero-1280.webp 1280w, assets/hero-1920.webp 1920w" sizes="100vw">
+        <source type="image/jpeg" srcset="assets/hero-1280.jpg 1280w, assets/hero-1920.jpg 1920w" sizes="100vw">
+        <img
+          src="assets/hero-1920.jpg"
+          alt="Behind the scenes — film production set in Panama"
+          width="1920" height="1298"
+          fetchpriority="high" decoding="async"
+          style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;filter:brightness(.55) contrast(1.1) saturate(.85)"
+        >
+      </picture>
       <!-- Color grade overlay — teal shadows, warm mids -->
       <div style="position:absolute;inset:0;background:linear-gradient(160deg,rgba(2,18,14,.45) 0%,rgba(8,6,4,.2) 50%,rgba(18,8,4,.35) 100%);mix-blend-mode:multiply;z-index:2;pointer-events:none"></div>
       <div class="hero-bars"></div>
