@@ -186,7 +186,12 @@
     .btn-ghost:hover{border-color:rgba(238,236,234,.7)}
 
     /* ── HERO SLATE (designed film-slate overlay — replaces the stock clapperboard) ── */
-    #hero-section{position:relative}
+    #hero-section{position:relative;min-height:100vh;margin-top:-5rem;
+      display:flex;flex-direction:column;justify-content:flex-end}
+    .hero-scrim{position:absolute;inset:0;z-index:5;pointer-events:none;
+      background:
+        linear-gradient(to top,rgba(3,6,10,.94) 0%,rgba(3,6,10,.6) 26%,rgba(3,6,10,.12) 52%,transparent 72%),
+        linear-gradient(to right,rgba(3,6,10,.72) 0%,rgba(3,6,10,.2) 42%,transparent 66%)}
     /* ── HERO WHITE CLAPPERBOARD SLATE (reads "Verite") ── */
     .slate{position:absolute;z-index:19;right:3rem;top:5.9rem;width:clamp(296px,31vw,424px);
       transform:rotate(-1.5deg);transform-origin:center;
@@ -438,27 +443,23 @@
 
   <section id="hero-section">
     <div class="hero-frame">
-      <!-- Panama City skyline at dusk (self-hosted, responsive WebP + JPEG), graded dark.
-           Photo: Adam Jones, CC BY-SA 2.0 (Wikimedia Commons) — placeholder; replace with a
-           licensed/owned Verite frame before production, or keep this credit visible. -->
+      <!-- Full-bleed hero photograph (self-hosted, responsive WebP + JPEG).
+           Photo: Adam Jones, CC BY-SA 2.0 (Wikimedia Commons) — placeholder;
+           swap for an owned/licensed Verite catalog still before production. -->
       <picture>
         <source type="image/webp" srcset="assets/panama-1280.webp 1280w, assets/panama-1920.webp 1920w" sizes="100vw">
         <source type="image/jpeg" srcset="assets/panama-1280.jpg 1280w, assets/panama-1920.jpg 1920w" sizes="100vw">
         <img
           src="assets/panama-1920.jpg"
-          alt="Panama City skyline at dusk — Verite Producciones"
+          alt="Panama City skyline — Verite Producciones"
           width="1920" height="1080"
           fetchpriority="high" decoding="async"
-          style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 42%;filter:brightness(.5) contrast(1.08) saturate(.82)"
+          style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 45%;filter:brightness(.82) contrast(1.04) saturate(.95)"
         >
       </picture>
-      <!-- Color grade overlay — teal shadows, warm mids -->
-      <div style="position:absolute;inset:0;background:linear-gradient(160deg,rgba(2,18,14,.45) 0%,rgba(8,6,4,.2) 50%,rgba(18,8,4,.35) 100%);mix-blend-mode:multiply;z-index:2;pointer-events:none"></div>
-      <div class="hero-grain"></div>
-      <div class="hero-bars"></div>
+      <!-- Legibility scrim (darkens bottom + left where the copy sits) -->
+      <div class="hero-scrim"></div>
     </div>
-    <div class="hero-marks"><i></i><i></i><i></i><i></i></div>
-    <div class="hero-vig"></div>
     <div class="hero-content">
       <div class="hero-eyebrow">
         <div class="hero-eyebrow-line"></div>
@@ -479,21 +480,6 @@
       </div>
     </div>
 
-    <!-- White clapperboard slate — reads Verite (logo art swaps in over .slate-prod later) -->
-    <aside class="slate" aria-label="Production slate — Verite Producciones">
-      <div class="slate-arm"></div>
-      <div class="slate-stripes"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-      <div class="slate-face">
-        <div class="slate-row">
-          <div class="slate-cell"><div class="k">Roll</div><div class="v">A24</div></div>
-          <div class="slate-cell"><div class="k">Scene</div><div class="v">14</div></div>
-          <div class="slate-cell"><div class="k">Take</div><div class="v">03</div></div>
-        </div>
-        <div class="slate-led"><span class="tc" id="slate-tc">01:00:14:03</span><span class="fps">24 FPS</span></div>
-        <div class="slate-prod"><span class="k">Prod</span><span class="v">Verite Producciones</span></div>
-        <div class="slate-foot"><span>Loc · <b>Panamá</b></span><span class="rec">Rec</span></div>
-      </div>
-    </aside>
   </section>
 
   <!-- Quick services preview -->
