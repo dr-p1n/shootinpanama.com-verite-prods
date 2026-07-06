@@ -309,6 +309,35 @@
     .s-name em{font-family:'Playfair Display',serif;font-style:italic;font-weight:400;color:rgba(238,236,234,.4)}
     .s-desc{font-size:.8rem;font-weight:300;color:var(--muted);line-height:1.9;max-width:54ch}
 
+    /* ── LOCATIONS ── */
+    .loc-head{padding:4.5rem 3rem 2rem}
+    .loc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);
+      border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+    .loc-card{background:var(--ink);padding:2.3rem 2rem;display:flex;flex-direction:column;
+      transition:background .3s}
+    .loc-card:hover{background:rgba(238,236,234,.02)}
+    .loc-num{font-size:.56rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:1.1rem}
+    .loc-name{font-weight:200;font-size:1.45rem;letter-spacing:-.01em;color:var(--paper);margin-bottom:.7rem;line-height:1.15}
+    .loc-name em{font-family:'Playfair Display',serif;font-style:italic;font-weight:400;color:rgba(238,236,234,.45)}
+    .loc-desc{font-size:.76rem;font-weight:300;color:var(--muted);line-height:1.85}
+
+    /* ── WEATHER ── */
+    .wx-wrap{padding:4.5rem 3rem 2rem}
+    .wx-lede{font-size:.82rem;font-weight:300;color:var(--muted);line-height:1.9;max-width:60ch;margin:1.25rem 0 2.5rem}
+    .wx-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule)}
+    .wx-card{background:var(--ink);padding:1.9rem 1.5rem}
+    .wx-loc{font-size:.56rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(238,236,234,.55);margin-bottom:.15rem}
+    .wx-region{font-family:'Playfair Display',serif;font-style:italic;font-size:.8rem;color:rgba(238,236,234,.35);margin-bottom:1.15rem}
+    .wx-temp{font-weight:200;font-size:2.7rem;line-height:1;color:var(--paper);font-variant-numeric:tabular-nums}
+    .wx-temp sup{font-size:.34em;vertical-align:super;color:var(--muted);font-weight:300}
+    .wx-cond{display:flex;align-items:center;gap:.5rem;margin-top:.75rem;font-size:.72rem;font-weight:300;color:var(--muted)}
+    .wx-ico{font-size:1.05rem;filter:grayscale(.15)}
+    .wx-seasons{display:flex;gap:2.5rem;flex-wrap:wrap;margin-top:2.5rem;padding-top:2rem;border-top:1px solid var(--rule)}
+    .wx-season{flex:1;min-width:190px}
+    .wx-season-k{font-size:.56rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:.55rem}
+    .wx-season-v{font-size:.77rem;font-weight:300;color:var(--muted);line-height:1.8}
+    .wx-note{margin-top:1.75rem;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(238,236,234,.28)}
+
     /* Stats band */
     .stats-band{position:relative;overflow:hidden;margin:4rem 0 0}
     .stats-bg{position:absolute;inset:0;
@@ -393,6 +422,9 @@
       .hero-bottom{flex-direction:column;align-items:flex-start;gap:1.5rem}
       .hero-cta-group{flex-direction:column;align-items:flex-start}
       .page-header,.work-grid-wrap,.services-wrap,.resources-wrap,.contact-wrap{padding-left:1.5rem;padding-right:1.5rem}
+      .loc-head,.wx-wrap{padding-left:1.5rem;padding-right:1.5rem}
+      .loc-grid{grid-template-columns:1fr 1fr}
+      .wx-grid{grid-template-columns:1fr 1fr}
       .work-grid{grid-template-columns:1fr 1fr;gap:2px}
       .wc{grid-column:span 1!important;aspect-ratio:4/3!important}
       .wc:first-child{grid-column:span 2!important;aspect-ratio:16/9!important}
@@ -473,7 +505,7 @@
         arrives ready to shoot, not ready to problem-solve.
       </p>
       <div class="hero-bottom">
-        <p class="hero-sub">MTV · CBS · NBC · MrBeast · OEA · JMW</p>
+        <p class="hero-sub">Survivor · The Amazing Race · MrBeast · Deal or No Deal Island · MTV · CBS</p>
         <div class="hero-cta-group">
           <button class="btn-primary" onclick="showPage('contact')">Request a Quote</button>
           <button class="btn-ghost" onclick="showPage('work')">View Work</button>
@@ -624,12 +656,86 @@
           <p class="stat-detail">Direct flights from Miami, Bogotá, Madrid and Mexico City. Your crew lands and works day one.</p>
         </div>
         <div class="stat">
-          <div class="stat-n">40<sup>%</sup></div>
-          <p class="stat-label">Lower production costs</p>
-          <p class="stat-detail">Compared to equivalent locations in the region. Same caliber output, sharper budget.</p>
+          <div class="stat-n">25<sup>%</sup></div>
+          <p class="stat-label">Cash rebate</p>
+          <p class="stat-detail">On qualifying spends over $500K, through a licensed local partner. We structure and file it.</p>
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- ── LOCATIONS ── -->
+  <div class="loc-head reveal">
+    <p class="page-header-eyebrow">Locations</p>
+    <h2 class="page-header-title">Every backdrop,<br><em>one country.</em></h2>
+    <p class="page-header-desc">Caribbean to Pacific in a little over an hour. Panama doubles for the whole hemisphere — and we already know the permit, the road and the tide for each of them.</p>
+  </div>
+  <div class="loc-grid reveal">
+    <div class="loc-card">
+      <div class="loc-num">01 · Coast</div>
+      <div class="loc-name">Caribbean <em>Beaches</em></div>
+      <p class="loc-desc">Turquoise water and deserted islands — Bocas del Toro, the Pearl Islands, Pedasí. The look reality and campaign shoots keep coming back for.</p>
+    </div>
+    <div class="loc-card">
+      <div class="loc-num">02 · Urban</div>
+      <div class="loc-name">Panama <em>City</em></div>
+      <p class="loc-desc">A modern skyline with distinct neighborhoods that stand in for metros across the Americas — glass towers to gritty backstreets.</p>
+    </div>
+    <div class="loc-card">
+      <div class="loc-num">03 · Wild</div>
+      <div class="loc-name">Rainforest <em>&amp; Jungle</em></div>
+      <p class="loc-desc">Tropical jungle, mountains, raging rivers and waterfalls — dense wilderness that sits minutes from a five-star base.</p>
+    </div>
+    <div class="loc-card">
+      <div class="loc-num">04 · Maritime</div>
+      <div class="loc-name">Ports <em>&amp; Canal</em></div>
+      <p class="loc-desc">The Panama Canal and working deep-water ports — industrial scale and maritime access found in almost no other single country.</p>
+    </div>
+    <div class="loc-card">
+      <div class="loc-num">05 · Heritage</div>
+      <div class="loc-name">Casco <em>Viejo</em></div>
+      <p class="loc-desc">The UNESCO old town — cobblestone streets, Spanish-colonial façades and centuries of texture in a few walkable blocks.</p>
+    </div>
+    <div class="loc-card">
+      <div class="loc-num">06 · Access</div>
+      <div class="loc-name">Airports <em>&amp; Hubs</em></div>
+      <p class="loc-desc">Hub of the Americas — direct flights to 90+ cities and single-window customs. Crew and gear land and work day one.</p>
+    </div>
+  </div>
+
+  <!-- ── WEATHER ── -->
+  <div class="wx-wrap reveal">
+    <p class="page-header-eyebrow">Weather</p>
+    <h2 class="page-header-title">Shoot <em>year-round.</em></h2>
+    <p class="wx-lede">Close to 12 hours of daylight every day of the year and a stable tropical climate mean minimal weather loss. Live conditions across our primary filming regions:</p>
+    <div class="wx-grid" id="wx-grid">
+      <div class="wx-card" data-lat="8.98" data-lon="-79.52">
+        <div class="wx-loc">Panama City</div><div class="wx-region">Pacific · Urban</div>
+        <div class="wx-temp" data-temp>—</div>
+        <div class="wx-cond"><span class="wx-ico" data-ico>·</span><span data-cond>Loading…</span></div>
+      </div>
+      <div class="wx-card" data-lat="9.34" data-lon="-82.24">
+        <div class="wx-loc">Bocas del Toro</div><div class="wx-region">Caribbean · Islands</div>
+        <div class="wx-temp" data-temp>—</div>
+        <div class="wx-cond"><span class="wx-ico" data-ico>·</span><span data-cond>Loading…</span></div>
+      </div>
+      <div class="wx-card" data-lat="8.78" data-lon="-82.44">
+        <div class="wx-loc">Boquete</div><div class="wx-region">Highlands · Forest</div>
+        <div class="wx-temp" data-temp>—</div>
+        <div class="wx-cond"><span class="wx-ico" data-ico>·</span><span data-cond>Loading…</span></div>
+      </div>
+      <div class="wx-card" data-lat="7.53" data-lon="-80.03">
+        <div class="wx-loc">Pedasí</div><div class="wx-region">Pacific · Coast</div>
+        <div class="wx-temp" data-temp>—</div>
+        <div class="wx-cond"><span class="wx-ico" data-ico>·</span><span data-cond>Loading…</span></div>
+      </div>
+    </div>
+    <div class="wx-seasons">
+      <div class="wx-season"><div class="wx-season-k">Dry Season</div><div class="wx-season-v">Late December–April. The prime window — reliable sun, low rainfall and calm seas.</div></div>
+      <div class="wx-season"><div class="wx-season-k">Green Season</div><div class="wx-season-v">May–December. Lush landscapes and dramatic skies; mornings usually shoot clear.</div></div>
+      <div class="wx-season"><div class="wx-season-k">Daylight &amp; Time</div><div class="wx-season-v">~12h of light every day, year-round. GMT−5, no daylight saving. Typically 26–34°C.</div></div>
+    </div>
+    <p class="wx-note">Live data · Open-Meteo</p>
   </div>
 
   <footer>
@@ -870,16 +976,37 @@
   const initHash = location.hash.replace('#','') || 'home';
   if(pages.includes(initHash)) showPage(initHash);
 
-  // ── HERO SLATE: running timecode (HH:MM:SS:FF @ 24fps) ──
+  // ── LIVE WEATHER (Open-Meteo, keyless) ──
   (function(){
-    const el = document.getElementById('slate-tc');
-    if(!el || window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
-    let h = 1, m = 0, s = 14, f = 3;
-    const p = n => String(n).padStart(2,'0');
-    setInterval(() => {
-      if(++f >= 24){ f = 0; if(++s >= 60){ s = 0; if(++m >= 60){ m = 0; if(++h >= 24) h = 0; } } }
-      el.textContent = p(h)+':'+p(m)+':'+p(s)+':'+p(f);
-    }, 1000/24);
+    const cards = [...document.querySelectorAll('#wx-grid .wx-card')];
+    if(!cards.length) return;
+    const lat = cards.map(c => c.dataset.lat).join(',');
+    const lon = cards.map(c => c.dataset.lon).join(',');
+    const url = 'https://api.open-meteo.com/v1/forecast?latitude=' + lat + '&longitude=' + lon +
+      '&current=temperature_2m,weather_code&timezone=auto';
+    const wmo = code => {
+      if(code === 0) return ['☀︎','Clear'];
+      if(code <= 2) return ['⛅︎','Partly cloudy'];
+      if(code === 3) return ['☁︎','Overcast'];
+      if(code <= 48) return ['🌫︎','Fog'];
+      if(code <= 57) return ['🌦︎','Drizzle'];
+      if(code <= 67) return ['🌧︎','Rain'];
+      if(code <= 82) return ['🌦︎','Showers'];
+      return ['⛈︎','Thunderstorm'];
+    };
+    fetch(url).then(r => r.ok ? r.json() : Promise.reject(r.status)).then(data => {
+      const arr = Array.isArray(data) ? data : [data];
+      cards.forEach((card, i) => {
+        const cur = arr[i] && arr[i].current;
+        if(!cur) return;
+        const [ico, label] = wmo(cur.weather_code);
+        card.querySelector('[data-temp]').innerHTML = Math.round(cur.temperature_2m) + '<sup>°C</sup>';
+        card.querySelector('[data-ico]').textContent = ico;
+        card.querySelector('[data-cond]').textContent = label;
+      });
+    }).catch(() => {
+      cards.forEach(card => { card.querySelector('[data-cond]').textContent = 'Live data unavailable'; });
+    });
   })();
 
   // ── MOBILE MENU ──
