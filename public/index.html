@@ -298,6 +298,34 @@
     .cl-serif:hover{color:rgba(238,236,234,.65)}
     .cdot{width:2px;height:2px;border-radius:50%;background:rgba(238,236,234,.15);flex-shrink:0}
 
+    /* ── BEHIND THE SCENES (on-set gallery) ── */
+    .bts{padding:5rem 3rem 5.5rem;border-top:1px solid var(--rule)}
+    .bts-head{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;margin-bottom:2.5rem;flex-wrap:wrap}
+    .bts-eyebrow{font-size:.58rem;font-weight:400;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
+    .bts-title{font-weight:200;font-size:clamp(1.6rem,3vw,2.6rem);letter-spacing:-.02em;color:var(--paper);line-height:1.08}
+    .bts-title em{font-family:'Fraunces',serif;font-style:italic;font-weight:400;color:rgba(238,236,234,.5)}
+    .bts-note{font-family:'Fraunces',serif;font-style:italic;font-size:.78rem;color:var(--muted);max-width:32ch;text-align:right;line-height:1.6}
+    .bts-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:3px}
+    .bts-cell{position:relative;overflow:hidden;background:#05080e;cursor:default}
+    .bts-cell:nth-child(1){grid-column:span 5;aspect-ratio:4/3}
+    .bts-cell:nth-child(2){grid-column:span 4;aspect-ratio:1/1}
+    .bts-cell:nth-child(3){grid-column:span 3;aspect-ratio:3/4}
+    .bts-cell:nth-child(4){grid-column:span 4;aspect-ratio:4/5}
+    .bts-cell:nth-child(5){grid-column:span 5;aspect-ratio:16/10}
+    .bts-cell:nth-child(6){grid-column:span 3;aspect-ratio:3/4}
+    .bts-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+      filter:grayscale(.3) brightness(.72) contrast(1.06);transition:transform .8s cubic-bezier(.16,1,.3,1),filter .5s}
+    .bts-cell:hover .bts-img{transform:scale(1.05);filter:grayscale(0) brightness(.86)}
+    .bts-cell::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:1;
+      background:linear-gradient(to top,rgba(3,6,10,.88) 0%,transparent 52%)}
+    .bts-frameno{position:absolute;top:.85rem;left:.9rem;z-index:2;font-size:.5rem;font-weight:500;
+      letter-spacing:.18em;text-transform:uppercase;color:rgba(238,236,234,.42);font-variant-numeric:tabular-nums}
+    .bts-cap{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:1.5rem 1.1rem 1.1rem;
+      transform:translateY(.4rem);opacity:0;transition:transform .45s cubic-bezier(.16,1,.3,1),opacity .45s}
+    .bts-cell:hover .bts-cap{transform:translateY(0);opacity:1}
+    .bts-cap-t{font-family:'Fraunces',serif;font-style:italic;font-size:.85rem;color:var(--paper);line-height:1.3}
+    .bts-cap-s{font-size:.55rem;font-weight:400;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,236,234,.42);margin-top:.35rem}
+
     /* ── SERVICES PAGE ── */
     .services-wrap{padding:2.5rem 3rem 5rem}
     .services-how{font-size:.58rem;font-weight:400;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);margin-bottom:2rem}
@@ -480,6 +508,13 @@
       .wc{grid-column:span 1!important;aspect-ratio:4/3!important}
       .wc:first-child{grid-column:span 2!important;aspect-ratio:16/9!important}
       .wc-label{transform:translateY(0)}
+      .bts{padding:3.5rem 1.5rem}
+      .bts-head{flex-direction:column;align-items:flex-start}
+      .bts-note{text-align:left}
+      .bts-grid{grid-template-columns:1fr 1fr;gap:2px}
+      .bts-cell{grid-column:span 1!important;aspect-ratio:1/1!important}
+      .bts-cell:first-child{grid-column:span 2!important;aspect-ratio:16/10!important}
+      .bts-cap{transform:translateY(0);opacity:1}
       .stats-grid{grid-template-columns:1fr}
       .home-svc{grid-template-columns:1fr!important;padding:3rem 1.5rem!important}
       .stat{padding:3rem 1.5rem}
@@ -687,6 +722,49 @@
       </div>
     </div>
   </div>
+
+  <!-- Behind the scenes / on-set gallery -->
+  <section class="bts">
+    <div class="bts-head reveal">
+      <div>
+        <p class="bts-eyebrow">From The Set</p>
+        <h2 class="bts-title">Behind <em>the scenes.</em></h2>
+      </div>
+      <p class="bts-note">Frames from our crews on location — jungle, coast, canal and capital.</p>
+    </div>
+    <div class="bts-grid">
+      <div class="bts-cell reveal">
+        <picture><source srcset="assets/cam-1280.webp" type="image/webp"><img class="bts-img" src="assets/cam-1280.jpg" alt="Camera operator on a Verite production in Panama" loading="lazy" decoding="async"></picture>
+        <span class="bts-frameno">Fr. 014</span>
+        <div class="bts-cap"><p class="bts-cap-t">Camera department</p><p class="bts-cap-s">Panama City · Feature</p></div>
+      </div>
+      <div class="bts-cell reveal">
+        <picture><source srcset="assets/loc-forest.webp" type="image/webp"><img class="bts-img" src="assets/loc-forest.jpg" alt="Crew filming in the Panamanian rainforest" loading="lazy" decoding="async"></picture>
+        <span class="bts-frameno">Fr. 027</span>
+        <div class="bts-cap"><p class="bts-cap-t">Rainforest unit</p><p class="bts-cap-s">Darién · Documentary</p></div>
+      </div>
+      <div class="bts-cell reveal">
+        <picture><source srcset="assets/loc-casco.webp" type="image/webp"><img class="bts-img" src="assets/loc-casco.jpg" alt="Filming on a Casco Viejo street set" loading="lazy" decoding="async"></picture>
+        <span class="bts-frameno">Fr. 041</span>
+        <div class="bts-cap"><p class="bts-cap-t">Street set</p><p class="bts-cap-s">Casco Viejo · Commercial</p></div>
+      </div>
+      <div class="bts-cell reveal">
+        <picture><source srcset="assets/loc-canal.webp" type="image/webp"><img class="bts-img" src="assets/loc-canal.jpg" alt="Shooting at the Panama Canal locks" loading="lazy" decoding="async"></picture>
+        <span class="bts-frameno">Fr. 058</span>
+        <div class="bts-cap"><p class="bts-cap-t">Canal locks</p><p class="bts-cap-s">Agua Clara · Broadcast</p></div>
+      </div>
+      <div class="bts-cell reveal">
+        <picture><source srcset="assets/loc-beach.webp" type="image/webp"><img class="bts-img" src="assets/loc-beach.jpg" alt="Coastal shoot on a Caribbean beach in Panama" loading="lazy" decoding="async"></picture>
+        <span class="bts-frameno">Fr. 072</span>
+        <div class="bts-cap"><p class="bts-cap-t">Coastal day</p><p class="bts-cap-s">Bocas del Toro · Reality</p></div>
+      </div>
+      <div class="bts-cell reveal">
+        <picture><source srcset="assets/loc-city.webp" type="image/webp"><img class="bts-img" src="assets/loc-city.jpg" alt="Night rig over the Panama City skyline" loading="lazy" decoding="async"></picture>
+        <span class="bts-frameno">Fr. 089</span>
+        <div class="bts-cap"><p class="bts-cap-t">Skyline rig</p><p class="bts-cap-s">Panama City · Feature</p></div>
+      </div>
+    </div>
+  </section>
 
   <footer>
     <span class="footer-logo">Shoot In Panama</span>
