@@ -445,6 +445,40 @@
     .resource-dl:hover{opacity:.65}
     .resource-dl svg{width:.75rem;height:.75rem}
 
+    /* ── DOWNLOAD GATE (lead capture) ── */
+    .gate{position:fixed;inset:0;z-index:400;display:flex;align-items:center;justify-content:center;
+      padding:1.5rem;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s ease}
+    .gate.open{opacity:1;visibility:visible}
+    .gate-backdrop{position:absolute;inset:0;background:rgba(2,4,8,.82);backdrop-filter:blur(6px)}
+    .gate-card{position:relative;z-index:1;width:100%;max-width:430px;background:#080b10;
+      border:1px solid var(--rule);padding:2.75rem 2.5rem 2.5rem;
+      transform:translateY(12px);transition:transform .35s cubic-bezier(.16,1,.3,1)}
+    .gate.open .gate-card{transform:translateY(0)}
+    .gate-x{position:absolute;top:1.1rem;right:1.2rem;background:none;border:none;cursor:pointer;
+      font-size:1.4rem;line-height:1;color:rgba(238,236,234,.35);transition:color .2s;padding:.2rem}
+    .gate-x:hover{color:var(--paper)}
+    .gate-eyebrow{font-size:.55rem;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin-bottom:.9rem}
+    .gate-title{font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:1.4rem;
+      line-height:1.25;color:var(--paper);margin-bottom:.85rem}
+    .gate-desc{font-size:.76rem;font-weight:300;color:var(--muted);line-height:1.75;margin-bottom:1.75rem}
+    .gate-form{display:flex;flex-direction:column;gap:.85rem}
+    .gate-input{width:100%;background:rgba(238,236,234,.03);border:1px solid var(--rule);
+      color:var(--paper);font-family:inherit;font-size:.82rem;font-weight:300;padding:.8rem .9rem;
+      transition:border-color .2s}
+    .gate-input::placeholder{color:rgba(238,236,234,.3)}
+    .gate-input:focus{outline:none;border-color:rgba(238,236,234,.4)}
+    .gate-submit{margin-top:.5rem;width:100%;justify-content:center;border:none;cursor:pointer;
+      font-family:inherit;display:inline-flex;align-items:center;font-size:.6rem;font-weight:400;
+      letter-spacing:.2em;text-transform:uppercase;padding:.95rem 1.75rem;color:var(--ink);
+      background:var(--paper);transition:background .25s,color .25s}
+    .gate-submit:hover{background:var(--accent);color:var(--paper)}
+    .gate-fine{margin-top:1rem;font-size:.6rem;font-weight:300;color:rgba(238,236,234,.28);line-height:1.6}
+    .gate-success{text-align:center;padding:1rem 0 .5rem}
+    .gate-success .tick{width:2.5rem;height:2.5rem;border:1px solid var(--accent);border-radius:50%;
+      display:flex;align-items:center;justify-content:center;color:var(--accent);margin:0 auto 1.25rem;font-size:1.1rem}
+    .gate-success-t{font-family:'Fraunces',serif;font-style:italic;font-size:1.15rem;color:var(--paper);margin-bottom:.6rem}
+    .gate-success-p{font-size:.76rem;font-weight:300;color:var(--muted);line-height:1.75;max-width:32ch;margin:0 auto}
+
     /* ── CONTACT PAGE ── */
     .contact-wrap{padding:2.5rem 3rem 5rem}
     .contact-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:5rem;align-items:start}
@@ -945,8 +979,8 @@
     <picture><source srcset="assets/ph-resources-1280.webp 1280w, assets/ph-resources-1920.webp 1920w" type="image/webp"><source srcset="assets/ph-resources-1280.jpg 1280w, assets/ph-resources-1920.jpg 1920w" type="image/jpeg"><img class="page-hero-img" src="assets/ph-resources-1920.jpg" alt="Cobblestone street in Casco Viejo, Panama" decoding="async"></picture>
     <div class="page-header">
       <p class="page-header-eyebrow">Resources</p>
-      <h2 class="page-header-title">Everything you need<br><em>before you land.</em></h2>
-      <p class="page-header-desc">Downloadable guides, permit templates and location briefs prepared for international production teams. Request any document and we'll send the current version within 24 hours.</p>
+      <h2 class="page-header-title">Know Panama<br><em>before you commit.</em></h2>
+      <p class="page-header-desc">Field guides, incentive breakdowns and pre-production intel for producers weighing Panama for their next project. Free to download — tell us where to send it and we'll email it straight over.</p>
     </div>
   </div>
 
@@ -954,79 +988,79 @@
     <div class="resources-grid">
 
       <div class="resource-card reveal">
-        <p class="resource-card-cat">Permits &amp; Legal</p>
-        <p class="resource-card-title">Panama Filming Permit Guide</p>
-        <p class="resource-card-desc">Step-by-step permit process for foreign productions filming in Panama City, interior locations and protected areas. Includes contact list for INAC and municipal authorities.</p>
+        <p class="resource-card-cat">Field Guide</p>
+        <p class="resource-card-title">The International Producer's Guide to Panama</p>
+        <p class="resource-card-desc">The orientation we give every producer weighing Panama: geography, seasons, crew depth, canal and airport access, and why one small country doubles for a dozen others on screen.</p>
         <div class="resource-card-footer">
-          <span class="resource-card-meta">PDF · Updated Q1 2025</span>
-          <button class="resource-dl" onclick="requestDoc('Panama Filming Permit Guide')">
+          <span class="resource-card-meta">PDF · 28 pages</span>
+          <button class="resource-dl" onclick="openGate('The International Producer&#39;s Guide to Panama')">
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8m0 0l-3-3m3 3l3-3M2 12h12"/></svg>
-            Request
+            Download
           </button>
         </div>
       </div>
 
       <div class="resource-card reveal">
-        <p class="resource-card-cat">Permits &amp; Legal</p>
-        <p class="resource-card-title">Location Release Template</p>
-        <p class="resource-card-desc">Bilingual (EN/ES) location release agreement used across our productions. Compliant with Panamanian civil law and accepted by US and European studio legal departments.</p>
+        <p class="resource-card-cat">Incentives</p>
+        <p class="resource-card-title">The 25% Cash Rebate, Explained</p>
+        <p class="resource-card-desc">A plain-English walkthrough of Film Law 16 — who qualifies, which spend counts, the single-window filing, timelines and worked examples — so you can model the incentive before you pitch it.</p>
         <div class="resource-card-footer">
-          <span class="resource-card-meta">DOCX · Bilingual</span>
-          <button class="resource-dl" onclick="requestDoc('Location Release Template')">
+          <span class="resource-card-meta">PDF · Incentive briefing</span>
+          <button class="resource-dl" onclick="openGate('The 25% Cash Rebate, Explained')">
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8m0 0l-3-3m3 3l3-3M2 12h12"/></svg>
-            Request
-          </button>
-        </div>
-      </div>
-
-      <div class="resource-card reveal">
-        <p class="resource-card-cat">Budgeting</p>
-        <p class="resource-card-title">Panama Production Rate Card</p>
-        <p class="resource-card-desc">Day rates for local crew by department, equipment rental costs, location fees and transport benchmarks. Updated quarterly. Use for preliminary budget estimates before engagement.</p>
-        <div class="resource-card-footer">
-          <span class="resource-card-meta">PDF · Q2 2025</span>
-          <button class="resource-dl" onclick="requestDoc('Panama Production Rate Card')">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8m0 0l-3-3m3 3l3-3M2 12h12"/></svg>
-            Request
+            Download
           </button>
         </div>
       </div>
 
       <div class="resource-card reveal">
         <p class="resource-card-cat">Locations</p>
-        <p class="resource-card-title">Panama Location Brief</p>
-        <p class="resource-card-desc">Overview of filming locations across Panama: Canal Zone, Casco Viejo, Pacific coast, rainforest and urban Punta Pacifica. Includes logistics notes and permit complexity per zone.</p>
+        <p class="resource-card-title">Panama On-Screen — A Location Lookbook</p>
+        <p class="resource-card-desc">A visual tour of what Panama gives you on camera: Caribbean to Pacific in under an hour, rainforest, Casco Viejo, the Canal and a modern skyline — with the countries each backdrop can double for.</p>
         <div class="resource-card-footer">
-          <span class="resource-card-meta">PDF · 32 pages</span>
-          <button class="resource-dl" onclick="requestDoc('Panama Location Brief')">
+          <span class="resource-card-meta">PDF · Lookbook</span>
+          <button class="resource-dl" onclick="openGate('Panama On-Screen — A Location Lookbook')">
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8m0 0l-3-3m3 3l3-3M2 12h12"/></svg>
-            Request
+            Download
           </button>
         </div>
       </div>
 
       <div class="resource-card reveal">
-        <p class="resource-card-cat">Compliance</p>
-        <p class="resource-card-title">Foreign Production Insurance Checklist</p>
-        <p class="resource-card-desc">Minimum coverage requirements for filming in Panama. Includes local insurance providers, customs bond procedure for equipment import and liability limits by production type.</p>
+        <p class="resource-card-cat">Pre-Production</p>
+        <p class="resource-card-title">90 Days to Camera — A Pre-Production Checklist</p>
+        <p class="resource-card-desc">The milestone-by-milestone timeline our producers run: permits, visas, customs bonds, scouting and crew — so nothing slips between greenlight and your first call sheet.</p>
         <div class="resource-card-footer">
-          <span class="resource-card-meta">PDF · Legal</span>
-          <button class="resource-dl" onclick="requestDoc('Foreign Production Insurance Checklist')">
+          <span class="resource-card-meta">PDF · Checklist</span>
+          <button class="resource-dl" onclick="openGate('90 Days to Camera — A Pre-Production Checklist')">
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8m0 0l-3-3m3 3l3-3M2 12h12"/></svg>
-            Request
+            Download
           </button>
         </div>
       </div>
 
       <div class="resource-card reveal">
-        <p class="resource-card-cat">Logistics</p>
-        <p class="resource-card-title">Crew &amp; Talent Coordination Guide</p>
-        <p class="resource-card-desc">Local union structure, talent clearance process, visa requirements for foreign cast and crew, and recommended hotels and transport providers by production tier.</p>
+        <p class="resource-card-cat">Budgeting</p>
+        <p class="resource-card-title">Budgeting a Panama Shoot — A Starter Guide</p>
+        <p class="resource-card-desc">How productions are costed here — crew tiers, equipment, location fees and the savings the rebate unlocks — with benchmark ranges to sanity-check a budget before you commit.</p>
         <div class="resource-card-footer">
-          <span class="resource-card-meta">PDF · Operations</span>
-          <button class="resource-dl" onclick="requestDoc('Crew & Talent Coordination Guide')">
+          <span class="resource-card-meta">PDF · Starter guide</span>
+          <button class="resource-dl" onclick="openGate('Budgeting a Panama Shoot — A Starter Guide')">
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8m0 0l-3-3m3 3l3-3M2 12h12"/></svg>
-            Request
+            Download
+          </button>
+        </div>
+      </div>
+
+      <div class="resource-card reveal">
+        <p class="resource-card-cat">Sustainability</p>
+        <p class="resource-card-title">Shooting Carbon-Negative in Panama</p>
+        <p class="resource-card-desc">How to run a low-footprint production in one of the world's three carbon-negative nations — including our 100% solar studio, green-crew practices and how to document it for financiers.</p>
+        <div class="resource-card-footer">
+          <span class="resource-card-meta">PDF · Briefing</span>
+          <button class="resource-dl" onclick="openGate('Shooting Carbon-Negative in Panama')">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8m0 0l-3-3m3 3l3-3M2 12h12"/></svg>
+            Download
           </button>
         </div>
       </div>
@@ -1037,8 +1071,9 @@
     <div style="margin-top:2.5rem;padding:2rem;border:1px solid var(--rule);display:flex;align-items:center;gap:1.5rem">
       <div style="width:2px;height:3rem;background:var(--accent);flex-shrink:0"></div>
       <p style="font-size:.78rem;font-weight:300;color:var(--muted);line-height:1.8">
-        Documents are sent directly by Ricardo Barria within 24 hours of request.
-        Contact <a href="mailto:rbarria@veriteproducciones.net" style="color:var(--paper);text-decoration:none;border-bottom:1px solid rgba(238,236,234,.2)">rbarria@veriteproducciones.net</a> for urgent requests.
+        We use your details only to send the guide and the occasional note on Panama production —
+        no spam, unsubscribe anytime. Prefer to talk first? Reach Ricardo Barria at
+        <a href="mailto:rbarria@veriteproducciones.net" style="color:var(--paper);text-decoration:none;border-bottom:1px solid rgba(238,236,234,.2)">rbarria@veriteproducciones.net</a>.
       </p>
     </div>
   </div>
@@ -1130,6 +1165,31 @@
       <span class="footer-iq-text">International Quorum of Motion Picture Producers</span>
     </a>
   </footer>
+</div>
+
+<!-- Download gate (lead capture) -->
+<div class="gate" id="gate" aria-hidden="true">
+  <div class="gate-backdrop" onclick="closeGate()"></div>
+  <div class="gate-card" role="dialog" aria-modal="true" aria-labelledby="gate-title">
+    <button class="gate-x" onclick="closeGate()" aria-label="Close">&times;</button>
+    <div id="gate-body">
+      <p class="gate-eyebrow">Complimentary Guide</p>
+      <h3 class="gate-title" id="gate-title">Guide</h3>
+      <p class="gate-desc">Tell us where to send it. We'll email your copy and keep you posted on filming in Panama.</p>
+      <form class="gate-form" id="gate-form" onsubmit="return submitGate(event)">
+        <input class="gate-input" name="fullname" type="text" placeholder="Full name" required autocomplete="name">
+        <input class="gate-input" name="email" type="email" placeholder="Work email" required autocomplete="email">
+        <input class="gate-input" name="company" type="text" placeholder="Production / company (optional)" autocomplete="organization">
+        <button class="gate-submit" type="submit">Email me the guide</button>
+      </form>
+      <p class="gate-fine">By requesting, you agree we may contact you about your production. Unsubscribe anytime.</p>
+    </div>
+    <div id="gate-done" class="gate-success" hidden>
+      <div class="tick">&#10003;</div>
+      <p class="gate-success-t">On its way.</p>
+      <p class="gate-success-p">Your mail app just opened with the request — send it and we'll email the guide straight back.</p>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -1235,12 +1295,45 @@
   }
   initReveal();
 
-  // ── RESOURCE REQUEST ──
-  function requestDoc(name) {
-    const subject = encodeURIComponent('Resource Request: ' + name);
-    const body = encodeURIComponent('Hi Ricardo,\n\nI would like to request the following document:\n\n' + name + '\n\nThank you.');
-    window.location.href = 'mailto:rbarria@veriteproducciones.net?subject=' + subject + '&body=' + body;
+  // ── DOWNLOAD GATE (lead capture) ──
+  const gate = document.getElementById('gate');
+  let gateDoc = '';
+  function openGate(name) {
+    gateDoc = name;
+    document.getElementById('gate-title').textContent = name;
+    document.getElementById('gate-body').hidden = false;
+    document.getElementById('gate-done').hidden = true;
+    document.getElementById('gate-form').reset();
+    gate.classList.add('open');
+    gate.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => { const f = gate.querySelector('input[name=fullname]'); if (f) f.focus(); }, 320);
   }
+  function closeGate() {
+    gate.classList.remove('open');
+    gate.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+  function submitGate(e) {
+    e.preventDefault();
+    const f = e.target;
+    const name = f.elements.fullname.value.trim();
+    const email = f.elements.email.value.trim();
+    const company = f.elements.company.value.trim();
+    const subject = encodeURIComponent('Guide download — ' + gateDoc);
+    const body = encodeURIComponent(
+      'New guide request from the Resources page.\n\n' +
+      'Guide: ' + gateDoc + '\n' +
+      'Name: ' + name + '\n' +
+      'Email: ' + email + '\n' +
+      'Production / company: ' + (company || '—') + '\n'
+    );
+    window.location.href = 'mailto:rbarria@veriteproducciones.net?subject=' + subject + '&body=' + body;
+    document.getElementById('gate-body').hidden = true;
+    document.getElementById('gate-done').hidden = false;
+    return false;
+  }
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && gate.classList.contains('open')) closeGate(); });
 </script>
 </body>
 </html>
