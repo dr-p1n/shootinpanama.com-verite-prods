@@ -305,26 +305,52 @@
     .bts-title{font-weight:200;font-size:clamp(1.6rem,3vw,2.6rem);letter-spacing:-.02em;color:var(--paper);line-height:1.08}
     .bts-title em{font-family:'Fraunces',serif;font-style:italic;font-weight:400;color:rgba(238,236,234,.5)}
     .bts-note{font-family:'Fraunces',serif;font-style:italic;font-size:.78rem;color:var(--muted);max-width:32ch;text-align:right;line-height:1.6}
-    .bts-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:3px}
-    .bts-cell{position:relative;overflow:hidden;background:#05080e;cursor:default}
-    .bts-cell:nth-child(1){grid-column:span 5;aspect-ratio:4/3}
-    .bts-cell:nth-child(2){grid-column:span 4;aspect-ratio:1/1}
-    .bts-cell:nth-child(3){grid-column:span 3;aspect-ratio:3/4}
-    .bts-cell:nth-child(4){grid-column:span 4;aspect-ratio:4/5}
-    .bts-cell:nth-child(5){grid-column:span 5;aspect-ratio:16/10}
-    .bts-cell:nth-child(6){grid-column:span 3;aspect-ratio:3/4}
-    .bts-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-      filter:grayscale(.3) brightness(.72) contrast(1.06);transition:transform .8s cubic-bezier(.16,1,.3,1),filter .5s}
-    .bts-cell:hover .bts-img{transform:scale(1.05);filter:grayscale(0) brightness(.86)}
-    .bts-cell::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:1;
-      background:linear-gradient(to top,rgba(3,6,10,.88) 0%,transparent 52%)}
-    .bts-frameno{position:absolute;top:.85rem;left:.9rem;z-index:2;font-size:.5rem;font-weight:500;
-      letter-spacing:.18em;text-transform:uppercase;color:rgba(238,236,234,.42);font-variant-numeric:tabular-nums}
-    .bts-cap{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:1.5rem 1.1rem 1.1rem;
-      transform:translateY(.4rem);opacity:0;transition:transform .45s cubic-bezier(.16,1,.3,1),opacity .45s}
-    .bts-cell:hover .bts-cap{transform:translateY(0);opacity:1}
-    .bts-cap-t{font-family:'Fraunces',serif;font-style:italic;font-size:.85rem;color:var(--paper);line-height:1.3}
-    .bts-cap-s{font-size:.55rem;font-weight:400;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,236,234,.42);margin-top:.35rem}
+    /* full-bleed feature frames */
+    .bts-fullbleeds{margin:0 -3rem 3px}
+    .bf{position:relative;display:block;width:100%;height:72vh;max-height:720px;overflow:hidden;
+      background:#05080e;cursor:zoom-in;border-bottom:3px solid var(--ink)}
+    .bf:last-child{border-bottom:0}
+    .bf img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+      filter:brightness(.8) contrast(1.04);transition:transform 1.2s cubic-bezier(.16,1,.3,1),filter .6s}
+    .bf:hover img{transform:scale(1.03);filter:brightness(1) contrast(1.04)}
+    .bf::after{content:'';position:absolute;top:1.2rem;right:1.2rem;width:15px;height:15px;z-index:2;
+      border-top:1px solid rgba(238,236,234,.85);border-right:1px solid rgba(238,236,234,.85);
+      opacity:0;transition:opacity .3s}
+    .bf:hover::after{opacity:.9}
+    .bts-more{font-size:.56rem;font-weight:400;letter-spacing:.24em;text-transform:uppercase;
+      color:rgba(238,236,234,.32);margin:2.75rem 0 1.5rem}
+    /* contact sheet */
+    .cs{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+    .cs-cell{position:relative;overflow:hidden;background:#05080e;aspect-ratio:4/3;cursor:zoom-in}
+    .cs-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+      filter:brightness(.82) contrast(1.03);transition:transform .8s cubic-bezier(.16,1,.3,1),filter .5s}
+    .cs-cell:hover .cs-img{transform:scale(1.04);filter:brightness(1) contrast(1.03)}
+    .cs-cell::after{content:'';position:absolute;top:.7rem;right:.7rem;width:13px;height:13px;z-index:2;
+      border-top:1px solid rgba(238,236,234,.85);border-right:1px solid rgba(238,236,234,.85);
+      opacity:0;transition:opacity .3s}
+    .cs-cell:hover::after{opacity:.9}
+
+    /* ── LIGHTBOX ── */
+    .lb{position:fixed;inset:0;z-index:500;display:flex;align-items:center;justify-content:center;
+      background:rgba(2,4,8,.94);backdrop-filter:blur(4px);opacity:0;visibility:hidden;
+      transition:opacity .3s ease,visibility .3s ease}
+    .lb.open{opacity:1;visibility:visible}
+    .lb-stage{position:relative;z-index:1;display:flex;align-items:center;justify-content:center}
+    .lb-stage img{max-width:92vw;max-height:86vh;object-fit:contain;cursor:pointer;
+      box-shadow:0 30px 80px rgba(0,0,0,.6);opacity:0;transition:opacity .25s}
+    .lb-stage img.ready{opacity:1}
+    .lb-close,.lb-prev,.lb-next{position:absolute;z-index:3;background:none;border:none;cursor:pointer;
+      color:rgba(238,236,234,.7);transition:color .2s,background .2s;-webkit-tap-highlight-color:transparent}
+    .lb-close:hover,.lb-prev:hover,.lb-next:hover{color:var(--paper)}
+    .lb-close{top:1.4rem;right:1.6rem;font-size:1.8rem;line-height:1;width:2.4rem;height:2.4rem}
+    .lb-prev,.lb-next{top:0;bottom:0;width:16vw;min-width:64px;font-size:2.4rem;font-weight:200;
+      display:flex;align-items:center;justify-content:center}
+    .lb-prev{left:0;justify-content:flex-start;padding-left:1.5rem}
+    .lb-next{right:0;justify-content:flex-end;padding-right:1.5rem}
+    .lb-prev:hover,.lb-next:hover{background:linear-gradient(to var(--dir,right),rgba(3,6,10,.35),transparent)}
+    .lb-count{position:absolute;z-index:3;bottom:1.5rem;left:50%;transform:translateX(-50%);
+      font-size:.6rem;font-weight:400;letter-spacing:.24em;color:rgba(238,236,234,.5);
+      font-variant-numeric:tabular-nums}
 
     /* ── SERVICES PAGE ── */
     .services-wrap{padding:2.5rem 3rem 5rem}
@@ -557,10 +583,12 @@
       .bts{padding:3.5rem 1.5rem}
       .bts-head{flex-direction:column;align-items:flex-start}
       .bts-note{text-align:left}
-      .bts-grid{grid-template-columns:1fr 1fr;gap:2px}
-      .bts-cell{grid-column:span 1!important;aspect-ratio:1/1!important}
-      .bts-cell:first-child{grid-column:span 2!important;aspect-ratio:16/10!important}
-      .bts-cap{transform:translateY(0);opacity:1}
+      .bts-fullbleeds{margin:0 -1.5rem 2px}
+      .bf{height:52vh}
+      .cs{grid-template-columns:1fr 1fr;gap:2px}
+      .lb-stage img{max-width:96vw;max-height:82vh}
+      .lb-prev,.lb-next{width:22vw;min-width:48px;font-size:1.9rem}
+      .lb-close{top:1rem;right:1rem}
       .stats-grid{grid-template-columns:1fr}
       .home-svc{grid-template-columns:1fr!important;padding:3rem 1.5rem!important}
       .stat{padding:3rem 1.5rem}
@@ -776,39 +804,30 @@
         <p class="bts-eyebrow">From The Set</p>
         <h2 class="bts-title">Behind <em>the scenes.</em></h2>
       </div>
-      <p class="bts-note">Frames from our crews on location — jungle, coast, canal and capital.</p>
+      <p class="bts-note">On location across Panama — tap any frame to enlarge.</p>
     </div>
-    <div class="bts-grid">
-      <div class="bts-cell reveal">
-        <picture><source srcset="assets/cam-1280.webp" type="image/webp"><img class="bts-img" src="assets/cam-1280.jpg" alt="Camera operator on a Verite production in Panama" loading="lazy" decoding="async"></picture>
-        <span class="bts-frameno">Fr. 014</span>
-        <div class="bts-cap"><p class="bts-cap-t">Camera department</p><p class="bts-cap-s">Panama City · Feature</p></div>
-      </div>
-      <div class="bts-cell reveal">
-        <picture><source srcset="assets/loc-forest.webp" type="image/webp"><img class="bts-img" src="assets/loc-forest.jpg" alt="Crew filming in the Panamanian rainforest" loading="lazy" decoding="async"></picture>
-        <span class="bts-frameno">Fr. 027</span>
-        <div class="bts-cap"><p class="bts-cap-t">Rainforest unit</p><p class="bts-cap-s">Darién · Documentary</p></div>
-      </div>
-      <div class="bts-cell reveal">
-        <picture><source srcset="assets/loc-casco.webp" type="image/webp"><img class="bts-img" src="assets/loc-casco.jpg" alt="Filming on a Casco Viejo street set" loading="lazy" decoding="async"></picture>
-        <span class="bts-frameno">Fr. 041</span>
-        <div class="bts-cap"><p class="bts-cap-t">Street set</p><p class="bts-cap-s">Casco Viejo · Commercial</p></div>
-      </div>
-      <div class="bts-cell reveal">
-        <picture><source srcset="assets/loc-canal.webp" type="image/webp"><img class="bts-img" src="assets/loc-canal.jpg" alt="Shooting at the Panama Canal locks" loading="lazy" decoding="async"></picture>
-        <span class="bts-frameno">Fr. 058</span>
-        <div class="bts-cap"><p class="bts-cap-t">Canal locks</p><p class="bts-cap-s">Agua Clara · Broadcast</p></div>
-      </div>
-      <div class="bts-cell reveal">
-        <picture><source srcset="assets/loc-beach.webp" type="image/webp"><img class="bts-img" src="assets/loc-beach.jpg" alt="Coastal shoot on a Caribbean beach in Panama" loading="lazy" decoding="async"></picture>
-        <span class="bts-frameno">Fr. 072</span>
-        <div class="bts-cap"><p class="bts-cap-t">Coastal day</p><p class="bts-cap-s">Bocas del Toro · Reality</p></div>
-      </div>
-      <div class="bts-cell reveal">
-        <picture><source srcset="assets/loc-city.webp" type="image/webp"><img class="bts-img" src="assets/loc-city.jpg" alt="Night rig over the Panama City skyline" loading="lazy" decoding="async"></picture>
-        <span class="bts-frameno">Fr. 089</span>
-        <div class="bts-cap"><p class="bts-cap-t">Skyline rig</p><p class="bts-cap-s">Panama City · Feature</p></div>
-      </div>
+
+    <!-- six feature frames, full-bleed -->
+    <div class="bts-fullbleeds" id="bts-feature">
+      <a class="bf reveal" data-full="assets/bts01.webp" data-fulljpg="assets/bts01.jpg"><picture><source srcset="assets/bts01.webp" type="image/webp"><img src="assets/bts01.jpg" alt="Verite production still — Panama" loading="lazy" decoding="async"></picture></a>
+      <a class="bf reveal" data-full="assets/bts02.webp" data-fulljpg="assets/bts02.jpg"><picture><source srcset="assets/bts02.webp" type="image/webp"><img src="assets/bts02.jpg" alt="Verite production still — Panama" loading="lazy" decoding="async"></picture></a>
+      <a class="bf reveal" data-full="assets/bts03.webp" data-fulljpg="assets/bts03.jpg"><picture><source srcset="assets/bts03.webp" type="image/webp"><img src="assets/bts03.jpg" alt="Verite production still — Panama" loading="lazy" decoding="async"></picture></a>
+      <a class="bf reveal" data-full="assets/bts04.webp" data-fulljpg="assets/bts04.jpg"><picture><source srcset="assets/bts04.webp" type="image/webp"><img src="assets/bts04.jpg" alt="Verite production still — Panama" loading="lazy" decoding="async"></picture></a>
+      <a class="bf reveal" data-full="assets/bts05.webp" data-fulljpg="assets/bts05.jpg"><picture><source srcset="assets/bts05.webp" type="image/webp"><img src="assets/bts05.jpg" alt="Verite production still — Panama" loading="lazy" decoding="async"></picture></a>
+      <a class="bf reveal" data-full="assets/bts06.webp" data-fulljpg="assets/bts06.jpg"><picture><source srcset="assets/bts06.webp" type="image/webp"><img src="assets/bts06.jpg" alt="Verite production still — Panama" loading="lazy" decoding="async"></picture></a>
+    </div>
+
+    <p class="bts-more">More from the archive</p>
+    <div class="cs" id="cs">
+      <figure class="cs-cell reveal" data-full="assets/bts07.webp" data-fulljpg="assets/bts07.jpg"><picture><source srcset="assets/bts07-t.webp" type="image/webp"><img class="cs-img" src="assets/bts07-t.jpg" alt="Verite production still — Panama" loading="lazy" decoding="async"></picture></figure>
+      <figure class="cs-cell reveal" data-full="assets/bts08.webp" data-fulljpg="assets/bts08.jpg"><picture><source srcset="assets/bts08-t.webp" type="image/webp"><img class="cs-img" src="assets/bts08-t.jpg" alt="Verite production still — Panama" loading="lazy" decoding="async"></picture></figure>
+      <figure class="cs-cell reveal" data-full="assets/bts09.webp" data-fulljpg="assets/bts09.jpg"><picture><source srcset="assets/bts09-t.webp" type="image/webp"><img class="cs-img" src="assets/bts09-t.jpg" alt="Verite production still — Panama" loading="lazy" decoding="async"></picture></figure>
+      <figure class="cs-cell reveal" data-full="assets/bts10.webp" data-fulljpg="assets/bts10.jpg"><picture><source srcset="assets/bts10-t.webp" type="image/webp"><img class="cs-img" src="assets/bts10-t.jpg" alt="Verite production still — Panama" loading="lazy" decoding="async"></picture></figure>
+      <figure class="cs-cell reveal" data-full="assets/bts11.webp" data-fulljpg="assets/bts11.jpg"><picture><source srcset="assets/bts11-t.webp" type="image/webp"><img class="cs-img" src="assets/bts11-t.jpg" alt="Verite production still — Panama" loading="lazy" decoding="async"></picture></figure>
+      <figure class="cs-cell reveal" data-full="assets/bts12.webp" data-fulljpg="assets/bts12.jpg"><picture><source srcset="assets/bts12-t.webp" type="image/webp"><img class="cs-img" src="assets/bts12-t.jpg" alt="Verite production still — Panama" loading="lazy" decoding="async"></picture></figure>
+      <figure class="cs-cell reveal" data-full="assets/bts13.webp" data-fulljpg="assets/bts13.jpg"><picture><source srcset="assets/bts13-t.webp" type="image/webp"><img class="cs-img" src="assets/bts13-t.jpg" alt="Verite production still — Panama" loading="lazy" decoding="async"></picture></figure>
+      <figure class="cs-cell reveal" data-full="assets/bts14.webp" data-fulljpg="assets/bts14.jpg"><picture><source srcset="assets/bts14-t.webp" type="image/webp"><img class="cs-img" src="assets/bts14-t.jpg" alt="Verite production still — Panama" loading="lazy" decoding="async"></picture></figure>
+      <figure class="cs-cell reveal" data-full="assets/bts15.webp" data-fulljpg="assets/bts15.jpg"><picture><source srcset="assets/bts15-t.webp" type="image/webp"><img class="cs-img" src="assets/bts15-t.jpg" alt="Verite production still — Panama" loading="lazy" decoding="async"></picture></figure>
     </div>
   </section>
 
@@ -1208,6 +1227,15 @@
   </footer>
 </div>
 
+<!-- Lightbox (Work contact sheet) -->
+<div class="lb" id="lb" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Production still viewer">
+  <button class="lb-close" aria-label="Close" onclick="lb.close()">&times;</button>
+  <button class="lb-prev" aria-label="Previous" onclick="lb.prev()">&#8249;</button>
+  <picture class="lb-stage"><img id="lb-img" alt="Verite production still — Panama"></picture>
+  <button class="lb-next" aria-label="Next" onclick="lb.next()">&#8250;</button>
+  <span class="lb-count" id="lb-count"></span>
+</div>
+
 <!-- Download gate (lead capture) -->
 <div class="gate" id="gate" aria-hidden="true">
   <div class="gate-backdrop" onclick="closeGate()"></div>
@@ -1393,6 +1421,51 @@
     return false;
   }
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && gate.classList.contains('open')) closeGate(); });
+
+  // ── LIGHTBOX (Work contact sheet) ──
+  const lb = (function () {
+    const el = document.getElementById('lb');
+    const img = document.getElementById('lb-img');
+    const count = document.getElementById('lb-count');
+    const cells = [...document.querySelectorAll('#bts-feature .bf, #cs .cs-cell')];
+    const items = cells.map(c => ({ webp: c.dataset.full, jpg: c.dataset.fulljpg }));
+    cells.forEach((c, idx) => c.addEventListener('click', () => open(idx)));
+    let i = 0;
+    function show() {
+      const it = items[i];
+      img.classList.remove('ready');
+      img.onerror = () => { img.onerror = null; img.src = it.jpg; };
+      img.onload = () => img.classList.add('ready');
+      img.src = it.webp;
+      count.textContent = String(i + 1).padStart(2, '0') + ' / ' + items.length;
+      // preload neighbours
+      [items[(i + 1) % items.length], items[(i - 1 + items.length) % items.length]]
+        .forEach(n => { const p = new Image(); p.src = n.webp; });
+    }
+    function open(n) {
+      i = n; show();
+      el.classList.add('open');
+      el.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function close() {
+      el.classList.remove('open');
+      el.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+    function next() { i = (i + 1) % items.length; show(); }
+    function prev() { i = (i - 1 + items.length) % items.length; show(); }
+    // Click backdrop closes; click image advances
+    el.addEventListener('click', (e) => { if (e.target === el) close(); });
+    img.addEventListener('click', next);
+    document.addEventListener('keydown', (e) => {
+      if (!el.classList.contains('open')) return;
+      if (e.key === 'Escape') close();
+      else if (e.key === 'ArrowRight') next();
+      else if (e.key === 'ArrowLeft') prev();
+    });
+    return { open, close, next, prev };
+  })();
 </script>
 </body>
 </html>
