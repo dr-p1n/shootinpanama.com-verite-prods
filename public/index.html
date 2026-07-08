@@ -411,6 +411,17 @@
     .inc-step .n{font-family:'Fraunces',serif;font-style:italic;font-size:.95rem;color:var(--accent);margin-bottom:1rem}
     .inc-step .st{font-weight:400;font-size:.98rem;color:var(--paper);margin-bottom:.6rem;letter-spacing:-.01em}
     .inc-step .sd{font-size:.74rem;font-weight:300;color:var(--muted);line-height:1.8}
+    .inc-detail{margin-top:3.5rem;padding-top:3rem;border-top:1px solid var(--rule)}
+    .inc-cols{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem}
+    .inc-col-k{font-size:.56rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1.4rem}
+    .inc-list{list-style:none;display:flex;flex-direction:column;gap:.85rem}
+    .inc-list li{font-size:.78rem;font-weight:300;color:var(--muted);line-height:1.55;padding-left:1.1rem;position:relative}
+    .inc-list li::before{content:'';position:absolute;left:0;top:.5rem;width:5px;height:1px;background:var(--accent)}
+    .inc-list li strong{color:var(--paper);font-weight:400}
+    .inc-eg{margin-top:2.75rem;display:flex;align-items:baseline;gap:1.1rem;flex-wrap:wrap}
+    .inc-eg .eg-k{font-size:.56rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(238,236,234,.4)}
+    .inc-eg .eg-v{font-family:'Fraunces',serif;font-style:italic;font-size:1.15rem;color:var(--paper)}
+    .inc-eg .eg-v b{color:var(--accent);font-style:normal;font-weight:400}
 
     /* Stats band */
     .stats-band{position:relative;overflow:hidden;margin:4rem 0 0}
@@ -536,6 +547,7 @@
       .inc{padding:4rem 1.5rem}
       .inc-grid{grid-template-columns:1fr 1fr}
       .inc-steps{grid-template-columns:1fr 1fr;gap:1.8rem}
+      .inc-cols{grid-template-columns:1fr;gap:2.5rem}
       .loc-grid{grid-template-columns:1fr 1fr}
       .wx-grid{grid-template-columns:1fr 1fr}
       .work-grid{grid-template-columns:1fr 1fr;gap:2px}
@@ -879,6 +891,35 @@
       <div class="inc-step"><div class="n">03</div><div class="st">We file it</div><div class="sd">CPA-certified documentation submitted through legal counsel to the Ministry of Commerce &amp; Industries.</div></div>
       <div class="inc-step"><div class="n">04</div><div class="st">25% back</div><div class="sd">Paid as cash against your qualified spend. We track every eligible dollar from day one.</div></div>
     </div>
+
+    <div class="inc-detail">
+      <div class="inc-cols">
+        <div>
+          <p class="inc-col-k">What qualifies</p>
+          <ul class="inc-list">
+            <li>Panamanian <strong>crew wages</strong> and per diems</li>
+            <li>Local <strong>equipment, vehicle and gear</strong> rental</li>
+            <li><strong>Location fees</strong>, permits and set services</li>
+            <li>Hotels, ground transport and catering</li>
+            <li><strong>Post and lab</strong> services contracted in Panama</li>
+          </ul>
+        </div>
+        <div>
+          <p class="inc-col-k">The fine print</p>
+          <ul class="inc-list">
+            <li><strong>$500,000</strong> minimum qualifying spend — and <strong>no annual cap</strong> above it</li>
+            <li>Filed through a <strong>licensed local producer</strong> — a legal requirement, and that's us</li>
+            <li>Paid <strong>after wrap</strong> on CPA-audited expenditure</li>
+            <li>Stacks with <strong>0% duty</strong> on temporarily imported equipment</li>
+            <li>Panama runs on the <strong>US dollar</strong> — no currency risk on your rebate</li>
+          </ul>
+        </div>
+      </div>
+      <div class="inc-eg">
+        <span class="eg-k">Worked example</span>
+        <span class="eg-v">$2M qualifying spend → <b>$500,000 back in cash.</b></span>
+      </div>
+    </div>
   </div>
 
   <!-- ── LOCATIONS ── -->
@@ -980,7 +1021,7 @@
     <div class="page-header">
       <p class="page-header-eyebrow">Resources</p>
       <h2 class="page-header-title">Know Panama<br><em>before you commit.</em></h2>
-      <p class="page-header-desc">Field guides, incentive breakdowns and pre-production intel for producers weighing Panama for their next project. Free to download — tell us where to send it and we'll email it straight over.</p>
+      <p class="page-header-desc">Field guides and pre-production intel for producers weighing Panama. Free — tell us where to send it.</p>
     </div>
   </div>
 
@@ -990,7 +1031,7 @@
       <div class="resource-card reveal">
         <p class="resource-card-cat">Field Guide</p>
         <p class="resource-card-title">The International Producer's Guide to Panama</p>
-        <p class="resource-card-desc">The orientation we give every producer weighing Panama: geography, seasons, crew depth, canal and airport access, and why one small country doubles for a dozen others on screen.</p>
+        <p class="resource-card-desc">Geography, seasons, crew depth and canal access — why one small country doubles for a dozen on screen.</p>
         <div class="resource-card-footer">
           <span class="resource-card-meta">PDF · 28 pages</span>
           <button class="resource-dl" onclick="openGate('The International Producer&#39;s Guide to Panama')">
@@ -1003,7 +1044,7 @@
       <div class="resource-card reveal">
         <p class="resource-card-cat">Incentives</p>
         <p class="resource-card-title">The 25% Cash Rebate, Explained</p>
-        <p class="resource-card-desc">A plain-English walkthrough of Film Law 16 — who qualifies, which spend counts, the single-window filing, timelines and worked examples — so you can model the incentive before you pitch it.</p>
+        <p class="resource-card-desc">Film Law 16 in plain English: who qualifies, what spend counts, and how to model the 25% rebate before you pitch it.</p>
         <div class="resource-card-footer">
           <span class="resource-card-meta">PDF · Incentive briefing</span>
           <button class="resource-dl" onclick="openGate('The 25% Cash Rebate, Explained')">
@@ -1016,7 +1057,7 @@
       <div class="resource-card reveal">
         <p class="resource-card-cat">Locations</p>
         <p class="resource-card-title">Panama On-Screen — A Location Lookbook</p>
-        <p class="resource-card-desc">A visual tour of what Panama gives you on camera: Caribbean to Pacific in under an hour, rainforest, Casco Viejo, the Canal and a modern skyline — with the countries each backdrop can double for.</p>
+        <p class="resource-card-desc">Caribbean to Pacific in an hour — jungle, Casco Viejo, the Canal and skyline, and what each backdrop doubles for.</p>
         <div class="resource-card-footer">
           <span class="resource-card-meta">PDF · Lookbook</span>
           <button class="resource-dl" onclick="openGate('Panama On-Screen — A Location Lookbook')">
@@ -1029,7 +1070,7 @@
       <div class="resource-card reveal">
         <p class="resource-card-cat">Pre-Production</p>
         <p class="resource-card-title">90 Days to Camera — A Pre-Production Checklist</p>
-        <p class="resource-card-desc">The milestone-by-milestone timeline our producers run: permits, visas, customs bonds, scouting and crew — so nothing slips between greenlight and your first call sheet.</p>
+        <p class="resource-card-desc">The milestone timeline our producers run from greenlight to first call sheet — permits, visas, customs, scouting and crew.</p>
         <div class="resource-card-footer">
           <span class="resource-card-meta">PDF · Checklist</span>
           <button class="resource-dl" onclick="openGate('90 Days to Camera — A Pre-Production Checklist')">
@@ -1042,7 +1083,7 @@
       <div class="resource-card reveal">
         <p class="resource-card-cat">Budgeting</p>
         <p class="resource-card-title">Budgeting a Panama Shoot — A Starter Guide</p>
-        <p class="resource-card-desc">How productions are costed here — crew tiers, equipment, location fees and the savings the rebate unlocks — with benchmark ranges to sanity-check a budget before you commit.</p>
+        <p class="resource-card-desc">Crew tiers, gear, location fees and the rebate's savings — benchmark ranges to sanity-check a budget before you commit.</p>
         <div class="resource-card-footer">
           <span class="resource-card-meta">PDF · Starter guide</span>
           <button class="resource-dl" onclick="openGate('Budgeting a Panama Shoot — A Starter Guide')">
@@ -1055,7 +1096,7 @@
       <div class="resource-card reveal">
         <p class="resource-card-cat">Sustainability</p>
         <p class="resource-card-title">Shooting Carbon-Negative in Panama</p>
-        <p class="resource-card-desc">How to run a low-footprint production in one of the world's three carbon-negative nations — including our 100% solar studio, green-crew practices and how to document it for financiers.</p>
+        <p class="resource-card-desc">Shoot low-footprint in a carbon-negative nation — solar studio, green-crew practices, financier-ready documentation.</p>
         <div class="resource-card-footer">
           <span class="resource-card-meta">PDF · Briefing</span>
           <button class="resource-dl" onclick="openGate('Shooting Carbon-Negative in Panama')">
@@ -1175,7 +1216,7 @@
     <div id="gate-body">
       <p class="gate-eyebrow">Complimentary Guide</p>
       <h3 class="gate-title" id="gate-title">Guide</h3>
-      <p class="gate-desc">Tell us where to send it. We'll email your copy and keep you posted on filming in Panama.</p>
+      <p class="gate-desc">Tell us where to send it — your copy lands in your inbox.</p>
       <form class="gate-form" id="gate-form" onsubmit="return submitGate(event)">
         <input class="gate-input" name="fullname" type="text" placeholder="Full name" required autocomplete="name">
         <input class="gate-input" name="email" type="email" placeholder="Work email" required autocomplete="email">
@@ -1296,6 +1337,9 @@
   initReveal();
 
   // ── DOWNLOAD GATE (lead capture) ──
+  // Paste the Google Apps Script Web App /exec URL here to log leads to the sheet.
+  // Leave blank and the form falls back to an email request instead.
+  const LEAD_ENDPOINT = '';
   const gate = document.getElementById('gate');
   let gateDoc = '';
   function openGate(name) {
@@ -1320,15 +1364,30 @@
     const name = f.elements.fullname.value.trim();
     const email = f.elements.email.value.trim();
     const company = f.elements.company.value.trim();
-    const subject = encodeURIComponent('Guide download — ' + gateDoc);
-    const body = encodeURIComponent(
-      'New guide request from the Resources page.\n\n' +
-      'Guide: ' + gateDoc + '\n' +
-      'Name: ' + name + '\n' +
-      'Email: ' + email + '\n' +
-      'Production / company: ' + (company || '—') + '\n'
-    );
-    window.location.href = 'mailto:rbarria@veriteproducciones.net?subject=' + subject + '&body=' + body;
+    const donePara = document.querySelector('#gate-done .gate-success-p');
+    if (LEAD_ENDPOINT) {
+      // Log the lead straight to the Google Sheet (no-cors avoids a preflight).
+      const params = new URLSearchParams({ guide: gateDoc, name, email, company, source: 'resources' });
+      fetch(LEAD_ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: params.toString()
+      }).catch(() => {});
+      donePara.textContent = 'Thanks, ' + (name.split(' ')[0] || 'there') + ' — your copy of “' + gateDoc + '” is on its way to ' + email + '.';
+    } else {
+      // Fallback until the Sheet endpoint is set: email the request.
+      const subject = encodeURIComponent('Guide download — ' + gateDoc);
+      const body = encodeURIComponent(
+        'New guide request from the Resources page.\n\n' +
+        'Guide: ' + gateDoc + '\n' +
+        'Name: ' + name + '\n' +
+        'Email: ' + email + '\n' +
+        'Production / company: ' + (company || '—') + '\n'
+      );
+      window.location.href = 'mailto:rbarria@veriteproducciones.net?subject=' + subject + '&body=' + body;
+      donePara.textContent = 'Your mail app just opened with the request — send it and we\'ll email the guide straight back.';
+    }
     document.getElementById('gate-body').hidden = true;
     document.getElementById('gate-done').hidden = false;
     return false;
