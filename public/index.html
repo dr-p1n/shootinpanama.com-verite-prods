@@ -305,22 +305,8 @@
     .bts-title{font-weight:200;font-size:clamp(1.6rem,3vw,2.6rem);letter-spacing:-.02em;color:var(--paper);line-height:1.08}
     .bts-title em{font-family:'Fraunces',serif;font-style:italic;font-weight:400;color:rgba(238,236,234,.5)}
     .bts-note{font-family:'Fraunces',serif;font-style:italic;font-size:.78rem;color:var(--muted);max-width:32ch;text-align:right;line-height:1.6}
-    /* full-bleed feature frames */
-    .bts-fullbleeds{margin:0 -3rem 3px}
-    .bf{position:relative;display:block;width:100%;height:72vh;max-height:720px;overflow:hidden;
-      background:#05080e;cursor:zoom-in;border-bottom:3px solid var(--ink)}
-    .bf:last-child{border-bottom:0}
-    .bf img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-      filter:brightness(.8) contrast(1.04);transition:transform 1.2s cubic-bezier(.16,1,.3,1),filter .6s}
-    .bf:hover img{transform:scale(1.03);filter:brightness(1) contrast(1.04)}
-    .bf::after{content:'';position:absolute;top:1.2rem;right:1.2rem;width:15px;height:15px;z-index:2;
-      border-top:1px solid rgba(238,236,234,.85);border-right:1px solid rgba(238,236,234,.85);
-      opacity:0;transition:opacity .3s}
-    .bf:hover::after{opacity:.9}
-    .bts-more{font-size:.56rem;font-weight:400;letter-spacing:.24em;text-transform:uppercase;
-      color:rgba(238,236,234,.32);margin:2.75rem 0 1.5rem}
     /* contact sheet */
-    .cs{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+    .cs{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
     .cs-cell{position:relative;overflow:hidden;background:#05080e;aspect-ratio:4/3;cursor:zoom-in}
     .cs-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
       filter:brightness(.82) contrast(1.03);transition:transform .8s cubic-bezier(.16,1,.3,1),filter .5s}
@@ -583,9 +569,7 @@
       .bts{padding:3.5rem 1.5rem}
       .bts-head{flex-direction:column;align-items:flex-start}
       .bts-note{text-align:left}
-      .bts-fullbleeds{margin:0 -1.5rem 2px}
-      .bf{height:52vh}
-      .cs{grid-template-columns:1fr 1fr;gap:2px}
+      .cs{grid-template-columns:1fr 1fr;gap:.9rem}
       .lb-stage img{max-width:96vw;max-height:82vh}
       .lb-prev,.lb-next{width:22vw;min-width:48px;font-size:1.9rem}
       .lb-close{top:1rem;right:1rem}
@@ -807,18 +791,13 @@
       <p class="bts-note">On location across Panama — tap any frame to enlarge.</p>
     </div>
 
-    <!-- six feature frames, full-bleed -->
-    <div class="bts-fullbleeds" id="bts-feature">
-      <a class="bf reveal" data-full="assets/bts01.webp" data-fulljpg="assets/bts01.jpg"><picture><source srcset="assets/bts01.webp" type="image/webp"><img src="assets/bts01.jpg" alt="Verite production still — Panama" loading="lazy" decoding="async"></picture></a>
-      <a class="bf reveal" data-full="assets/bts02.webp" data-fulljpg="assets/bts02.jpg"><picture><source srcset="assets/bts02.webp" type="image/webp"><img src="assets/bts02.jpg" alt="Verite production still — Panama" loading="lazy" decoding="async"></picture></a>
-      <a class="bf reveal" data-full="assets/bts03.webp" data-fulljpg="assets/bts03.jpg"><picture><source srcset="assets/bts03.webp" type="image/webp"><img src="assets/bts03.jpg" alt="Verite production still — Panama" loading="lazy" decoding="async"></picture></a>
-      <a class="bf reveal" data-full="assets/bts04.webp" data-fulljpg="assets/bts04.jpg"><picture><source srcset="assets/bts04.webp" type="image/webp"><img src="assets/bts04.jpg" alt="Verite production still — Panama" loading="lazy" decoding="async"></picture></a>
-      <a class="bf reveal" data-full="assets/bts05.webp" data-fulljpg="assets/bts05.jpg"><picture><source srcset="assets/bts05.webp" type="image/webp"><img src="assets/bts05.jpg" alt="Verite production still — Panama" loading="lazy" decoding="async"></picture></a>
-      <a class="bf reveal" data-full="assets/bts06.webp" data-fulljpg="assets/bts06.jpg"><picture><source srcset="assets/bts06.webp" type="image/webp"><img src="assets/bts06.jpg" alt="Verite production still — Panama" loading="lazy" decoding="async"></picture></a>
-    </div>
-
-    <p class="bts-more">More from the archive</p>
     <div class="cs" id="cs">
+      <figure class="cs-cell reveal" data-full="assets/bts01.webp" data-fulljpg="assets/bts01.jpg"><picture><source srcset="assets/bts01-t.webp" type="image/webp"><img class="cs-img" src="assets/bts01-t.jpg" alt="Verite production still — Panama" loading="lazy" decoding="async"></picture></figure>
+      <figure class="cs-cell reveal" data-full="assets/bts02.webp" data-fulljpg="assets/bts02.jpg"><picture><source srcset="assets/bts02-t.webp" type="image/webp"><img class="cs-img" src="assets/bts02-t.jpg" alt="Verite production still — Panama" loading="lazy" decoding="async"></picture></figure>
+      <figure class="cs-cell reveal" data-full="assets/bts03.webp" data-fulljpg="assets/bts03.jpg"><picture><source srcset="assets/bts03-t.webp" type="image/webp"><img class="cs-img" src="assets/bts03-t.jpg" alt="Verite production still — Panama" loading="lazy" decoding="async"></picture></figure>
+      <figure class="cs-cell reveal" data-full="assets/bts04.webp" data-fulljpg="assets/bts04.jpg"><picture><source srcset="assets/bts04-t.webp" type="image/webp"><img class="cs-img" src="assets/bts04-t.jpg" alt="Verite production still — Panama" loading="lazy" decoding="async"></picture></figure>
+      <figure class="cs-cell reveal" data-full="assets/bts05.webp" data-fulljpg="assets/bts05.jpg"><picture><source srcset="assets/bts05-t.webp" type="image/webp"><img class="cs-img" src="assets/bts05-t.jpg" alt="Verite production still — Panama" loading="lazy" decoding="async"></picture></figure>
+      <figure class="cs-cell reveal" data-full="assets/bts06.webp" data-fulljpg="assets/bts06.jpg"><picture><source srcset="assets/bts06-t.webp" type="image/webp"><img class="cs-img" src="assets/bts06-t.jpg" alt="Verite production still — Panama" loading="lazy" decoding="async"></picture></figure>
       <figure class="cs-cell reveal" data-full="assets/bts07.webp" data-fulljpg="assets/bts07.jpg"><picture><source srcset="assets/bts07-t.webp" type="image/webp"><img class="cs-img" src="assets/bts07-t.jpg" alt="Verite production still — Panama" loading="lazy" decoding="async"></picture></figure>
       <figure class="cs-cell reveal" data-full="assets/bts08.webp" data-fulljpg="assets/bts08.jpg"><picture><source srcset="assets/bts08-t.webp" type="image/webp"><img class="cs-img" src="assets/bts08-t.jpg" alt="Verite production still — Panama" loading="lazy" decoding="async"></picture></figure>
       <figure class="cs-cell reveal" data-full="assets/bts09.webp" data-fulljpg="assets/bts09.jpg"><picture><source srcset="assets/bts09-t.webp" type="image/webp"><img class="cs-img" src="assets/bts09-t.jpg" alt="Verite production still — Panama" loading="lazy" decoding="async"></picture></figure>
@@ -1427,7 +1406,7 @@
     const el = document.getElementById('lb');
     const img = document.getElementById('lb-img');
     const count = document.getElementById('lb-count');
-    const cells = [...document.querySelectorAll('#bts-feature .bf, #cs .cs-cell')];
+    const cells = [...document.querySelectorAll('#cs .cs-cell')];
     const items = cells.map(c => ({ webp: c.dataset.full, jpg: c.dataset.fulljpg }));
     cells.forEach((c, idx) => c.addEventListener('click', () => open(idx)));
     let i = 0;
