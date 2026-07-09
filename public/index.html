@@ -119,8 +119,8 @@
     #nav.scrolled{padding:1rem 3rem;background:rgba(3,6,10,.94);backdrop-filter:blur(18px)}
     .nav-logo{display:flex;align-items:center;text-decoration:none;opacity:.92;transition:opacity .2s}
     .nav-logo:hover{opacity:1}
-    .nav-logo img{height:44px;width:44px;display:block}
-    #nav.scrolled .nav-logo img{height:38px;width:38px;transition:height .4s,width .4s}
+    .nav-logo img{height:66px;width:66px;display:block;transition:height .4s,width .4s}
+    #nav.scrolled .nav-logo img{height:52px;width:52px}
     .nav-links{display:flex;align-items:center;gap:2.5rem}
     .nav-link{font-size:.58rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase;
       color:var(--paper);text-decoration:none;opacity:.35;transition:opacity .2s;cursor:pointer;background:none;border:none;padding:0}
@@ -540,7 +540,7 @@
     /* ── FOOTER ── */
     footer{padding:1.75rem 3rem;border-top:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}
     .footer-logo{font-size:.58rem;font-weight:300;letter-spacing:.28em;text-transform:uppercase;color:var(--muted)}
-    .footer-logo-img{height:54px;width:54px;display:block;opacity:.95}
+    .footer-logo-img{height:104px;width:104px;display:block;opacity:1}
     .footer-copy{font-size:.58rem;font-weight:300;color:rgba(238,236,234,.18);letter-spacing:.04em}
     .footer-iq{display:flex;align-items:center;gap:.85rem;flex-shrink:0;text-decoration:none;cursor:pointer}
     .footer-iq-logo{width:28px;height:28px;border-radius:50%;object-fit:cover;opacity:.75;transition:opacity .2s}
@@ -554,8 +554,10 @@
 
     /* ── MOBILE ── */
     @media(max-width:768px){
-      #nav{padding:1.25rem 1.5rem}
-      #nav.scrolled{padding:.9rem 1.5rem}
+      #nav{padding:1.1rem 1.5rem}
+      #nav.scrolled{padding:.8rem 1.5rem}
+      .nav-logo img,#nav.scrolled .nav-logo img{height:56px;width:56px}
+      .footer-logo-img{height:88px;width:88px}
       .nav-links{display:none}
       .nav-toggle{display:flex}
       .hero-marks{display:none}
@@ -568,7 +570,7 @@
       .loc-head,.wx-wrap{padding-left:1.5rem;padding-right:1.5rem}
       .why{padding:4rem 1.5rem}
       .page-hero{min-height:42vh}
-      .inc{padding:4rem 1.5rem}
+      .inc,.inc-teaser{padding:4rem 1.5rem}
       .inc-grid{grid-template-columns:1fr 1fr}
       .inc-steps{grid-template-columns:1fr 1fr;gap:1.8rem}
       .inc-cols{grid-template-columns:1fr;gap:2.5rem}
