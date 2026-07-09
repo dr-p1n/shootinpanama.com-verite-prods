@@ -413,6 +413,9 @@
 
     /* ── INCENTIVES (tax rebate detail) ── */
     .inc{padding:6.5rem 3rem;border-top:1px solid var(--rule)}
+    .inc-teaser{padding:5.5rem 3rem;border-top:1px solid var(--rule)}
+    .inc-teaser-p{font-size:.9rem;font-weight:300;color:var(--muted);line-height:2;max-width:60ch;margin:1.25rem 0 2.5rem}
+    .inc-teaser-p strong{color:var(--paper);font-weight:400}
     .inc-lead{font-family:'Fraunces',serif;font-style:italic;font-weight:400;
       font-size:clamp(1.7rem,3.3vw,2.7rem);line-height:1.22;color:var(--paper);letter-spacing:-.015em;
       max-width:18ch;margin:1.5rem 0 1.7rem}
@@ -607,6 +610,7 @@
     <button class="nav-link active" id="nav-home" onclick="showPage('home')">Home</button>
     <button class="nav-link" id="nav-work" onclick="showPage('work')">Work</button>
     <button class="nav-link" id="nav-services" onclick="showPage('services')">Services</button>
+    <button class="nav-link" id="nav-incentives" onclick="showPage('incentives')">Incentives</button>
     <button class="nav-link" id="nav-resources" onclick="showPage('resources')">Resources</button>
     <button class="nav-cta" id="nav-contact" onclick="showPage('contact')">Get in Touch</button>
   </div>
@@ -620,6 +624,7 @@
   <button class="mobile-link" onclick="showPage('home')">Home</button>
   <button class="mobile-link" onclick="showPage('work')">Work</button>
   <button class="mobile-link" onclick="showPage('services')">Services</button>
+  <button class="mobile-link" onclick="showPage('incentives')">Incentives</button>
   <button class="mobile-link" onclick="showPage('resources')">Resources</button>
   <button class="mobile-link mm-cta" onclick="showPage('contact')">Get in Touch</button>
 </div>
@@ -881,52 +886,12 @@
     </div>
   </div>
 
-  <!-- ── INCENTIVES (tax rebate detail) ── -->
-  <div class="inc reveal">
-    <p class="page-header-eyebrow">Incentives</p>
+  <!-- ── INCENTIVES TEASER (full detail on its own tab) ── -->
+  <div class="inc-teaser reveal">
+    <p class="page-header-eyebrow">Government Incentives</p>
     <p class="inc-lead">25% of your Panama spend, back in cash.</p>
-    <p class="inc-intro">Panama's <strong>Film Law 16</strong> (2012) grants international productions a 25% cash rebate on qualifying in-country expenditure — alongside customs exemptions and single-window permitting. Verite is a licensed local partner registered with the Ministries of Culture and Commerce; we structure the spend and file the claim so the incentive actually lands.</p>
-    <div class="inc-grid">
-      <div class="inc-item"><div class="k">25<sup>%</sup></div><div class="t">Cash Rebate</div><div class="d">On qualifying in-country spend from $500,000 USD, paid against your budget after wrap.</div></div>
-      <div class="inc-item"><div class="k">0<sup>%</sup></div><div class="t">Import Duty</div><div class="d">Duty-free temporary internment of all production equipment under Law 16.</div></div>
-      <div class="inc-item"><div class="k">1</div><div class="t">Single Window</div><div class="d">One-stop processing of both customs and labor permits at the Ministry of Commerce.</div></div>
-      <div class="inc-item"><div class="k">$150</div><div class="t">Per Week</div><div class="d">Film Commission fee from pre-production — and it credits back toward your rebate.</div></div>
-    </div>
-    <div class="inc-steps">
-      <div class="inc-step"><div class="n">01</div><div class="st">Partner with Verite</div><div class="sd">A licensed local company registered with the Ministries of Culture and Commerce — a legal requirement for the rebate.</div></div>
-      <div class="inc-step"><div class="n">02</div><div class="st">Spend in-country</div><div class="sd">$500,000 USD or more across crew, equipment, locations and logistics.</div></div>
-      <div class="inc-step"><div class="n">03</div><div class="st">We file it</div><div class="sd">CPA-certified documentation submitted through legal counsel to the Ministry of Commerce &amp; Industries.</div></div>
-      <div class="inc-step"><div class="n">04</div><div class="st">25% back</div><div class="sd">Paid as cash against your qualified spend. We track every eligible dollar from day one.</div></div>
-    </div>
-
-    <div class="inc-detail">
-      <div class="inc-cols">
-        <div>
-          <p class="inc-col-k">What qualifies</p>
-          <ul class="inc-list">
-            <li>Panamanian <strong>crew wages</strong> and per diems</li>
-            <li>Local <strong>equipment, vehicle and gear</strong> rental</li>
-            <li><strong>Location fees</strong>, permits and set services</li>
-            <li>Hotels, ground transport and catering</li>
-            <li><strong>Post and lab</strong> services contracted in Panama</li>
-          </ul>
-        </div>
-        <div>
-          <p class="inc-col-k">The fine print</p>
-          <ul class="inc-list">
-            <li><strong>$500,000</strong> minimum qualifying spend — and <strong>no annual cap</strong> above it</li>
-            <li>Filed through a <strong>licensed local producer</strong> — a legal requirement, and that's us</li>
-            <li>Paid <strong>after wrap</strong> on CPA-audited expenditure</li>
-            <li>Stacks with <strong>0% duty</strong> on temporarily imported equipment</li>
-            <li>Panama runs on the <strong>US dollar</strong> — no currency risk on your rebate</li>
-          </ul>
-        </div>
-      </div>
-      <div class="inc-eg">
-        <span class="eg-k">Worked example</span>
-        <span class="eg-v">$2M qualifying spend → <b>$500,000 back in cash.</b></span>
-      </div>
-    </div>
+    <p class="inc-teaser-p">Panama's <strong>Film Law 16</strong> returns 25% of qualifying in-country spend as cash — stacked with 0% equipment-import duty and single-window permits. As a licensed local partner, Verite structures the spend and files the claim so it actually lands.</p>
+    <button class="btn-primary" onclick="showPage('incentives')">Government incentives for international productions &rarr;</button>
   </div>
 
   <!-- ── LOCATIONS ── -->
@@ -1007,6 +972,75 @@
       <div class="wx-season"><div class="wx-season-k">Daylight &amp; Time</div><div class="wx-season-v">Near the Equator: an almost even 12 hours of daylight. Upper-20s to mid-30s °C, humidity in the mid-80s. GMT−5.</div></div>
     </div>
     <p class="wx-note">Live data · Open-Meteo</p>
+  </div>
+
+  <footer>
+    <img class="footer-logo-img" src="assets/logo-badge.webp" alt="Shoot In Panama · Verite Producciones">
+    <span class="footer-copy">Panama City · República de Panamá</span>
+    <a class="footer-iq" href="https://internationalquorum.com/" target="_blank" rel="noopener"
+       aria-label="Member — International Quorum of Motion Picture Producers (opens in a new tab)"
+       title="Member — International Quorum of Motion Picture Producers">
+      <img class="footer-iq-logo" src="data:image/jpeg;base64,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" alt="IQ">
+      <span class="footer-iq-text">International Quorum of Motion Picture Producers</span>
+    </a>
+  </footer>
+</div>
+
+<!-- ════════════════════ GOVERNMENT INCENTIVES ════════════════════ -->
+<div id="page-incentives" class="page">
+  <div class="page-hero reveal">
+    <picture><source srcset="assets/ph-services-1280.webp 1280w, assets/ph-services-1920.webp 1920w" type="image/webp"><source srcset="assets/ph-services-1280.jpg 1280w, assets/ph-services-1920.jpg 1920w" type="image/jpeg"><img class="page-hero-img" src="assets/ph-services-1920.jpg" alt="Panama City financial-district skyline" decoding="async"></picture>
+    <div class="page-header">
+      <p class="page-header-eyebrow">Film Law 16 · Panama</p>
+      <h2 class="page-header-title">Government Incentives<br><em>for international productions.</em></h2>
+      <p class="page-header-desc">A 25% cash rebate on qualifying in-country spend, 0% duty on imported equipment and single-window permitting — structured and filed by a licensed local partner so the incentive actually reaches your budget.</p>
+    </div>
+  </div>
+
+  <div class="inc reveal">
+    <p class="inc-lead">25% of your Panama spend, back in cash.</p>
+    <p class="inc-intro">Panama's <strong>Film Law 16</strong> (2012) grants international productions a 25% cash rebate on qualifying in-country expenditure — alongside customs exemptions and single-window permitting. Verite is a licensed local partner registered with the Ministries of Culture and Commerce; we structure the spend and file the claim so the incentive actually lands.</p>
+    <div class="inc-grid">
+      <div class="inc-item"><div class="k">25<sup>%</sup></div><div class="t">Cash Rebate</div><div class="d">On qualifying in-country spend from $500,000 USD, paid against your budget after wrap.</div></div>
+      <div class="inc-item"><div class="k">0<sup>%</sup></div><div class="t">Import Duty</div><div class="d">Duty-free temporary internment of all production equipment under Law 16.</div></div>
+      <div class="inc-item"><div class="k">1</div><div class="t">Single Window</div><div class="d">One-stop processing of both customs and labor permits at the Ministry of Commerce.</div></div>
+      <div class="inc-item"><div class="k">$150</div><div class="t">Per Week</div><div class="d">Film Commission fee from pre-production — and it credits back toward your rebate.</div></div>
+    </div>
+    <div class="inc-steps">
+      <div class="inc-step"><div class="n">01</div><div class="st">Partner with Verite</div><div class="sd">A licensed local company registered with the Ministries of Culture and Commerce — a legal requirement for the rebate.</div></div>
+      <div class="inc-step"><div class="n">02</div><div class="st">Spend in-country</div><div class="sd">$500,000 USD or more across crew, equipment, locations and logistics.</div></div>
+      <div class="inc-step"><div class="n">03</div><div class="st">We file it</div><div class="sd">CPA-certified documentation submitted through legal counsel to the Ministry of Commerce &amp; Industries.</div></div>
+      <div class="inc-step"><div class="n">04</div><div class="st">25% back</div><div class="sd">Paid as cash against your qualified spend. We track every eligible dollar from day one.</div></div>
+    </div>
+
+    <div class="inc-detail">
+      <div class="inc-cols">
+        <div>
+          <p class="inc-col-k">What qualifies</p>
+          <ul class="inc-list">
+            <li>Panamanian <strong>crew wages</strong> and per diems</li>
+            <li>Local <strong>equipment, vehicle and gear</strong> rental</li>
+            <li><strong>Location fees</strong>, permits and set services</li>
+            <li>Hotels, ground transport and catering</li>
+            <li><strong>Post and lab</strong> services contracted in Panama</li>
+          </ul>
+        </div>
+        <div>
+          <p class="inc-col-k">The fine print</p>
+          <ul class="inc-list">
+            <li><strong>$500,000</strong> minimum qualifying spend — and <strong>no annual cap</strong> above it</li>
+            <li>Filed through a <strong>licensed local producer</strong> — a legal requirement, and that's us</li>
+            <li>Paid <strong>after wrap</strong> on CPA-audited expenditure</li>
+            <li>Stacks with <strong>0% duty</strong> on temporarily imported equipment</li>
+            <li>Panama runs on the <strong>US dollar</strong> — no currency risk on your rebate</li>
+          </ul>
+        </div>
+      </div>
+      <div class="inc-eg">
+        <span class="eg-k">Worked example</span>
+        <span class="eg-v">$2M qualifying spend → <b>$500,000 back in cash.</b></span>
+      </div>
+    </div>
   </div>
 
   <footer>
@@ -1251,7 +1285,7 @@
 
 <script>
   // ── PAGE ROUTING ──
-  const pages = ['home','work','services','resources','contact'];
+  const pages = ['home','work','services','incentives','resources','contact'];
 
   function showPage(id) {
     pages.forEach(p => {
