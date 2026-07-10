@@ -411,6 +411,33 @@
     .why-p strong{color:var(--paper);font-weight:400}
     .why-p em{font-style:italic;color:rgba(238,236,234,.7)}
 
+    /* ── HOME · OFFERINGS ── */
+    .offer{padding:6.5rem 3rem 5.5rem}
+    .offer-head{max-width:60rem;margin-bottom:2.75rem}
+    .offer-eyebrow{font-size:.58rem;font-weight:500;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:1.3rem}
+    .offer-title{font-weight:200;font-size:clamp(1.9rem,3.6vw,3rem);letter-spacing:-.02em;color:var(--paper);line-height:1.08;margin-bottom:1.4rem}
+    .offer-title em{font-family:'Fraunces',serif;font-style:italic;font-weight:400;color:rgba(238,236,234,.5)}
+    .offer-sub{font-size:.9rem;font-weight:300;color:var(--muted);line-height:1.95;max-width:56ch}
+    .offer-list{display:grid;grid-template-columns:1fr 1fr;column-gap:4rem}
+    .offer-item{display:flex;align-items:flex-start;gap:1.4rem;width:100%;text-align:left;
+      padding:2.1rem 0;background:none;border:none;border-top:1px solid var(--rule);cursor:pointer;
+      font-family:inherit;transition:padding-left .35s cubic-bezier(.16,1,.3,1)}
+    .offer-item:hover{padding-left:.6rem}
+    .offer-n{font-size:.62rem;font-weight:500;letter-spacing:.14em;color:var(--accent);padding-top:.45rem;font-variant-numeric:tabular-nums;flex-shrink:0}
+    .offer-body{display:flex;flex-direction:column;gap:.5rem;flex:1}
+    .offer-k{font-weight:300;font-size:1.15rem;letter-spacing:-.01em;color:var(--paper)}
+    .offer-d{font-size:.78rem;font-weight:300;color:var(--muted);line-height:1.75}
+    .offer-go{color:rgba(238,236,234,.25);font-size:1rem;padding-top:.3rem;flex-shrink:0;transition:color .25s,transform .25s}
+    .offer-item:hover .offer-go{color:var(--accent);transform:translateX(4px)}
+
+    /* ── HOME · ARTICLE TEASER ── */
+    .teaser{padding:2rem 3rem 6.5rem}
+    .teaser-inner{max-width:62rem}
+    .teaser-eyebrow{font-size:.58rem;font-weight:500;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:1.6rem}
+    .teaser-lead{font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:clamp(1.7rem,3.2vw,2.5rem);line-height:1.28;color:var(--paper);letter-spacing:-.01em;margin-bottom:1.9rem;max-width:20ch}
+    .teaser-p{font-size:.92rem;font-weight:300;color:var(--muted);line-height:2.05;max-width:66ch;margin-bottom:2.2rem}
+    .teaser-p em{font-family:'Fraunces',serif;font-style:italic;color:rgba(238,236,234,.75)}
+
     /* ── INCENTIVES (tax rebate detail) ── */
     .inc{padding:6.5rem 3rem;border-top:1px solid var(--rule)}
     .inc-teaser{padding:5.5rem 3rem;border-top:1px solid var(--rule)}
@@ -569,6 +596,9 @@
       .page-header,.work-grid-wrap,.services-wrap,.resources-wrap,.contact-wrap{padding-left:1.5rem;padding-right:1.5rem}
       .loc-head,.wx-wrap{padding-left:1.5rem;padding-right:1.5rem}
       .why{padding:4rem 1.5rem}
+      .offer{padding:4rem 1.5rem 3rem}
+      .teaser{padding:1rem 1.5rem 4rem}
+      .offer-list{grid-template-columns:1fr;column-gap:0}
       .page-hero{min-height:42vh}
       .inc,.inc-teaser{padding:4rem 1.5rem}
       .inc-grid{grid-template-columns:1fr 1fr}
@@ -675,51 +705,44 @@
 
   </section>
 
-  <!-- Quick services preview -->
-  <section class="home-svc" style="padding:5rem 3rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border-top:1px solid var(--rule)">
-    <div style="background:var(--ink);padding:2.5rem 2rem">
-      <p style="font-size:.58rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem">We Scout</p>
-      <p style="font-weight:200;font-size:1.2rem;letter-spacing:-.01em;color:var(--paper);margin-bottom:.6rem">Production <span style="font-family:'Fraunces',serif;font-style:italic;font-weight:400;color:rgba(238,236,234,.4)">Services</span></p>
-      <p style="font-size:.75rem;font-weight:300;color:var(--muted);line-height:1.8">Full crew, equipment and location management for international productions.</p>
+  <!-- Offerings -->
+  <section class="offer reveal">
+    <div class="offer-head">
+      <p class="offer-eyebrow">What We Do</p>
+      <h2 class="offer-title">One team, <em>scout to wrap.</em></h2>
+      <p class="offer-sub">International productions don't hand off between vendors here. The crew that scouts your location clears your permits, files your rebate and wraps your shoot — so your team arrives ready to shoot, not ready to problem-solve.</p>
     </div>
-    <div style="background:var(--ink);padding:2.5rem 2rem">
-      <p style="font-size:.58rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem">We Crew</p>
-      <p style="font-weight:200;font-size:1.2rem;letter-spacing:-.01em;color:var(--paper);margin-bottom:.6rem">Fixer <span style="font-family:'Fraunces',serif;font-style:italic;font-weight:400;color:rgba(238,236,234,.4)">&amp; Logistics</span></p>
-      <p style="font-size:.75rem;font-weight:300;color:var(--muted);line-height:1.8">Permits, talent coordination, transport and on-ground support.</p>
-    </div>
-    <div style="background:var(--ink);padding:2.5rem 2rem">
-      <p style="font-size:.58rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem">We Clear</p>
-      <p style="font-weight:200;font-size:1.2rem;letter-spacing:-.01em;color:var(--paper);margin-bottom:.6rem">Executive <span style="font-family:'Fraunces',serif;font-style:italic;font-weight:400;color:rgba(238,236,234,.4)">Compliance</span></p>
-      <p style="font-size:.75rem;font-weight:300;color:var(--muted);line-height:1.8">Legal setup, insurance, customs and regulatory clearance for foreign productions.</p>
-    </div>
-  </section>
-
-  <!-- ── WHY PANAMA (Hub of the Americas) ── -->
-  <section class="why reveal">
-    <div class="why-inner">
-      <p class="why-eyebrow">Hub of the Americas</p>
-      <p class="why-lead">"A man, a plan, a canal: Panama."</p>
-      <p class="why-p">Many countries in the region offer beaches, rainforests, mountains, modern cities and bucolic villages. Panama, aside from all these, offers a premium no other country in the region can: it is a recognized air, maritime and communications hub — literally the <strong>Hub of the Americas</strong>. Its location at the center of the Americas connects 90+ cities in Europe and America with daily direct non-stop flights. Five percent of all global maritime trade navigates through here. So whatever can't be sourced locally, it can be transported here — fast.</p>
-      <p class="why-p">Panama's versatility as a location has been proven widely. The Bond franchise used it to play Bolivia and Haiti in <em>Quantum of Solace</em>; <em>The Suicide Squad</em> turned a derelict corner of Colón into the South American island of Corto Maltese; in <em>Prison Break</em> and <em>Contraband</em>, Panama plays itself. Its compact size and modern roads move productions fast — from the Caribbean to the Pacific in a little over an hour (82 km). No wonder it has the fastest transcontinental railroad.</p>
-    </div>
-  </section>
-
-  <!-- ── SUSTAINABILITY (Carbon negative · solar studio) ── -->
-  <section class="why reveal">
-    <div class="why-inner">
-      <p class="why-eyebrow">Carbon Negative</p>
-      <p class="why-lead">One of three carbon-negative countries on Earth — and the only 100% solar studio in it.</p>
-      <p class="why-p">Along with Bhutan and Suriname, Panama is one of just three carbon-negative countries in the world. <strong>Verite Producciones</strong> is a local leader in environmental production, operating the only 100% solar-powered studio facility in the country. We help visiting productions shrink their footprint — reusable crew bottles instead of single-use plastic, composting and biodegradable catering on remote islands and villages, and full compliance with Panama's laws protecting its flora and fauna.</p>
+    <div class="offer-list">
+      <button class="offer-item" onclick="showPage('services')">
+        <span class="offer-n">01</span>
+        <span class="offer-body"><span class="offer-k">Production Services</span><span class="offer-d">Full crew, equipment and location management, from first scout to final wrap.</span></span>
+        <span class="offer-go">&rarr;</span>
+      </button>
+      <button class="offer-item" onclick="showPage('services')">
+        <span class="offer-n">02</span>
+        <span class="offer-body"><span class="offer-k">Fixer &amp; Logistics</span><span class="offer-d">Permits, talent coordination, transport and on-ground support across the country.</span></span>
+        <span class="offer-go">&rarr;</span>
+      </button>
+      <button class="offer-item" onclick="showPage('services')">
+        <span class="offer-n">03</span>
+        <span class="offer-body"><span class="offer-k">Executive Compliance</span><span class="offer-d">Legal setup, insurance, customs and regulatory clearance for foreign productions.</span></span>
+        <span class="offer-go">&rarr;</span>
+      </button>
+      <button class="offer-item" onclick="showPage('incentives')">
+        <span class="offer-n">04</span>
+        <span class="offer-body"><span class="offer-k">Government Incentives</span><span class="offer-d">A 25% cash rebate on qualifying spend, 0% import duty — structured and filed for you.</span></span>
+        <span class="offer-go">&rarr;</span>
+      </button>
     </div>
   </section>
 
-  <!-- ── DISCRETION (NDA / confidentiality value prop) ── -->
-  <section class="why reveal">
-    <div class="why-inner">
-      <p class="why-eyebrow">Discretion</p>
-      <p class="why-lead">Some productions can't afford a leak.</p>
-      <p class="why-p">High-profile talent, unannounced projects, competitive campaigns — we treat confidentiality as infrastructure, not a favour. Every crew member signs an <strong>NDA</strong> before the first call sheet. Closed sets, controlled access, secure transport and locked location lists keep your project invisible until you choose otherwise.</p>
-      <p class="why-p">And the country itself is built for it: private islands, remote jungle, and controlled points of entry. In Panama, what shoots here stays here.</p>
+  <!-- Why Panama — article teaser -->
+  <section class="teaser reveal">
+    <div class="teaser-inner">
+      <p class="teaser-eyebrow">Why Panama · Hub of the Americas</p>
+      <p class="teaser-lead">"A man, a plan, a canal: Panama."</p>
+      <p class="teaser-p">A recognized air, maritime and communications hub — 90+ cities on daily direct flights, Caribbean to Pacific in a little over an hour. Panama has doubled for Bolivia and Haiti in <em>Quantum of Solace</em> and for Corto Maltese in <em>The Suicide Squad</em>. It's one of three carbon-negative nations on Earth, where Verite runs the country's only 100% solar studio &mdash; and it's discreet by design, with NDAs as standard and controlled points of entry.</p>
+      <button class="btn-ghost" onclick="showPage('services')">Explore Panama &rarr;</button>
     </div>
   </section>
 

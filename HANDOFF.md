@@ -1,105 +1,102 @@
 # Handoff — Verite Producciones "Shoot In Panama" website
 
-You are continuing work on a marketing website for **Verite Producciones** ("Shoot In Panama"),
-a full-service **film-production company in Panama** that services international productions
-(crew, permits, locations, logistics, incentives). This is the owner's **first film-industry
-client**, so the bar is "exceptional." The site is a client-facing demo/proposal.
+Marketing website for **Verite Producciones** ("Shoot In Panama"), a full-service **film-production
+services company in Panama** for international productions (crew, permits, locations, logistics,
+incentives). Owner's **first film-industry client** — bar is "exceptional." Client-facing demo/proposal.
 
-## ★ The two proposals to show the client (identical site, different hero image)
-- **Cinematic** → https://hero-cinematic.shootinpanama-verite.pages.dev
-  Full-bleed hero: a moody, backlit **cinematographer silhouette holding a cinema camera** (teal
-  studio light). Reads "film" instantly; palette matches the site.
-- **Clapperboard** → https://hero-clapperboard.shootinpanama-verite.pages.dev
-  Full-bleed hero: a **film clapperboard macro shot**, darkened/graded.
-Both branches are byte-identical except the hero image; all other work below is on both.
-(Hero images are high-quality **Unsplash placeholders** — to be replaced by the client's real
-Verite catalog stills.)
+## ★ Two proposals (identical site, different Home hero image)
+- **Cinematic** → https://hero-cinematic.shootinpanama-verite.pages.dev — moody backlit
+  cinematographer-with-camera silhouette (teal light).
+- **Clapperboard** → https://hero-clapperboard.shootinpanama-verite.pages.dev — darkened
+  clapperboard macro.
+Branches are identical **except the Home hero image** (inner-page headers/OG are shared). Shared work
+is committed on `hero-cinematic` then **cherry-picked** to `hero-clapperboard`.
+⚠️ In-flight (below) this is changing: the **cinematic** branch is getting a distinct **editorial
+theme**, so the two branches will start to differ by more than the hero.
 
 ## Infrastructure & workflow
-- **Host:** Cloudflare Pages, project `shootinpanama-verite` (account id via `wrangler whoami`).
-  `wrangler` is authed on the dev machine.
-- **Repo:** GitHub `dr-p1n/shootinpanama.com-verite-prods` (`gh` authed).
-- **Single file:** everything is `public/index.html` (a small static **SPA** — pages toggle via a
-  `showPage(id)` JS function; nav is a hamburger on mobile). `public/_headers` holds the CSP —
-  it MUST keep `connect-src ... https://api.open-meteo.com` or the live weather breaks.
-- **Branches:**
-  - `main` = auto-deploys to https://shootinpanama-verite.pages.dev via GitHub Actions on push.
-    ⚠️ **`main` is STALE** — it still has the OLD desert-clapperboard hero and NONE of the
-    redesign/new content. Do not treat it as current.
-  - `hero-cinematic` and `hero-clapperboard` = the real, current A/B proposals (deploy as Cloudflare
-    Pages preview branches). Shared content is committed to `hero-cinematic` then **cherry-picked**
-    to `hero-clapperboard` to keep them in sync.
-- **Deploy a branch preview:** `wrangler pages deploy public --project-name shootinpanama-verite
-  --branch <branch> --commit-dirty=true`
-- **Custom domain:** `shootinpanama.com` is **NOT registered** (client owns `veriteproducciones.net`
-  on Bluehost). Kept on `pages.dev`. `scripts/set-domain.sh <domain>` rewrites all
-  canonical/OG/JSON-LD URLs in one pass at cutover.
+- **Host:** Cloudflare Pages, project `shootinpanama-verite`, account `julioernestolv@gmail.com`
+  (id `2b29809d1391e748856d98e409edaf0d`). `wrangler` authed.
+- **Repo:** GitHub `dr-p1n/shootinpanama.com-verite-prods` (`gh` authed as `dr-p1n`).
+- **Single file:** everything is `public/index.html` — static **SPA**, pages toggle via `showPage(id)`;
+  `pages` array in JS must stay in sync with the mobile-link order. `public/_headers` CSP must keep
+  `connect-src ... https://api.open-meteo.com` (live weather) — and will need the Google endpoint host
+  added when the lead-capture Sheet is wired (see Pending).
+- **Branches:** `main` auto-deploys to https://shootinpanama-verite.pages.dev but is **STALE** (old
+  desert-clapperboard hero, none of the redesign). `hero-cinematic` / `hero-clapperboard` are the real
+  A/B previews.
+- **Deploy a preview:** `wrangler pages deploy public --project-name shootinpanama-verite --branch <b> --commit-dirty=true`
+- **Domain:** `shootinpanama.com` NOT registered (client owns `veriteproducciones.net` on Bluehost).
+  `scripts/set-domain.sh <domain>` rewrites canonical/OG/JSON-LD at cutover.
+- **Contact:** Ricardo Barria · rbarria@veriteproducciones.net · +507 6612-7525.
 
-## What's been built (chronological log)
-1. Repo + Cloudflare Pages + GitHub Actions auto-deploy; served from `public/`.
-2. Self-hosted + optimized all imagery (responsive WebP+JPEG); security headers (CSP/HSTS/etc.),
-   long-cache for assets; **SEO**: Open Graph + Twitter cards, canonical, and **JSON-LD**
-   (Organization / ProfessionalService / WebSite, incl. IQ `memberOf`).
-3. **Mobile-ready:** hamburger nav overlay; fixed horizontal overflow; responsive grids.
-4. Custom-domain **cutover script** + docs.
-5. **Hero redesign** (several iterations; see "Client preferences"): landed on a **full-bleed
-   photographic hero** — two options (cinematic silhouette / clapperboard).
-6. **Content rewritten in the client's real article voice** (source:
-   productionlinkint.com/countries/panama): Home now has narrative sections —
-   **"Hub of the Americas"** ("A man, a plan, a canal…", 90+ direct flights, doubling for
-   Bolivia/Haiti/Corto Maltese) and **"Carbon Negative"** (one of 3 carbon-negative nations;
-   **Verite runs the country's only 100% solar studio**).
-7. **Services page:** detailed **Incentives** section (Film Law 16 · 25% cash rebate · 0% import
-   duty · single-window permits · $150/wk Film Commission fee · 4-step filing process);
-   **Locations** grid (6 image tiles: Caribbean beaches, Panama City, rainforest, ports/canal,
-   Casco Viejo, airports); **live Weather** for 4 regions via the keyless **Open-Meteo** API +
-   dry/green-season copy.
-8. **Discretion / NDA** value proposition on Home ("Some productions can't afford a leak.") —
-   NDAs, closed sets, secure logistics, Panama's built-in privacy. A differentiator vs the client's
-   reference competitor **nafta.tv**.
-9. **Full-bleed image headers** added to Work, Services, Resources pages.
-10. **IQ footer badge** made a certification **backlink** to internationalquorum.com (all pages).
-11. **Modern-luxury typography:** switched serif from Playfair → **Fraunces** (optical, high-contrast)
-    paired with **DM Sans**; consistent 3rem/1.5rem section insets for spatial alignment.
+## Current page structure (SPA tabs)
+Home · Work · Services · **Government Incentives** (own tab) · Resources · Contact.
 
-## Current page structure (`public/index.html`, SPA)
-- **Home:** full-bleed hero → 3 quick services → "Hub of the Americas" → "Carbon Negative" →
-  "Discretion (NDA)" → footer.
-- **Work:** full-bleed header → selected-work grid → footer.
-- **Services:** full-bleed header → 3 disciplines → stats band → **Incentives** → **Locations** →
-  **Weather** → footer.
-- **Resources:** full-bleed header → downloadable-docs grid (mailto request flow) → footer.
-- **Contact:** header → contact info + RFQ form (client-side `mailto:` to the Verite contact).
+## What's been built
+1. Repo + Pages + GitHub Actions auto-deploy; optimized responsive imagery (WebP+JPEG); security
+   headers; SEO (OG, Twitter, canonical, JSON-LD Organization/ProfessionalService/WebSite, IQ `memberOf`,
+   Organization `logo`).
+2. Mobile hamburger nav; responsive grids; fixed overflow.
+3. Full-bleed photographic hero (cinematic / clapperboard A/B).
+4. Copy in the client's real article voice (source productionlinkint.com/countries/panama):
+   "Hub of the Americas", "Carbon Negative" (Verite runs the country's only 100% solar studio).
+5. **Real Verite imagery** — client delivered a 27-shot BTS catalog (`verite - bts caatlog/`, iPhone
+   HEIC). 15 curated, converted + optimized to `assets/bts01..15` (thumb `-t` + full, WebP+JPEG).
+6. **Work → "From The Set"** is a **3-column contact sheet** (15 uniform reduced tiles, 1.5rem gaps)
+   with a **click-to-enlarge lightbox** (prev/next, ← → keys, click-advance, Esc/backdrop, "NN / 15",
+   neighbour preload). Selected-work grid features **MrBeast** in the lead slot.
+7. **Government Incentives for International Productions** is its **own tab** (Film Law 16 · 25% cash
+   rebate · 0% duty · single-window · $150/wk · 4-step process · what-qualifies/fine-print/worked
+   example). Services keeps a **teaser** with a CTA through to it.
+8. **Resources** recast as gated **pre-production/educational guides** (producer's field guide, the
+   25% rebate explained, location lookbook, 90-days-to-camera checklist, budgeting starter,
+   carbon-negative briefing). "Download" opens a **lead-capture gate** (name/email/company). NOTE:
+   currently a `mailto:` hand-off — see Pending for the Google Sheet.
+9. **Discretion / NDA** value prop on Home. Live **Open-Meteo weather** + season copy on Services.
+10. **Verite logo** (client's circular badge, `WhatsApp Image 2026-07-08…jpeg`, 864²): circle-masked
+    to transparent PNG/WebP → nav (90px, 68 scrolled) + all footers (136px); favicons (16/32/48) +
+    180px apple-touch; **1200×630 OG social card** (`assets/og-card.jpg`, logo on ink) drives
+    og:image/twitter:image. Source was opaque JPEG — a transparent PNG/SVG from the client would sharpen
+    small sizes.
+11. Type: **Fraunces** (italic serif) + **DM Sans**. Palette `--ink #03060a` / `--paper #EEECEA` /
+    `--accent #C9541E`, teal shadows.
 
-## Design language
-- Palette: `--ink #03060a`, `--paper #EEECEA`, `--accent #C9541E` (burnt orange), teal shadows.
-- Type: **Fraunces** (italic serif accents/leads) + **DM Sans** (body/UI). Luxury, editorial, dark.
-- Client cares about: **spatial alignment**, **modern luxury** feel, real photography, restraint.
+## Client preferences (honor)
+- Hero MUST be full-bleed, photorealistic, cinematic. REJECTED: CSS "slate" gimmick, plain skyline.
+- Modern-luxury type, spatial alignment, real photography, restraint. Likes discretion/NDAs. Wants
+  detailed rebate info (done). Reference competitor **nafta.tv** — out-detail on incentives.
+- Logo must have presence / be readable (why it's now large).
+- Never push experiments to `main` without client OK.
 
-## Client preferences / feedback (accumulated — honor these)
-- Hero MUST be **full-bleed, photorealistic, cinematic** ("invoke film inspiration"). REJECTED: a
-  rendered CSS clapperboard "slate" (called it "silly/a gimmick") and a plain Panama City skyline
-  (reads "Panama," not "film"). Prefer real film-production imagery, moody/dark.
-- Wants **modern luxury font pairings** and **spatial alignment**.
-- Likes **discretion/NDAs** as a value prop.
-- Wants **detailed tax-rebate** info (done).
-- Reference competitor **nafta.tv** — out-detail them on incentives, out-class them on type.
-- Never push experiments to `main` (the live demo) without the client's OK.
+## In-flight this session (direction just given — may be partially done)
+- **Landing (Home) copy, BOTH branches:** lead with the **offerings** (services), reduce the narrative
+  "article" (Hub of the Americas / Carbon Negative) to a **small teaser**.
+- **Cinematic branch theme → more editorial:** reduce reliance on **translucent/transparent text
+  boxes** and **section divider hairlines** (`border-top:1px solid var(--rule)`); lean on typography +
+  whitespace. This makes cinematic diverge from clapperboard beyond the hero — commit theme changes on
+  `hero-cinematic` only; keep copy changes shared via cherry-pick.
+- The CEO wants a **tab-by-tab visual comparison** of the two links (in lieu of a Loom). Preview
+  `screenshot` tool is flaky (returns black) — a fresh server sometimes fixes it; otherwise a headless
+  full-page capture of the two live URLs (hash routes: `#work` etc.) montaged is the fallback.
 
 ## Pending / next steps
-- **Client's real Verite stills** (incl. **jungle mobile shots** they have) → replace the Unsplash
-  placeholders in the hero + location tiles. This is the single biggest upgrade left.
-- **The actual Verite logo** → nav + footer (currently plain text "Shoot In Panama").
-- **Client picks a hero** (cinematic vs clapperboard) → merge that branch to `main` so the live
-  demo shows the redesign.
-- Custom-domain decision.
-- Optional polish: real client-logo strip, real client list (Bunim-Murray, Discovery, FOX, E!,
-  The Today Show) on Work, local "fun facts" (¿Qué Xopa?, Ron Abuelo, patacones).
+- **Wire the Resources download gate to a Google Sheet** (client chose Sheets). Plan: Google Apps
+  Script Web App (`doPost` → append row), form POSTs form-urlencoded `no-cors`; add
+  `https://script.google.com https://script.googleusercontent.com` to `_headers` connect-src; keep
+  mailto as fallback. Needs the client's Apps Script `/exec` URL.
+- Finish shortening the **Resources card copy** (3 of 6 were trimmed).
+- **Client picks a hero** → merge that branch to `main`.
+- Real client-logo strip / full client list on Work; custom-domain decision.
 
-## Working notes / gotchas
-- Edit `public/index.html` only; keep both branches synced via cherry-pick.
-- Live weather needs the Open-Meteo entry in `_headers` CSP.
-- The preview **screenshot** tool intermittently returns black — starting a **fresh** preview
-  server fixes it; otherwise verify via DOM (`preview_eval`).
-- Images are optimized with `sips` + `cwebp` (both installed); no ImageMagick (use a Python/PIL
-  contact sheet to review candidates).
+## Gotchas
+- Edit `public/index.html` only. Keep shared changes synced via cherry-pick; keep **cinematic-only**
+  theme changes OFF clapperboard.
+- Cherry-picks can conflict on the head **OG/hero image lines** (branches differ there) — resolve to
+  the shared/new value.
+- Live weather needs the Open-Meteo CSP entry.
+- Preview screenshot intermittently returns black — start a **fresh** preview server; else verify via
+  DOM (`preview_eval`). Fresh preview tabs can also start at **0×0** — `preview_resize` to explicit
+  1280×840 before measuring/screenshotting.
+- Images: `sips` (HEIC→JPEG, orientation baked) + `cwebp`; no ImageMagick. Review candidates via a
+  Python/PIL contact sheet (one image-token instead of many).
