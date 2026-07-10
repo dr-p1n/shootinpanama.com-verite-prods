@@ -433,7 +433,9 @@
     /* ── HOME · ARTICLE TEASER ── */
     .teaser{padding:2rem 3rem 6.5rem}
     .teaser-inner{max-width:62rem}
-    .teaser-eyebrow{font-size:.58rem;font-weight:500;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:1.6rem}
+    .teaser-credit{display:inline-block;font-size:.58rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);text-decoration:none;margin-bottom:1.6rem;padding-bottom:2px;border-bottom:1px solid transparent;transition:border-color .2s,opacity .2s}
+    .teaser-credit:hover{border-color:var(--accent);opacity:.85}
+    .teaser-p strong{color:var(--paper);font-weight:400}
     .teaser-lead{font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:clamp(1.7rem,3.2vw,2.5rem);line-height:1.28;color:var(--paper);letter-spacing:-.01em;margin-bottom:1.9rem;max-width:20ch}
     .teaser-p{font-size:.92rem;font-weight:300;color:var(--muted);line-height:2.05;max-width:66ch;margin-bottom:2.2rem}
     .teaser-p em{font-family:'Fraunces',serif;font-style:italic;color:rgba(238,236,234,.75)}
@@ -763,10 +765,10 @@
   <!-- Why Panama — article teaser -->
   <section class="teaser reveal">
     <div class="teaser-inner">
-      <p class="teaser-eyebrow">Why Panama · Hub of the Americas</p>
-      <p class="teaser-lead">"A man, a plan, a canal: Panama."</p>
-      <p class="teaser-p">A recognized air, maritime and communications hub — 90+ cities on daily direct flights, Caribbean to Pacific in a little over an hour. Panama has doubled for Bolivia and Haiti in <em>Quantum of Solace</em> and for Corto Maltese in <em>The Suicide Squad</em>. It's one of three carbon-negative nations on Earth, where Verite runs the country's only 100% solar studio &mdash; and it's discreet by design, with NDAs as standard and controlled points of entry.</p>
-      <button class="btn-ghost" onclick="showPage('services')">Explore Panama &rarr;</button>
+      <a class="teaser-credit" href="https://www.productionlinkint.com/countries/panama/" target="_blank" rel="noopener">As featured in Production Link International &#8599;</a>
+      <p class="teaser-lead">Over 25 years making Panama work on camera.</p>
+      <p class="teaser-p">Verite Producciones has spent more than <strong>25 years</strong> as the ground team behind international features, series and campaigns filming in Panama — the Hub of the Americas, one of only three carbon-negative nations on Earth, and discreet by design. We handle the crews, permits, locations and logistics, so your production arrives ready to shoot.</p>
+      <button class="btn-ghost" onclick="showPage('work')">See our work &rarr;</button>
     </div>
   </section>
 
