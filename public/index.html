@@ -631,6 +631,30 @@
       .reveal,.ll1,.ll2,.ll3,.ll4,.ll5,.ll6,.hero-frame::before{animation:none}
       .reveal{opacity:1;transform:none}
     }
+
+    /* ══════════ EDITORIAL THEME · CINEMATIC BRANCH ONLY ══════════
+       Fewer hairline dividers and glass panels — whitespace, type and the
+       accent carry the structure. (Do not cherry-pick to clapperboard.) */
+    .why,.inc,.inc-teaser,.bts,.client-strip,.offer-item{border-top:0}
+    .page-header{border-bottom:0}
+    .service-row,.service-row:first-of-type{border-top:0;border-bottom:0}
+    .inc-detail,.wx-seasons{border-top:0}
+    footer{border-top:0}
+    /* offerings read as an editorial index, not a boxed grid */
+    .offer-list{column-gap:5rem;row-gap:1rem}
+    .offer-item{padding:1.7rem 0}
+    /* the disciplines breathe on the page instead of sitting between rules */
+    .service-row{padding:2.4rem 0}
+    /* stats become open display type, not a translucent band */
+    .stats-band{margin:5.5rem 0 1.5rem}
+    .stats-bg{display:none}
+    .stats-grid{background:none;border-top:0;border-bottom:0;gap:3rem 2.5rem}
+    .stat{padding:1.5rem 2.5rem 1.5rem 0}
+    @media(max-width:768px){
+      .offer-list{column-gap:0;row-gap:0}
+      .stats-grid{gap:2rem}
+      .stat{padding:1.5rem 0}
+    }
   </style>
 </head>
 <body>
