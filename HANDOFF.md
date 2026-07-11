@@ -42,13 +42,15 @@ Home · Work · Services · **Government Incentives** · Resources · Contact.
 ## What's built
 - **Home (offerings-first):** full-bleed hero → **"What We Do"** offerings index (Production Services /
   Fixer & Logistics / Executive Compliance / Government Incentives, numbered 01–04, each links onward)
-  → a single **teaser** that opens with **"As featured in Production Link International ↗"** — a
-  follow **backlink** to `https://www.productionlinkint.com/countries/panama/` (new tab) — then leads on
-  the firm's experience: **"Over 25 years making Panama work on camera."** The old long narratives (Hub
-  of the Americas / Carbon Negative / Discretion) were condensed into this one teaser.
-- **Work:** selected-work grid (MrBeast in the lead slot) → **"From The Set"** 3-column **contact
-  sheet** of 15 real Verite BTS stills (uniform, 1.5rem gaps) with a **click-to-enlarge lightbox**
-  (prev/next, ← →, click-advance, Esc/backdrop, "NN / 15", neighbour preload).
+  → a single **teaser** that leads on the firm's experience (**"Over 25 years making Panama work on
+  camera."**) then a light **"Why Panama?"** line with inline links into Services/Incentives. (The
+  Production Link International "As featured in" backlink was **REMOVED** per CEO — relationship ended.)
+- **Work:** monochrome **logo wall** (drop-in SVG marks: MrBeast wordmark, CBS, NBC, MTV, Netflix,
+  Discovery wordmark) → last tile "The Complete Reel · Available Upon Request" (→ Contact). Credits are
+  the **CEO-authorized list only**: CBS's The Amazing Race, NBC's Today Show (Where in the World is Matt
+  Lauer?), MTV's The Challenge, Netflix's ARP, Discovery's Survive the Raft, MrBeast; credits roll adds
+  Miss Universe 2003, Survivor vs Survivalist, beer-brand commercials, OAS. **English uses OAS (not
+  OEA).** Then **"From The Set"** 3-column **contact sheet** of 15 real BTS stills with a lightbox.
 - **Services:** 3 disciplines → stats band → an **Incentives teaser** with a CTA to the Incentives tab
   → Locations grid → live **Open-Meteo weather** + season copy.
 - **Government Incentives (own tab):** Film Law 16 · 25% cash rebate · 0% duty · single-window ·
@@ -79,24 +81,34 @@ alignment. Client likes discretion/NDAs and detailed rebate info.
 ## Client / CEO preferences (honor)
 - Hero MUST be full-bleed, photorealistic, cinematic. REJECTED: CSS "slate" gimmick, plain skyline.
 - Logo must have presence / be readable (why it's large now).
-- Teaser copy = firm experience ("over 25 years"), with the source credited as **"As featured in…"**
-  (not an "article" subheader), linking out in a new tab. Keep it a teaser.
+- Teaser copy = firm experience ("over 25 years"). Keep it a teaser. **No** Production Link backlink.
+- Always use the full name **"Verite Producciones"**. English uses **OAS** (not OEA).
+- Positioning line (Home offerings + Services header): **"the executive arm of your production"** — the
+  executive branch so the client's creative/production team stays on the creative.
+- Incentives fine print: **no** annual/per-project cap; payout can take **up to 3 years**; credit the
+  most experienced Cash Rebate accountants/auditors.
 - Never push experiments to `main` without client OK.
 
 ## Pending / next steps
-1. **CEO comparison deliverable** (asked, not built): a tab-by-tab **cinematic vs clapperboard**
-   side-by-side, "instead of a Loom." Best path: headless full-page capture of each tab on both live
-   URLs (SPA hash routes `#work`, `#services`, `#incentives`, `#resources`, `#contact`) montaged into
-   one shareable page/Artifact. NOTE: the in-app preview `screenshot` tool is flaky (returns black; a
-   fresh server sometimes fixes it) and its images can't be embedded into an Artifact — use a real
-   headless capture to files.
-2. **Wire the Resources download gate to a Google Sheet** (client chose Sheets). Plan: Google Apps
-   Script Web App (`doPost` → append row); form POSTs form-urlencoded `no-cors`; add
+1. **Bilingual EN/ES** (CEO wants it; not started). Planned mechanism: `data-i18n` dictionary + a small
+   EN/ES nav toggle, `localStorage` persistence, `<html lang>` swap; draft Panama/neutral-LatAm Spanish
+   for the whole site, flagged for CEO review. **BLOCKED on one decision: default language** (recommend
+   English default w/ toggle). ~150–200 strings; shared change → both branches.
+2. **CEO-pending assets** (can't build without files):
+   - **Owned page-1 hero image** — replace the stock hero (the clapperboard = the "slate" the CEO
+     flagged on clapperboard; the cinematic cinematographer photo is also a stock placeholder).
+   - **Last 3 gallery photos** — CEO will specify which BTS stills to swap in.
+   - **OAS conference screenshot** (CEO sending) → add to visuals.
+   - **Beer-brand commercial images** (being sourced).
+   - Official **show logos/screenshots** for the aired authorized productions (currently network SVG
+     marks stand in on the Work grid).
+3. **Wire the Resources download gate to a Google Sheet** (client chose Sheets). Google Apps Script
+   Web App (`doPost` → append row); form POSTs form-urlencoded `no-cors`; add
    `https://script.google.com https://script.googleusercontent.com` to `_headers` connect-src; keep
-   mailto as fallback. Needs the client's Apps Script `/exec` URL.
-3. Finish shortening the **Resources card copy** (3 of 6 trimmed).
-4. **Client picks a hero** → merge that branch to `main`.
-5. Custom-domain decision; optional real client-logo strip / full client list on Work.
+   mailto fallback. Needs the client's Apps Script `/exec` URL.
+4. **Client picks a THEME** (editorial vs ruled/boxed — not the hero; the two share aspects) → merge
+   that branch to `main`. Compare via the two live URLs directly.
+5. Custom-domain decision.
 
 ## Gotchas
 - Edit `public/index.html` only. Keep cinematic-only theme changes OFF clapperboard.
