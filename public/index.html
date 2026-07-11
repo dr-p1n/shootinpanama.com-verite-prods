@@ -260,6 +260,25 @@
     .page-header-desc{font-size:.82rem;font-weight:300;color:var(--muted);max-width:58ch;line-height:1.85}
     .page-header-desc strong{color:var(--paper);font-weight:400}
 
+    /* ── GET IN TOUCH HERO (full-bleed) ── */
+    .git-hero{position:relative;min-height:clamp(560px,80vh,820px);margin-top:-5rem;
+      display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;background:#02040a}
+    .git-hero-bg{position:absolute;inset:0;z-index:0}
+    .git-hero-bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 42%;
+      filter:brightness(.94) contrast(1.04)}
+    .git-hero-scrim{position:absolute;inset:0;z-index:1;background:
+      linear-gradient(to top,rgba(3,6,10,.94) 0%,rgba(3,6,10,.55) 34%,rgba(3,6,10,.12) 62%,rgba(3,6,10,.42) 100%),
+      linear-gradient(to right,rgba(3,6,10,.72) 0%,rgba(3,6,10,.18) 52%,transparent 78%)}
+    .git-hero-content{position:relative;z-index:2;padding:0 3rem 4.5rem;max-width:60rem}
+    .git-hero-h1{font-weight:200;font-size:clamp(2.4rem,5.2vw,4.6rem);line-height:1.03;
+      letter-spacing:-.03em;color:var(--paper);margin:1.2rem 0 1.4rem;text-shadow:0 2px 18px rgba(2,4,8,.55)}
+    .git-hero-h1 em{font-family:'Fraunces',serif;font-style:italic;font-weight:400;color:rgba(238,236,234,.6)}
+    .git-hero-sub{font-size:.9rem;font-weight:300;color:var(--muted);max-width:50ch;line-height:1.85;margin-bottom:2rem;text-shadow:0 1px 12px rgba(2,4,8,.6)}
+    .btn-accent{display:inline-block;font-size:.6rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;
+      text-decoration:none;padding:.9rem 1.9rem;color:var(--paper);background:var(--accent);
+      border:1px solid var(--accent);transition:opacity .25s,transform .2s;cursor:pointer}
+    .btn-accent:hover{opacity:.9;transform:translateY(-1px)}
+
     /* ── WORK GRID ── */
     .work-grid-wrap{padding:2.5rem 3rem 5rem}
     .work-note-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem}
@@ -598,6 +617,8 @@
       .slate{position:static;right:auto;top:auto;width:auto;max-width:330px;margin:2.2rem auto .5rem;
         animation:none;opacity:1;transform:rotate(-1deg)}
       .hero-content{padding:0 1.5rem 2.5rem}
+      .git-hero{min-height:clamp(460px,72vh,640px)}
+      .git-hero-content{padding:0 1.5rem 3rem}
       .hero-bottom{flex-direction:column;align-items:flex-start;gap:1.5rem}
       .hero-cta-group{flex-direction:column;align-items:flex-start}
       .page-header,.work-grid-wrap,.services-wrap,.resources-wrap,.contact-wrap{padding-left:1.5rem;padding-right:1.5rem}
@@ -722,7 +743,7 @@
       </div>
       <h1 class="hero-h1">Panama. Where your next<br><em>production lives.</em></h1>
       <p class="hero-narrative">
-        For over <strong>25 years</strong> we've been the ground team international
+        For over <strong>30 years</strong> we've been the ground team international
         productions trust in Panama — handling crew, permits, compliance and logistics
         so your team arrives <strong>ready to shoot</strong>, not ready to problem-solve.
       </p>
@@ -767,8 +788,8 @@
   <!-- Why Panama — article teaser -->
   <section class="teaser reveal">
     <div class="teaser-inner">
-      <p class="teaser-lead">Over 25 years making Panama work on camera.</p>
-      <p class="teaser-p">Verite Producciones is the ground team behind international features, series and campaigns shooting in Panama — from <em>The Amazing Race</em> and <em>The Challenge</em> to MrBeast. More than <strong>25 years</strong> of crews, permits, locations and logistics, so your production arrives ready to shoot.</p>
+      <p class="teaser-lead">Over 30 years making Panama work on camera.</p>
+      <p class="teaser-p">Verite Producciones is the ground team behind international features, series and campaigns shooting in Panama — from <em>The Amazing Race</em> and <em>The Challenge</em> to MrBeast. More than <strong>30 years</strong> of crews, permits, locations and logistics, so your production arrives ready to shoot.</p>
       <p class="teaser-p">Why Panama? One small country that <a class="tlink" onclick="showPage('services')">doubles for a dozen on screen</a>, a <a class="tlink" onclick="showPage('incentives')">25% cash rebate</a> on qualifying spend, and the crew depth to keep a shoot on schedule — the Hub of the Americas, carbon-negative, discreet by design.</p>
       <button class="btn-ghost" onclick="showPage('work')">See our work &rarr;</button>
     </div>
@@ -1044,10 +1065,10 @@
 <!-- ════════════════════ GOVERNMENT INCENTIVES ════════════════════ -->
 <div id="page-incentives" class="page">
   <div class="page-hero reveal">
-    <picture><source srcset="assets/ph-services-1280.webp 1280w, assets/ph-services-1920.webp 1920w" type="image/webp"><source srcset="assets/ph-services-1280.jpg 1280w, assets/ph-services-1920.jpg 1920w" type="image/jpeg"><img class="page-hero-img" src="assets/ph-services-1920.jpg" alt="Panama City financial-district skyline" decoding="async"></picture>
+    <picture><source srcset="assets/ph-incentives-1280.webp 1280w, assets/ph-incentives-1920.webp 1920w" type="image/webp"><source srcset="assets/ph-incentives-1280.jpg 1280w, assets/ph-incentives-1920.jpg 1920w" type="image/jpeg"><img class="page-hero-img" src="assets/ph-incentives-1920.jpg" alt="Cargo ship transiting the Panama Canal" decoding="async"></picture>
     <div class="page-header">
       <p class="page-header-eyebrow">Film Law 16 · Panama</p>
-      <h2 class="page-header-title">Government Incentives<br><em>for international productions.</em></h2>
+      <h2 class="page-header-title">Tax incentives for<br><em>film production in Panama.</em></h2>
       <p class="page-header-desc">A 25% cash rebate on qualifying in-country spend, 0% duty on imported equipment and single-window permitting — structured and filed by a licensed local partner so the incentive actually reaches your budget.</p>
     </div>
   </div>
@@ -1229,13 +1250,24 @@
 
 <!-- ════════════════════ CONTACT ════════════════════ -->
 <div id="page-contact" class="page">
-  <div class="page-header reveal">
-    <p class="page-header-eyebrow">Get in Touch</p>
-    <h2 class="page-header-title">Tell us about<br><em>your production.</em></h2>
-    <p class="page-header-desc">We respond within 24 hours with a preliminary budget estimate, location recommendations and crew availability for your dates.</p>
-  </div>
+  <section class="git-hero reveal">
+    <div class="git-hero-bg">
+      <picture>
+        <source type="image/webp" srcset="assets/ph-contact-1280.webp 1280w, assets/ph-contact-1920.webp 1920w" sizes="100vw">
+        <source type="image/jpeg" srcset="assets/ph-contact-1280.jpg 1280w, assets/ph-contact-1920.jpg 1920w" sizes="100vw">
+        <img src="assets/ph-contact-1920.jpg" alt="Colorful film clapperboard on set — Verite Producciones" decoding="async">
+      </picture>
+      <div class="git-hero-scrim"></div>
+    </div>
+    <div class="git-hero-content">
+      <div class="hero-eyebrow"><div class="hero-eyebrow-line"></div><span class="hero-eyebrow-text">Panama · Since 1993</span></div>
+      <h1 class="git-hero-h1">The audiovisual house<br><em>of reference in Panama.</em></h1>
+      <p class="git-hero-sub">Full-service logistics. For over 30 years, the ground team behind the country's largest international and local productions.</p>
+      <button class="btn-accent" onclick="document.getElementById('rfq').scrollIntoView({behavior:'smooth'})">Request a Quote</button>
+    </div>
+  </section>
 
-  <div class="contact-wrap">
+  <div class="contact-wrap" id="rfq">
     <div class="contact-grid">
       <div class="contact-info reveal">
         <div class="contact-info-block">
