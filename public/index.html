@@ -258,6 +258,7 @@
     .page-header-title{font-weight:200;font-size:clamp(2rem,4vw,3.5rem);letter-spacing:-.025em;color:var(--paper);line-height:1.05;margin-bottom:.75rem}
     .page-header-title em{font-family:'Fraunces',serif;font-style:italic;font-weight:400;color:rgba(238,236,234,.5)}
     .page-header-desc{font-size:.82rem;font-weight:300;color:var(--muted);max-width:58ch;line-height:1.85}
+    .page-header-desc strong{color:var(--paper);font-weight:400}
 
     /* ── WORK GRID ── */
     .work-grid-wrap{padding:2.5rem 3rem 5rem}
@@ -272,16 +273,15 @@
     .wc:nth-child(5){grid-column:span 4;aspect-ratio:1/1}
     .wc:nth-child(6){grid-column:span 8;aspect-ratio:2.39/1}
     .wc:nth-child(7){grid-column:span 4;aspect-ratio:16/10}
-    .wc-frame{position:absolute;inset:0;transition:transform .8s cubic-bezier(.16,1,.3,1)}
-    .wc:hover .wc-frame{transform:scale(1.04)}
-    .wc:nth-child(1) .wc-frame{background:radial-gradient(ellipse 65% 70% at 35% 45%,#0d3d1e 0%,#071a0d 60%,#040e08 100%)}
-    .wc:nth-child(2) .wc-frame{background:radial-gradient(ellipse 60% 65% at 65% 35%,#3d1f08 0%,#1e0e04 55%,#0e0804 100%)}
-    .wc:nth-child(3) .wc-frame{background:radial-gradient(ellipse 70% 70% at 40% 55%,#0a1e3d 0%,#060f1e 55%,#030810 100%)}
-    .wc:nth-child(4) .wc-frame{background:radial-gradient(ellipse 65% 65% at 60% 40%,#3d0e0a 0%,#1e0704 55%,#0e0403 100%)}
-    .wc:nth-child(5) .wc-frame{background:radial-gradient(ellipse 60% 75% at 30% 65%,#143d1a 0%,#081e0d 55%,#040e06 100%)}
-    .wc:nth-child(6) .wc-frame{background:radial-gradient(ellipse 85% 55% at 45% 50%,#1a0a3d 0%,#0d051e 55%,#07030e 100%)}
-    .wc:nth-child(7) .wc-frame{background:radial-gradient(ellipse 65% 65% at 55% 40%,#3d2a08 0%,#1e1504 55%,#0e0b03 100%)}
-    .wc-vig{position:absolute;inset:0;background:radial-gradient(ellipse 100% 100% at 50% 50%,transparent 35%,rgba(3,6,10,.65) 100%);pointer-events:none;z-index:2}
+    .wc-frame{position:absolute;inset:0;transition:transform .8s cubic-bezier(.16,1,.3,1);
+      background:radial-gradient(ellipse 95% 95% at 50% 42%,#0b0f15 0%,#070a0f 62%,#05080c 100%)}
+    .wc:hover .wc-frame{transform:scale(1.02)}
+    .wc-vig{position:absolute;inset:0;background:radial-gradient(ellipse 100% 100% at 50% 50%,transparent 40%,rgba(3,6,10,.55) 100%);pointer-events:none;z-index:2}
+    /* Monochrome brand marks (silhouette) */
+    .wc-logo{color:rgba(238,236,234,.6);transition:color .4s}
+    .wc-logo svg{display:block;margin:0 auto;width:auto;height:clamp(30px,4.2vw,54px);fill:currentColor}
+    .wc:hover .wc-logo{color:rgba(238,236,234,.85)}
+    .wc:nth-child(1) .wc-logo svg{height:clamp(30px,3.4vw,44px)}
     .wc-client{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:6;text-align:center;pointer-events:none;transition:opacity .4s}
     .wc:hover .wc-client{opacity:0}
     .wc-client-name{font-weight:300;font-size:clamp(.75rem,1.4vw,1.1rem);letter-spacing:.14em;text-transform:uppercase;color:rgba(238,236,234,.82);white-space:nowrap}
@@ -385,7 +385,9 @@
 
     /* ── WEATHER ── */
     .wx-wrap{padding:4.5rem 3rem 2rem}
-    .wx-lede{font-size:.82rem;font-weight:300;color:var(--muted);line-height:1.9;max-width:60ch;margin:1.25rem 0 2.5rem}
+    .wx-lede{font-size:.82rem;font-weight:300;color:var(--muted);line-height:1.9;max-width:60ch;margin:1.25rem 0 1.5rem}
+    .wx-clock-line{font-size:.6rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:rgba(238,236,234,.4);margin:0 0 2.25rem;display:flex;align-items:baseline;gap:.7rem;flex-wrap:wrap}
+    .wx-clock{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:.92rem;letter-spacing:.05em;color:var(--accent);text-transform:none;font-variant-numeric:tabular-nums}
     .wx-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule)}
     .wx-card{background:var(--ink);padding:1.9rem 1.5rem}
     .wx-loc{font-size:.56rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(238,236,234,.55);margin-bottom:.15rem}
@@ -418,6 +420,7 @@
     .offer-title{font-weight:200;font-size:clamp(1.9rem,3.6vw,3rem);letter-spacing:-.02em;color:var(--paper);line-height:1.08;margin-bottom:1.4rem}
     .offer-title em{font-family:'Fraunces',serif;font-style:italic;font-weight:400;color:rgba(238,236,234,.5)}
     .offer-sub{font-size:.9rem;font-weight:300;color:var(--muted);line-height:1.95;max-width:56ch}
+    .offer-sub strong{color:var(--paper);font-weight:400}
     .offer-list{display:grid;grid-template-columns:1fr 1fr;column-gap:4rem}
     .offer-item{display:flex;align-items:flex-start;gap:1.4rem;width:100%;text-align:left;
       padding:2.1rem 0;background:none;border:none;border-top:1px solid var(--rule);cursor:pointer;
@@ -439,6 +442,8 @@
     .teaser-lead{font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:clamp(1.7rem,3.2vw,2.5rem);line-height:1.28;color:var(--paper);letter-spacing:-.01em;margin-bottom:1.9rem;max-width:20ch}
     .teaser-p{font-size:.92rem;font-weight:300;color:var(--muted);line-height:2.05;max-width:66ch;margin-bottom:2.2rem}
     .teaser-p em{font-family:'Fraunces',serif;font-style:italic;color:rgba(238,236,234,.75)}
+    .teaser-p .tlink{color:var(--paper);border-bottom:1px solid var(--accent);cursor:pointer;transition:color .2s,opacity .2s}
+    .teaser-p .tlink:hover{color:var(--accent)}
 
     /* ── INCENTIVES (tax rebate detail) ── */
     .inc{padding:6.5rem 3rem;border-top:1px solid var(--rule)}
@@ -611,7 +616,8 @@
       .work-grid{grid-template-columns:1fr 1fr;gap:2px}
       .wc{grid-column:span 1!important;aspect-ratio:4/3!important}
       .wc:first-child{grid-column:span 2!important;aspect-ratio:16/9!important}
-      .wc-label{transform:translateY(0)}
+      .wc-label{display:none}
+      .wc-client{opacity:1!important}
       .bts{padding:3.5rem 1.5rem}
       .bts-head{flex-direction:column;align-items:flex-start}
       .bts-note{text-align:left}
@@ -716,12 +722,12 @@
       </div>
       <h1 class="hero-h1">Panama. Where your next<br><em>production lives.</em></h1>
       <p class="hero-narrative">
-        International productions don't just happen here — they <strong>work here</strong>. 
-        We handle crew, permits, compliance and logistics so your team 
-        arrives ready to shoot, not ready to problem-solve.
+        For over <strong>25 years</strong> we've been the ground team international
+        productions trust in Panama — handling crew, permits, compliance and logistics
+        so your team arrives <strong>ready to shoot</strong>, not ready to problem-solve.
       </p>
       <div class="hero-bottom">
-        <p class="hero-sub">Survivor · The Amazing Race · MrBeast · Deal or No Deal Island · MTV · CBS</p>
+        <p class="hero-sub">CBS · NBC · MTV · Netflix · Discovery · MrBeast</p>
         <div class="hero-cta-group">
           <button class="btn-primary" onclick="showPage('contact')">Request a Quote</button>
           <button class="btn-ghost" onclick="showPage('work')">View Work</button>
@@ -736,7 +742,7 @@
     <div class="offer-head">
       <p class="offer-eyebrow">What We Do</p>
       <h2 class="offer-title">One team, <em>scout to wrap.</em></h2>
-      <p class="offer-sub">International productions don't hand off between vendors here. The crew that scouts your location clears your permits, files your rebate and wraps your shoot — so your team arrives ready to shoot, not ready to problem-solve.</p>
+      <p class="offer-sub">We're the <strong>executive arm of your production</strong> in Panama. The same crew that scouts your location clears your permits, files your rebate and wraps your shoot — so your creative and production team stay focused on the work, not the paperwork.</p>
     </div>
     <div class="offer-list">
       <button class="offer-item" onclick="showPage('services')">
@@ -765,9 +771,9 @@
   <!-- Why Panama — article teaser -->
   <section class="teaser reveal">
     <div class="teaser-inner">
-      <a class="teaser-credit" href="https://www.productionlinkint.com/countries/panama/" target="_blank" rel="noopener">As featured in Production Link International &#8599;</a>
       <p class="teaser-lead">Over 25 years making Panama work on camera.</p>
-      <p class="teaser-p">Verite Producciones has spent more than <strong>25 years</strong> as the ground team behind international features, series and campaigns filming in Panama — the Hub of the Americas, one of only three carbon-negative nations on Earth, and discreet by design. We handle the crews, permits, locations and logistics, so your production arrives ready to shoot.</p>
+      <p class="teaser-p">Verite Producciones is the ground team behind international features, series and campaigns shooting in Panama — from <em>The Amazing Race</em> and <em>The Challenge</em> to MrBeast. More than <strong>25 years</strong> of crews, permits, locations and logistics, so your production arrives ready to shoot.</p>
+      <p class="teaser-p">Why Panama? One small country that <a class="tlink" onclick="showPage('services')">doubles for a dozen on screen</a>, a <a class="tlink" onclick="showPage('incentives')">25% cash rebate</a> on qualifying spend, and the crew depth to keep a shoot on schedule — the Hub of the Americas, carbon-negative, discreet by design.</p>
       <button class="btn-ghost" onclick="showPage('work')">See our work &rarr;</button>
     </div>
   </section>
@@ -805,43 +811,44 @@
         <div class="wc-label"><p class="wc-cat">Digital · International Creator</p><p class="wc-title">MrBeast Production</p></div>
       </div>
       <div class="wc reveal"><div class="wc-frame"></div><div class="wc-vig"></div>
-        <div class="wc-client"><p class="wc-client-name">CBS</p><div class="wc-client-divider"></div><p class="wc-client-cat">Amazing Race</p></div>
-        <div class="wc-label"><p class="wc-cat">Reality Television · Network</p><p class="wc-title">CBS Amazing Race</p></div>
+        <div class="wc-client"><div class="wc-logo" role="img" aria-label="CBS"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 24C5.314 24 .068 18.587.068 11.949.068 5.413 5.314 0 12 0s11.932 5.413 11.932 11.949C23.932 18.587 18.686 24 12 24zm0-5.106c5.452 0 9.36-3.473 11.109-6.945C21.875 9.294 18.172 5.106 12 5.106c-5.452 0-9.36 3.37-11.109 6.843C2.537 15.42 6.548 18.894 12 18.894zm0-.613c-3.497 0-6.377-2.86-6.377-6.332S8.503 5.617 12 5.617s6.377 2.86 6.377 6.332c0 3.574-2.88 6.332-6.377 6.332Z"/></svg></div><div class="wc-client-divider"></div><p class="wc-client-cat">Amazing Race</p></div>
+        <div class="wc-label"><p class="wc-cat">Reality Television · Network</p><p class="wc-title">CBS's The Amazing Race — USA · Canada · Finland · Australia</p></div>
       </div>
       <div class="wc reveal"><div class="wc-frame"></div><div class="wc-vig"></div>
-        <div class="wc-client"><p class="wc-client-name">NBC</p><div class="wc-client-divider"></div><p class="wc-client-cat">Deal or No Deal Island</p></div>
-        <div class="wc-label"><p class="wc-cat">Reality Television · Network</p><p class="wc-title">NBC Deal or No Deal Island</p></div>
+        <div class="wc-client"><div class="wc-logo" role="img" aria-label="NBC"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14.8281 4.6055c-1.4058.0067-2.5666 1.2083-2.416 2.7851h1.08s.5026-.0062.6485.338c0 0-1.594.6128-1.4668 1.6093l.9922 7.3281 3.4727-8.4316c.5296-1.279-.0616-3.1668-1.6973-3.5567a2.5497 2.5497 0 0 0-.6133-.0722zm-5.6426.002a2.5551 2.5551 0 0 0-.627.0722c-1.6356.3878-2.2268 2.2757-1.6972 3.5566l3.4727 8.4317 1.2422-9.1582c.2194-1.629-.9564-2.8876-2.3907-2.9024zM4.293 8.3104c-.5719.0213-1.1298.2465-1.5586.6583-.803.7737-1.4275 2.8792.371 4.1562l6.9532 4.9258-3.334-8.0762c-.4878-1.1698-1.4785-1.6994-2.4316-1.664zm15.2715 0c-.9075.0203-1.8246.5528-2.2891 1.6641l-3.332 8.0762 6.953-4.9258c1.7987-1.275 1.172-3.3825.3692-4.1563-.4638-.446-1.0802-.672-1.7011-.6582zm1.9394 5.7872c-.4523.0075-.9351.1573-1.42.502l-6.7694 4.7948h8.0253c1.8734 0 3.0648-1.5828 2.5332-3.4843-.2595-.9264-1.2131-1.8318-2.369-1.8125zm-19.0078.002C1.3405 14.081.3879 14.9851.127 15.9101c-.5316 1.9015.6597 3.4843 2.5332 3.4843h8.0253L3.916 14.5996c-.4848-.344-.9677-.4927-1.42-.5z"/></svg></div><div class="wc-client-divider"></div><p class="wc-client-cat">Today Show</p></div>
+        <div class="wc-label"><p class="wc-cat">Broadcast · Network</p><p class="wc-title">NBC's Today Show — Where in the World is Matt Lauer?</p></div>
       </div>
       <div class="wc reveal"><div class="wc-frame"></div><div class="wc-vig"></div>
-        <div class="wc-client"><p class="wc-client-name">MTV</p><div class="wc-client-divider"></div><p class="wc-client-cat">The Challenge</p></div>
+        <div class="wc-client"><div class="wc-logo" role="img" aria-label="MTV"><svg viewBox="0 0 264.58333 163.52768" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-19.826464,201.34222)"><path d="m 206.51128,-37.814543 c -0.48752,-4.074263 -1.07951,-9.959309 -1.07951,-15.147901 0,-3.203694 0.4527,-16.15776 0.4527,-26.569765 0,-8.775336 -1.91525,-24.410751 -1.91525,-32.872681 0,-5.11895 0.38305,-12.01386 -0.17412,-14.45145 4.07427,-2.64653 7.62619,-4.35285 18.83912,-11.10846 3.62156,-2.22866 10.55129,-5.91987 10.55129,-10.41201 0,-1.98489 -0.52234,-3.27334 -3.34298,-5.60646 -1.95008,-1.56702 -4.07426,-2.01972 -6.47703,-2.01972 -5.71094,0 -8.28782,5.71093 -13.09336,8.67087 -7.31278,4.45731 -11.17811,6.65114 -12.67549,7.48689 -0.59198,-0.27858 -3.09922,-1.74114 -7.10384,-1.74114 -4.17873,0 -9.01909,1.88043 -9.01909,7.31278 0,2.47242 0.7661,5.18859 -2.54207,6.92973 -1.88042,1.18397 -10.96917,6.37257 -20.64989,12.22279 -8.14853,4.91001 -11.94421,4.52696 -15.39166,6.5815 -3.16887,1.91525 -4.00462,4.31802 -4.00462,6.37257 0,1.8456 1.14915,4.178728 1.56702,4.701069 2.19384,2.785821 4.14391,4.318022 7.59137,4.318022 5.85022,0 10.72541,-5.118945 19.7445,-11.526331 5.64129,-4.00462 10.79506,-8.18335 13.82464,-8.18335 2.71617,0 4.5966,2.05454 4.5966,10.412 0,28.067149 -1.70631,32.524462 -1.70631,51.955562 0,3.517099 0.13929,9.994132 0.24375,12.675485 h -14.86931 v -45.93122 l -28.62431,24.132172 -28.65913,-24.132172 v 45.93122 H 19.826464 V -201.34222 H 110.1567 l 31.09673,32.73339 31.0619,-32.73339 h 90.81776 v 69.9241 c -2.85547,4.42249 -11.6308,19.46592 -17.55067,34.822758 -1.91526,5.014478 -2.82065,8.636045 -5.36271,8.636045 -2.78582,0 -3.02958,-2.750998 -3.30816,-5.258237 -0.55716,-5.362705 -1.77596,-15.391656 -2.33313,-19.117696 -1.0795,-7.13867 -2.47241,-14.6952 -10.48165,-14.6952 -5.91987,0 -12.11832,3.23851 -12.11832,12.08349 0,5.01448 2.54206,13.72017 6.89491,25.176859 1.70632,4.526959 10.79506,28.380549 12.11832,31.828003 2.40277,6.302919 5.71093,8.044057 10.93435,8.044057 6.65114,0 8.94945,-2.437593 11.66562,-11.770093 2.33313,-7.939589 6.2681,-20.893656 9.54144,-29.042181 0,0 0,0 0,0 v 52.895772 z m 77.89851,-90.748117 v 90.748117 h -14.93896 v -66.407007 c 3.20369,-6.8949 10.89952,-19.01322 14.93896,-24.34111 m -14.93896,-12.11832 v -60.66124 l 14.93896,8.98427 v 33.22091 c -3.65639,3.8305 -11.35222,13.163 -14.93896,18.45606 m -119.99923,-45.79193 -8.21817,8.67087 -22.28657,-23.43572 28.27608,12.43173 z m 1.00986,127.346838 h 10.27271 l 2.78582,-2.333125 v -8.670867 z m -31.54942,21.311529 h 12.29243 v -21.973162 l -12.29243,-10.342359 z"/></g></svg></div><div class="wc-client-divider"></div><p class="wc-client-cat">The Challenge</p></div>
         <div class="wc-label"><p class="wc-cat">Reality Television · Network</p><p class="wc-title">MTV's The Challenge</p></div>
       </div>
       <div class="wc reveal"><div class="wc-frame"></div><div class="wc-vig"></div>
-        <div class="wc-nda">NDA</div>
-        <div class="wc-client"><p class="wc-client-name">OEA</p><div class="wc-client-divider"></div><p class="wc-client-cat">Org. of American States</p></div>
-        <div class="wc-label"><p class="wc-cat">Institutional · Multilateral</p><p class="wc-title">OEA — Organization of American States</p></div>
+        <div class="wc-client"><div class="wc-logo" role="img" aria-label="Netflix"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m5.398 0 8.348 23.602c2.346.059 4.856.398 4.856.398L10.113 0H5.398zm8.489 0v9.172l4.715 13.33V0h-4.715zM5.398 1.5V24c1.873-.225 2.81-.312 4.715-.398V14.83L5.398 1.5z"/></svg></div><div class="wc-client-divider"></div><p class="wc-client-cat">ARP</p></div>
+        <div class="wc-label"><p class="wc-cat">Series · Streaming</p><p class="wc-title">Netflix's ARP</p></div>
       </div>
       <div class="wc reveal"><div class="wc-frame"></div><div class="wc-vig"></div>
-        <div class="wc-nda">NDA</div>
-        <div class="wc-client"><p class="wc-client-name">JMW</p><div class="wc-client-divider"></div><p class="wc-client-cat">Brand Campaign</p></div>
-        <div class="wc-label"><p class="wc-cat">Commercial · Agency</p><p class="wc-title">JMW — Brand Campaign</p></div>
+        <div class="wc-client"><p class="wc-client-name">Discovery</p><div class="wc-client-divider"></div><p class="wc-client-cat">Survive the Raft</p></div>
+        <div class="wc-label"><p class="wc-cat">Reality Television · Network</p><p class="wc-title">Discovery's Survive the Raft</p></div>
       </div>
-      <div class="wc reveal"><div class="wc-frame"></div><div class="wc-vig"></div>
-        <div class="wc-nda">NDA</div>
-        <div class="wc-client"><p class="wc-client-name" style="font-size:.65rem;letter-spacing:.1em">Confidential</p><div class="wc-client-divider"></div><p class="wc-client-cat">Available on Request</p></div>
-        <div class="wc-label"><p class="wc-cat">Documentary · Broadcast</p><p class="wc-title">Confidential · Available on Request</p></div>
+      <div class="wc reveal" onclick="showPage('contact')" style="cursor:pointer"><div class="wc-frame"></div><div class="wc-vig"></div>
+        <div class="wc-client"><p class="wc-client-name serif">The Complete Reel</p><div class="wc-client-divider"></div><p class="wc-client-cat">Available Upon Request</p></div>
+        <div class="wc-label"><p class="wc-cat">Full Reference List</p><p class="wc-title">The complete reel is available upon request.</p></div>
       </div>
     </div>
 
     <div class="client-strip reveal">
-      <span class="client-strip-label">Clients include</span>
+      <span class="client-strip-label">Credits include</span>
       <div class="client-logos">
-        <span class="cl">MTV</span><div class="cdot"></div>
+        <span class="cl-serif">MrBeast</span><div class="cdot"></div>
         <span class="cl">CBS</span><div class="cdot"></div>
         <span class="cl">NBC</span><div class="cdot"></div>
-        <span class="cl-serif">MrBeast</span><div class="cdot"></div>
-        <span class="cl">JMW</span><div class="cdot"></div>
-        <span class="cl">OEA</span>
+        <span class="cl">MTV</span><div class="cdot"></div>
+        <span class="cl">Netflix</span><div class="cdot"></div>
+        <span class="cl">Discovery</span><div class="cdot"></div>
+        <span class="cl">OAS</span><div class="cdot"></div>
+        <span class="cl">Miss Universe 2003</span><div class="cdot"></div>
+        <span class="cl">Survivor vs Survivalist</span><div class="cdot"></div>
+        <span class="cl">Beer-brand commercials</span>
       </div>
     </div>
   </div>
@@ -894,7 +901,7 @@
     <div class="page-header">
       <p class="page-header-eyebrow">How We Work</p>
       <h2 class="page-header-title">Three disciplines.<br><em>One production.</em></h2>
-      <p class="page-header-desc">We don't hand off between departments. The same team that scouts your location clears your permits and crews your shoot. That continuity is why international productions come back.</p>
+      <p class="page-header-desc">We're the <strong>executive arm of your production</strong> — we carry the operation, compliance and liability so your creative team can stay on the creative. The same team that scouts your location clears your permits and crews your shoot; that continuity is why international productions come back.</p>
     </div>
   </div>
 
@@ -941,7 +948,7 @@
   <div class="inc-teaser reveal">
     <p class="page-header-eyebrow">Government Incentives</p>
     <p class="inc-lead">25% of your Panama spend, back in cash.</p>
-    <p class="inc-teaser-p">Panama's <strong>Film Law 16</strong> returns 25% of qualifying in-country spend as cash — stacked with 0% equipment-import duty and single-window permits. As a licensed local partner, Verite structures the spend and files the claim so it actually lands.</p>
+    <p class="inc-teaser-p">Panama's <strong>Film Law 16</strong> returns 25% of qualifying in-country spend as cash — stacked with 0% equipment-import duty and single-window permits. As a licensed local partner, Verite Producciones structures the spend and files the claim so it actually lands.</p>
     <button class="btn-primary" onclick="showPage('incentives')">Government incentives for international productions &rarr;</button>
   </div>
 
@@ -954,39 +961,39 @@
   <div class="loc-grid reveal">
     <div class="loc-card">
       <picture><source srcset="assets/loc-beach.webp" type="image/webp"><img class="loc-img" src="assets/loc-beach.jpg" alt="Caribbean beach in Panama" decoding="async"></picture>
-      <div class="loc-num">01 · Coast</div>
+      <div class="loc-num">Coast</div>
       <div class="loc-name">Caribbean <em>Beaches</em></div>
       <p class="loc-desc">Turquoise water and deserted islands — Bocas del Toro, the Pearl Islands, Pedasí. The look reality and campaign shoots keep coming back for.</p>
     </div>
     <div class="loc-card">
       <picture><source srcset="assets/loc-city.webp" type="image/webp"><img class="loc-img" src="assets/loc-city.jpg" alt="Panama City skyline at sunset" decoding="async"></picture>
-      <div class="loc-num">02 · Urban</div>
+      <div class="loc-num">Urban</div>
       <div class="loc-name">Panama <em>City</em></div>
       <p class="loc-desc">A modern skyline with distinct neighborhoods that stand in for metros across the Americas — glass towers to gritty backstreets.</p>
     </div>
     <div class="loc-card">
       <picture><source srcset="assets/loc-forest.webp" type="image/webp"><img class="loc-img" src="assets/loc-forest.jpg" alt="Rainforest waterfall in Panama" decoding="async"></picture>
-      <div class="loc-num">03 · Wild</div>
+      <div class="loc-num">Wild</div>
       <div class="loc-name">Rainforest <em>&amp; Jungle</em></div>
       <p class="loc-desc">Tropical jungle, mountains, raging rivers and waterfalls — dense wilderness that sits minutes from a five-star base.</p>
     </div>
     <div class="loc-card">
       <picture><source srcset="assets/loc-canal.webp" type="image/webp"><img class="loc-img" src="assets/loc-canal.jpg" alt="Container ship in the Panama Canal locks" decoding="async"></picture>
-      <div class="loc-num">04 · Maritime</div>
+      <div class="loc-num">Maritime</div>
       <div class="loc-name">Ports <em>&amp; Canal</em></div>
       <p class="loc-desc">The Panama Canal and working deep-water ports — industrial scale and maritime access found in almost no other single country.</p>
     </div>
     <div class="loc-card">
       <picture><source srcset="assets/loc-casco.webp" type="image/webp"><img class="loc-img" src="assets/loc-casco.jpg" alt="Casco Viejo colonial architecture" decoding="async"></picture>
-      <div class="loc-num">05 · Heritage</div>
+      <div class="loc-num">Heritage</div>
       <div class="loc-name">Casco <em>Viejo</em></div>
       <p class="loc-desc">The UNESCO old town — cobblestone streets, Spanish-colonial façades and centuries of texture in a few walkable blocks.</p>
     </div>
     <div class="loc-card">
       <picture><source srcset="assets/loc-airport.webp" type="image/webp"><img class="loc-img" src="assets/loc-airport.jpg" alt="Airport runway at dusk" decoding="async"></picture>
-      <div class="loc-num">06 · Access</div>
+      <div class="loc-num">Access</div>
       <div class="loc-name">Airports <em>&amp; Hubs</em></div>
-      <p class="loc-desc">Hub of the Americas — direct flights to 90+ cities and single-window customs. Crew and gear land and work day one.</p>
+      <p class="loc-desc">Hub of the Americas — direct flights to 90 cities across the Americas (17 in the US) and several in Europe, plus single-window customs. Crew and gear land and work day one.</p>
     </div>
   </div>
 
@@ -995,6 +1002,7 @@
     <p class="page-header-eyebrow">Weather</p>
     <h2 class="page-header-title">Shoot <em>year-round.</em></h2>
     <p class="wx-lede">Panama's privileged position keeps it away from most tropical weather — mainly hurricanes. Its weather oscillates between dry and wet… very wet (that's why they call it the rain-forest). Live conditions across our primary filming regions:</p>
+    <p class="wx-clock-line">Panama time now <span class="wx-clock" id="wx-clock">—</span></p>
     <div class="wx-grid" id="wx-grid">
       <div class="wx-card" data-lat="8.98" data-lon="-79.52">
         <div class="wx-loc">Panama City</div><div class="wx-region">Pacific · Urban</div>
@@ -1050,7 +1058,7 @@
 
   <div class="inc reveal">
     <p class="inc-lead">25% of your Panama spend, back in cash.</p>
-    <p class="inc-intro">Panama's <strong>Film Law 16</strong> (2012) grants international productions a 25% cash rebate on qualifying in-country expenditure — alongside customs exemptions and single-window permitting. Verite is a licensed local partner registered with the Ministries of Culture and Commerce; we structure the spend and file the claim so the incentive actually lands.</p>
+    <p class="inc-intro">Panama's <strong>Film Law 16</strong> (2012) grants international productions a 25% cash rebate on qualifying in-country expenditure — alongside customs exemptions and single-window permitting. Verite Producciones is a licensed local partner registered with the Ministries of Culture and Commerce; we structure the spend and file the claim so the incentive actually lands.</p>
     <div class="inc-grid">
       <div class="inc-item"><div class="k">25<sup>%</sup></div><div class="t">Cash Rebate</div><div class="d">On qualifying in-country spend from $500,000 USD, paid against your budget after wrap.</div></div>
       <div class="inc-item"><div class="k">0<sup>%</sup></div><div class="t">Import Duty</div><div class="d">Duty-free temporary internment of all production equipment under Law 16.</div></div>
@@ -1058,9 +1066,9 @@
       <div class="inc-item"><div class="k">$150</div><div class="t">Per Week</div><div class="d">Film Commission fee from pre-production — and it credits back toward your rebate.</div></div>
     </div>
     <div class="inc-steps">
-      <div class="inc-step"><div class="n">01</div><div class="st">Partner with Verite</div><div class="sd">A licensed local company registered with the Ministries of Culture and Commerce — a legal requirement for the rebate.</div></div>
+      <div class="inc-step"><div class="n">01</div><div class="st">Partner with Verite Producciones</div><div class="sd">A licensed local company registered with the Ministries of Culture and Commerce — a legal requirement for the rebate.</div></div>
       <div class="inc-step"><div class="n">02</div><div class="st">Spend in-country</div><div class="sd">$500,000 USD or more across crew, equipment, locations and logistics.</div></div>
-      <div class="inc-step"><div class="n">03</div><div class="st">We file it</div><div class="sd">CPA-certified documentation submitted through legal counsel to the Ministry of Commerce &amp; Industries.</div></div>
+      <div class="inc-step"><div class="n">03</div><div class="st">We file it</div><div class="sd">Filed by the most experienced Cash Rebate accountants and auditors in Panama — every qualifying dollar counted — through legal counsel to the Ministry of Commerce &amp; Industries.</div></div>
       <div class="inc-step"><div class="n">04</div><div class="st">25% back</div><div class="sd">Paid as cash against your qualified spend. We track every eligible dollar from day one.</div></div>
     </div>
 
@@ -1079,9 +1087,9 @@
         <div>
           <p class="inc-col-k">The fine print</p>
           <ul class="inc-list">
-            <li><strong>$500,000</strong> minimum qualifying spend — and <strong>no annual cap</strong> above it</li>
+            <li><strong>$500,000</strong> minimum qualifying spend</li>
             <li>Filed through a <strong>licensed local producer</strong> — a legal requirement, and that's us</li>
-            <li>Paid <strong>after wrap</strong> on CPA-audited expenditure</li>
+            <li>Paid as cash on CPA-audited spend <strong>after wrap</strong> — the government audit and disbursement can take up to <strong>3 years</strong></li>
             <li>Stacks with <strong>0% duty</strong> on temporarily imported equipment</li>
             <li>Panama runs on the <strong>US dollar</strong> — no currency risk on your rebate</li>
           </ul>
@@ -1162,7 +1170,7 @@
       <div class="resource-card reveal">
         <p class="resource-card-cat">Pre-Production</p>
         <p class="resource-card-title">90 Days to Camera — A Pre-Production Checklist</p>
-        <p class="resource-card-desc">The milestone timeline our producers run from greenlight to first call sheet — permits, visas, customs, scouting and crew.</p>
+        <p class="resource-card-desc">The milestone timeline from greenlight to first call sheet — permits, visas, customs, scouting, crew.</p>
         <div class="resource-card-footer">
           <span class="resource-card-meta">PDF · Checklist</span>
           <button class="resource-dl" onclick="openGate('90 Days to Camera — A Pre-Production Checklist')">
@@ -1175,7 +1183,7 @@
       <div class="resource-card reveal">
         <p class="resource-card-cat">Budgeting</p>
         <p class="resource-card-title">Budgeting a Panama Shoot — A Starter Guide</p>
-        <p class="resource-card-desc">Crew tiers, gear, location fees and the rebate's savings — benchmark ranges to sanity-check a budget before you commit.</p>
+        <p class="resource-card-desc">Benchmark ranges for crew, gear and locations — with rebate savings — to sanity-check a budget before you commit.</p>
         <div class="resource-card-footer">
           <span class="resource-card-meta">PDF · Starter guide</span>
           <button class="resource-dl" onclick="openGate('Budgeting a Panama Shoot — A Starter Guide')">
@@ -1188,7 +1196,7 @@
       <div class="resource-card reveal">
         <p class="resource-card-cat">Sustainability</p>
         <p class="resource-card-title">Shooting Carbon-Negative in Panama</p>
-        <p class="resource-card-desc">Shoot low-footprint in a carbon-negative nation — solar studio, green-crew practices, financier-ready documentation.</p>
+        <p class="resource-card-desc">Low-footprint production in a carbon-negative nation — solar studio, green crew, financier-ready docs.</p>
         <div class="resource-card-footer">
           <span class="resource-card-meta">PDF · Briefing</span>
           <button class="resource-dl" onclick="openGate('Shooting Carbon-Negative in Panama')">
@@ -1538,6 +1546,16 @@
       else if (e.key === 'ArrowLeft') prev();
     });
     return { open, close, next, prev };
+  })();
+
+  // Live Panama local time (America/Panama — no external calls)
+  (function () {
+    const el = document.getElementById('wx-clock');
+    if (!el) return;
+    const fmt = new Intl.DateTimeFormat('en-US', { timeZone: 'America/Panama', hour: 'numeric', minute: '2-digit', hour12: true });
+    const tick = () => { el.textContent = fmt.format(new Date()) + ' · GMT−5'; };
+    tick();
+    setInterval(tick, 15000);
   })();
 </script>
 </body>
