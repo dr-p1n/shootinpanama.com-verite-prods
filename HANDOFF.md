@@ -5,28 +5,22 @@ services company in Panama** for international productions (crew, permits, locat
 incentives). Owner's **first film-industry client** — bar is "exceptional." Client-facing demo/proposal.
 The client's CEO reviews and gives notes; honor them precisely.
 
-## ★ Two proposals (A/B)
-- **Cinematic** → https://hero-cinematic.shootinpanama-verite.pages.dev — moody backlit
-  cinematographer-with-camera Home hero **+ an editorial theme** (see below).
-- **Clapperboard** → https://hero-clapperboard.shootinpanama-verite.pages.dev — darkened clapperboard
-  macro Home hero, keeps the original **ruled/boxed** theme.
-The branches now differ by **two things**: (1) the Home hero image, and (2) the cinematic-only
-**editorial theme CSS**. Everything else (copy, structure, imagery) is shared.
+## ★ Chosen direction (A/B resolved)
+- **Cinematic + editorial theme is the site** → https://hero-cinematic.shootinpanama-verite.pages.dev
+  (moody backlit cinematographer Home hero + editorial theme). The client picked this direction.
+- **`hero-clapperboard` was DELETED** (local + remote) — "we are only using [one] deployment." Its
+  preview alias `hero-clapperboard.shootinpanama-verite.pages.dev` may linger until its Pages
+  deployments are purged (Cloudflare dashboard, or `wrangler pages deployment delete`).
 
 ## Workflow / branch discipline (IMPORTANT)
 - Single file: **`public/index.html`** (static SPA; `showPage(id)`; the JS `pages` array must match the
   mobile-link order). `public/_headers` holds the CSP — keep `connect-src ... https://api.open-meteo.com`
   (live weather).
-- Shared changes → commit on **`hero-cinematic`**, then `git cherry-pick -x <sha>` to
-  **`hero-clapperboard`**. Cherry-picks can conflict on the head **OG/hero image lines** (branches
-  differ there) — resolve to the shared/new value.
-- **Cinematic-only theme** changes → commit on `hero-cinematic` ONLY, do **not** cherry-pick. The
-  editorial CSS lives in a clearly-marked block at the end of `<style>` ("EDITORIAL THEME · CINEMATIC
-  BRANCH ONLY").
-- Deploy a preview: `wrangler pages deploy public --project-name shootinpanama-verite --branch <b> --commit-dirty=true`
-  (deploy BOTH branches after shared changes; only cinematic after theme changes).
-- `main` auto-deploys to https://shootinpanama-verite.pages.dev but is **STALE** — don't touch without
-  client OK.
+- **Single working branch now: `hero-cinematic`.** No more cherry-picks. Commit → deploy that branch.
+  The editorial CSS lives in a clearly-marked block at the end of `<style>` ("EDITORIAL THEME").
+- Deploy: `wrangler pages deploy public --project-name shootinpanama-verite --branch hero-cinematic --commit-dirty=true`.
+- `main` auto-deploys to https://shootinpanama-verite.pages.dev but is **STALE**. Open question: promote
+  `hero-cinematic` → `main` to make it the production URL (ask client / confirm before doing so).
 
 ## Infra
 - Cloudflare Pages project `shootinpanama-verite`, account `julioernestolv@gmail.com`
@@ -41,8 +35,8 @@ Home · Work · Services · **Government Incentives** · Resources · Contact.
 
 ## What's built
 - **Home (offerings-first):** full-bleed hero → **"What We Do"** offerings index (Production Services /
-  Fixer & Logistics / Executive Compliance / Government Incentives, numbered 01–04, each links onward)
-  → a single **teaser** that leads on the firm's experience (**"Over 25 years making Panama work on
+  Fixer & Logistics / Executive Compliance / Government Incentives, each links onward)
+  → a single **teaser** that leads on the firm's experience (**"Over 30 years making Panama work on
   camera."**) then a light **"Why Panama?"** line with inline links into Services/Incentives. (The
   Production Link International "As featured in" backlink was **REMOVED** per CEO — relationship ended.)
 - **Work:** monochrome **logo wall** (drop-in SVG marks: MrBeast wordmark, CBS, NBC, MTV, Netflix,
@@ -81,7 +75,8 @@ alignment. Client likes discretion/NDAs and detailed rebate info.
 ## Client / CEO preferences (honor)
 - Hero MUST be full-bleed, photorealistic, cinematic. REJECTED: CSS "slate" gimmick, plain skyline.
 - Logo must have presence / be readable (why it's large now).
-- Teaser copy = firm experience ("over 25 years"). Keep it a teaser. **No** Production Link backlink.
+- Firm experience = **"over 30 years / Since 1993"** (client's approved commercial branding; updated
+  from the earlier "25 years" placeholder). Keep the teaser a teaser. **No** Production Link backlink.
 - Always use the full name **"Verite Producciones"**. English uses **OAS** (not OEA).
 - Positioning line (Home offerings + Services header): **"the executive arm of your production"** — the
   executive branch so the client's creative/production team stays on the creative.
@@ -93,11 +88,14 @@ alignment. Client likes discretion/NDAs and detailed rebate info.
 1. **Bilingual EN/ES** (CEO wants it; not started). Planned mechanism: `data-i18n` dictionary + a small
    EN/ES nav toggle, `localStorage` persistence, `<html lang>` swap; draft Panama/neutral-LatAm Spanish
    for the whole site, flagged for CEO review. **BLOCKED on one decision: default language** (recommend
-   English default w/ toggle). ~150–200 strings; shared change → both branches.
-2. **CEO-pending assets** (can't build without files):
-   - **Owned page-1 hero image** — replace the stock hero (the clapperboard = the "slate" the CEO
-     flagged on clapperboard; the cinematic cinematographer photo is also a stock placeholder).
-   - **Last 3 gallery photos** — CEO will specify which BTS stills to swap in.
+   English default w/ toggle). ~150–200 strings, single branch.
+2. **CEO-pending assets** (all current hero images are **Unsplash placeholders** — swap for owned):
+   - **Home page-1 hero** — cinematic = cinematographer photo; clapperboard = clapperboard photo
+     (the "slate" the CEO flagged). Both are stock; need owned imagery.
+   - **Get in Touch hero** = colorful on-set clapperboard (Unsplash stand-in). **Incentives hero** =
+     Panama Canal (Unsplash stand-in). Both new this round; swap for owned/exact when available.
+   - **Gallery:** BTS slots 5,7,8,13,14,15 replaced from the client's `new selection/final cut`
+     folder (HEIC/JPEG → sips+cwebp, bts13/14 rotated 90° CW). Remaining swaps as CEO specifies.
    - **OAS conference screenshot** (CEO sending) → add to visuals.
    - **Beer-brand commercial images** (being sourced).
    - Official **show logos/screenshots** for the aired authorized productions (currently network SVG
