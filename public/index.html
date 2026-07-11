@@ -421,6 +421,10 @@
     .wx-season-k{font-size:.56rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:.55rem}
     .wx-season-v{font-size:.77rem;font-weight:300;color:var(--muted);line-height:1.8}
     .wx-note{margin-top:1.75rem;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(238,236,234,.28)}
+    /* Climate + live-weather split */
+    .wx-split{display:grid;grid-template-columns:minmax(200px,.85fr) 1.3fr;gap:3.5rem;align-items:center;margin-top:1.75rem}
+    .wx-split .wx-grid{grid-template-columns:repeat(2,1fr)}
+    .wx-split .wx-note{margin-top:1.4rem}
 
     /* ── NARRATIVE (Why Panama / Sustainability) ── */
     .why{padding:6rem 3rem;border-top:1px solid var(--rule)}
@@ -507,7 +511,7 @@
         radial-gradient(ellipse 80% 100% at 80% 30%,rgba(18,10,6,.85) 0%,transparent 55%),
         linear-gradient(160deg,#0b1610 0%,#090c0b 40%,#100a08 70%,#0a0908 100%)}
     .stats-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 100% 100% at 50% 50%,transparent 30%,rgba(3,6,10,.6) 100%)}
-    .stats-grid{position:relative;z-index:5;display:grid;grid-template-columns:repeat(3,1fr);
+    .stats-grid{position:relative;z-index:5;display:grid;grid-template-columns:repeat(2,1fr);
       gap:1px;background:rgba(238,236,234,.04);
       border-top:1px solid rgba(238,236,234,.06);border-bottom:1px solid rgba(238,236,234,.06)}
     .stat{padding:4rem 3rem}
@@ -635,6 +639,7 @@
       .inc-cols{grid-template-columns:1fr;gap:2.5rem}
       .loc-grid{grid-template-columns:1fr 1fr}
       .wx-grid{grid-template-columns:1fr 1fr}
+      .wx-split{grid-template-columns:1fr;gap:2rem}
       .work-grid{grid-template-columns:1fr 1fr;gap:2px}
       .wc{grid-column:span 1!important;aspect-ratio:4/3!important}
       .wc:first-child{grid-column:span 2!important;aspect-ratio:16/9!important}
@@ -944,11 +949,6 @@
       <div class="stats-bg"></div>
       <div class="stats-grid">
         <div class="stat">
-          <div class="stat-n">270<sup>+</sup></div>
-          <p class="stat-label">Filming days per year</p>
-          <p class="stat-detail">Tropical climate with minimal weather disruption. Consistent natural light year-round.</p>
-        </div>
-        <div class="stat">
           <div class="stat-n">Hub</div>
           <p class="stat-label">of the Americas</p>
           <p class="stat-detail">Direct flights to 90 cities across the Americas — 17 in the US — plus several in Europe. Your crew lands and works day one.</p>
@@ -1020,27 +1020,37 @@
     <p class="page-header-eyebrow">Weather</p>
     <h2 class="page-header-title">Shoot <em>year-round.</em></h2>
     <p class="wx-lede">Panama's privileged position keeps it away from most tropical weather — mainly hurricanes. Its weather oscillates between dry and wet… very wet (that's why they call it the rain-forest). Live conditions across our primary filming regions:</p>
-    <p class="wx-clock-line">Panama time now <span class="wx-clock" id="wx-clock">—</span></p>
-    <div class="wx-grid" id="wx-grid">
-      <div class="wx-card" data-lat="8.98" data-lon="-79.52">
-        <div class="wx-loc">Panama City</div><div class="wx-region">Pacific · Urban</div>
-        <div class="wx-temp" data-temp>—</div>
-        <div class="wx-cond"><span class="wx-ico" data-ico>·</span><span data-cond>Loading…</span></div>
+    <div class="wx-split">
+      <div class="wx-climate">
+        <div class="stat-n">270<sup>+</sup></div>
+        <p class="stat-label">Filming days per year</p>
+        <p class="stat-detail">Tropical climate with minimal weather disruption — consistent natural light year-round.</p>
       </div>
-      <div class="wx-card" data-lat="9.34" data-lon="-82.24">
-        <div class="wx-loc">Bocas del Toro</div><div class="wx-region">Caribbean · Islands</div>
-        <div class="wx-temp" data-temp>—</div>
-        <div class="wx-cond"><span class="wx-ico" data-ico>·</span><span data-cond>Loading…</span></div>
-      </div>
-      <div class="wx-card" data-lat="8.78" data-lon="-82.44">
-        <div class="wx-loc">Boquete</div><div class="wx-region">Highlands · Forest</div>
-        <div class="wx-temp" data-temp>—</div>
-        <div class="wx-cond"><span class="wx-ico" data-ico>·</span><span data-cond>Loading…</span></div>
-      </div>
-      <div class="wx-card" data-lat="7.53" data-lon="-80.03">
-        <div class="wx-loc">Pedasí</div><div class="wx-region">Pacific · Coast</div>
-        <div class="wx-temp" data-temp>—</div>
-        <div class="wx-cond"><span class="wx-ico" data-ico>·</span><span data-cond>Loading…</span></div>
+      <div class="wx-live">
+        <p class="wx-clock-line">Panama time now <span class="wx-clock" id="wx-clock">—</span></p>
+        <div class="wx-grid" id="wx-grid">
+          <div class="wx-card" data-lat="8.98" data-lon="-79.52">
+            <div class="wx-loc">Panama City</div><div class="wx-region">Pacific · Urban</div>
+            <div class="wx-temp" data-temp>—</div>
+            <div class="wx-cond"><span class="wx-ico" data-ico>·</span><span data-cond>Loading…</span></div>
+          </div>
+          <div class="wx-card" data-lat="9.34" data-lon="-82.24">
+            <div class="wx-loc">Bocas del Toro</div><div class="wx-region">Caribbean · Islands</div>
+            <div class="wx-temp" data-temp>—</div>
+            <div class="wx-cond"><span class="wx-ico" data-ico>·</span><span data-cond>Loading…</span></div>
+          </div>
+          <div class="wx-card" data-lat="8.78" data-lon="-82.44">
+            <div class="wx-loc">Boquete</div><div class="wx-region">Highlands · Forest</div>
+            <div class="wx-temp" data-temp>—</div>
+            <div class="wx-cond"><span class="wx-ico" data-ico>·</span><span data-cond>Loading…</span></div>
+          </div>
+          <div class="wx-card" data-lat="7.53" data-lon="-80.03">
+            <div class="wx-loc">Pedasí</div><div class="wx-region">Pacific · Coast</div>
+            <div class="wx-temp" data-temp>—</div>
+            <div class="wx-cond"><span class="wx-ico" data-ico>·</span><span data-cond>Loading…</span></div>
+          </div>
+        </div>
+        <p class="wx-note">Live data · Open-Meteo</p>
       </div>
     </div>
     <div class="wx-seasons">
@@ -1048,7 +1058,6 @@
       <div class="wx-season"><div class="wx-season-k">Green Season</div><div class="wx-season-v">Rains from early May to mid-December (September–October the wettest). Downpours are fast and furious, and can turn a somber sky into a bright day — with the magic-hour sunset that follows.</div></div>
       <div class="wx-season"><div class="wx-season-k">Daylight &amp; Time</div><div class="wx-season-v">Near the Equator: an almost even 12 hours of daylight. Upper-20s to mid-30s °C, humidity in the mid-80s. GMT−5.</div></div>
     </div>
-    <p class="wx-note">Live data · Open-Meteo</p>
   </div>
 
   <footer>
