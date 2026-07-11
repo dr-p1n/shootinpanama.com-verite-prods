@@ -746,22 +746,18 @@
     </div>
     <div class="offer-list">
       <button class="offer-item" onclick="showPage('services')">
-        <span class="offer-n">01</span>
         <span class="offer-body"><span class="offer-k">Production Services</span><span class="offer-d">Full crew, equipment and location management, from first scout to final wrap.</span></span>
         <span class="offer-go">&rarr;</span>
       </button>
       <button class="offer-item" onclick="showPage('services')">
-        <span class="offer-n">02</span>
         <span class="offer-body"><span class="offer-k">Fixer &amp; Logistics</span><span class="offer-d">Permits, talent coordination, transport and on-ground support across the country.</span></span>
         <span class="offer-go">&rarr;</span>
       </button>
       <button class="offer-item" onclick="showPage('services')">
-        <span class="offer-n">03</span>
         <span class="offer-body"><span class="offer-k">Executive Compliance</span><span class="offer-d">Legal setup, insurance, customs and regulatory clearance for foreign productions.</span></span>
         <span class="offer-go">&rarr;</span>
       </button>
       <button class="offer-item" onclick="showPage('incentives')">
-        <span class="offer-n">04</span>
         <span class="offer-body"><span class="offer-k">Government Incentives</span><span class="offer-d">A 25% cash rebate on qualifying spend, 0% import duty — structured and filed for you.</span></span>
         <span class="offer-go">&rarr;</span>
       </button>
@@ -1310,10 +1306,10 @@
 
 <!-- Lightbox (Work contact sheet) -->
 <div class="lb" id="lb" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Production still viewer">
-  <button class="lb-close" aria-label="Close" onclick="lb.close()">&times;</button>
-  <button class="lb-prev" aria-label="Previous" onclick="lb.prev()">&#8249;</button>
+  <button class="lb-close" aria-label="Close">&times;</button>
+  <button class="lb-prev" aria-label="Previous">&#8249;</button>
   <picture class="lb-stage"><img id="lb-img" alt="Verite production still — Panama"></picture>
-  <button class="lb-next" aria-label="Next" onclick="lb.next()">&#8250;</button>
+  <button class="lb-next" aria-label="Next">&#8250;</button>
   <span class="lb-count" id="lb-count"></span>
 </div>
 
@@ -1536,6 +1532,10 @@
     }
     function next() { i = (i + 1) % items.length; show(); }
     function prev() { i = (i - 1 + items.length) % items.length; show(); }
+    // Controls
+    el.querySelector('.lb-close').addEventListener('click', close);
+    el.querySelector('.lb-prev').addEventListener('click', prev);
+    el.querySelector('.lb-next').addEventListener('click', next);
     // Click backdrop closes; click image advances
     el.addEventListener('click', (e) => { if (e.target === el) close(); });
     img.addEventListener('click', next);
