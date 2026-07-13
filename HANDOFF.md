@@ -13,9 +13,13 @@ The client's CEO reviews and gives notes; honor them precisely.
   deployments are purged (Cloudflare dashboard, or `wrangler pages deployment delete`).
 
 ## Workflow / branch discipline (IMPORTANT)
-- Single file: **`public/index.html`** (static SPA; `showPage(id)`; the JS `pages` array must match the
-  mobile-link order). `public/_headers` holds the CSP — keep `connect-src ... https://api.open-meteo.com`
-  (live weather).
+- **Three files now** (externalized to drop CSP `'unsafe-inline'`): markup/copy in
+  **`public/index.html`**, styling in **`public/styles.css`**, behavior in **`public/app.js`** (static SPA;
+  `showPage(id)`; the JS `pages` array must match the mobile-link order). JSON-LD stays inline in the head.
+  No inline `on*=`/`style=` — interactions use `data-page`/`data-guide`/`data-scroll`/`data-gate-close`
+  hooks wired by a delegated listener in `app.js`; new interactive elements must use the same pattern.
+  `public/_headers` holds the hardened CSP (`script-src 'self'`, `style-src 'self' fonts.googleapis`) —
+  keep `connect-src ... https://api.open-meteo.com` (live weather).
 - **Single working branch now: `hero-cinematic`.** No more cherry-picks. Commit → deploy that branch.
   The editorial CSS lives in a clearly-marked block at the end of `<style>` ("EDITORIAL THEME").
 - Deploy: `wrangler pages deploy public --project-name shootinpanama-verite --branch hero-cinematic --commit-dirty=true`.
