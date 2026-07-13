@@ -101,625 +101,34 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@200;300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&display=swap" rel="stylesheet">
-  <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{
-      --ink:#03060a;--paper:#EEECEA;--accent:#C9541E;
-      --muted:rgba(238,236,234,0.38);--rule:rgba(238,236,234,0.08);
-      --card:rgba(238,236,234,0.03)
-    }
-    html{scroll-behavior:smooth}
-    body{background:var(--ink);color:var(--paper);font-family:'DM Sans',system-ui,sans-serif;
-      font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-
-    /* ── NAV ── */
-    #nav{position:fixed;top:0;left:0;right:0;z-index:300;
-      display:flex;align-items:center;justify-content:space-between;
-      padding:1.6rem 3rem;transition:padding .4s,background .4s}
-    #nav.scrolled{padding:1rem 3rem;background:rgba(3,6,10,.94);backdrop-filter:blur(18px)}
-    .nav-logo{display:flex;align-items:center;text-decoration:none;opacity:.92;transition:opacity .2s}
-    .nav-logo:hover{opacity:1}
-    .nav-logo img{height:90px;width:90px;display:block;transition:height .4s,width .4s}
-    #nav.scrolled .nav-logo img{height:68px;width:68px}
-    .nav-links{display:flex;align-items:center;gap:2.5rem}
-    .nav-link{font-size:.58rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase;
-      color:var(--paper);text-decoration:none;opacity:.35;transition:opacity .2s;cursor:pointer;background:none;border:none;padding:0}
-    .nav-link:hover,.nav-link.active{opacity:.9}
-    .nav-link.active{opacity:.9;border-bottom:1px solid rgba(238,236,234,.4);padding-bottom:2px}
-    .nav-cta{font-size:.58rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase;
-      color:var(--paper);text-decoration:none;padding-bottom:2px;
-      border-bottom:1px solid rgba(238,236,234,.35);cursor:pointer;background:none;border-top:none;border-left:none;border-right:none;
-      border-bottom:1px solid rgba(238,236,234,.35);transition:border-color .2s}
-    .nav-cta:hover{border-color:var(--paper)}
-
-    /* ── MOBILE NAV (hamburger + overlay) ── */
-    .nav-toggle{display:none;flex-direction:column;justify-content:center;gap:6px;
-      width:34px;height:34px;background:none;border:none;cursor:pointer;padding:0}
-    .nav-toggle span{display:block;width:24px;height:1px;background:var(--paper);
-      transition:transform .3s ease,opacity .2s ease}
-    .nav-toggle.open span:nth-child(1){transform:translateY(3.5px) rotate(45deg)}
-    .nav-toggle.open span:nth-child(2){transform:translateY(-3.5px) rotate(-45deg)}
-    .mobile-menu{position:fixed;inset:0;z-index:250;background:rgba(3,6,10,.97);
-      backdrop-filter:blur(20px);display:flex;flex-direction:column;align-items:center;
-      justify-content:center;gap:1.75rem;opacity:0;visibility:hidden;
-      transition:opacity .35s ease,visibility .35s ease}
-    .mobile-menu.open{opacity:1;visibility:visible}
-    .mobile-link{font-size:1.5rem;font-weight:200;letter-spacing:.02em;color:var(--paper);
-      background:none;border:none;cursor:pointer;font-family:inherit;opacity:.75;transition:opacity .2s}
-    .mobile-link:hover,.mobile-link.active{opacity:1}
-    .mobile-link.mm-cta{margin-top:.75rem;font-family:'Fraunces',serif;font-style:italic;color:var(--accent);opacity:1}
-
-    /* ── PAGE SYSTEM ── */
-    .page{display:none;min-height:100vh;padding-top:5rem}
-    .page.active{display:block}
-
-    /* ── LIGHT LEAK KEYFRAMES ── */
-    /* ── HERO: Photo background ── */
-    .hero-frame{position:absolute;inset:0;overflow:hidden;background:#02040a}
-    .hero-bars{position:absolute;inset:0;z-index:20;pointer-events:none;
-      background:linear-gradient(to bottom,#02040a 0%,#02040a 6%,transparent 6%,transparent 94%,#02040a 94%,#02040a 100%)}
-    .hero-vig{position:absolute;inset:0;z-index:18;pointer-events:none;
-      background:
-        radial-gradient(ellipse 140% 120% at 50% 50%,transparent 15%,rgba(2,4,10,.45) 65%,rgba(2,4,10,.9) 100%),
-        linear-gradient(to bottom,rgba(2,4,10,.08) 0%,transparent 15%,transparent 65%,rgba(2,4,10,.98) 100%)}a 0%,#02040a 6%,transparent 6%,transparent 94%,#02040a 94%,#02040a 100%)}
-    .hero-vig{position:absolute;inset:0;z-index:18;pointer-events:none;
-      background:
-        radial-gradient(ellipse 140% 120% at 50% 50%,transparent 15%,rgba(2,4,10,.5) 65%,rgba(2,4,10,.92) 100%),
-        linear-gradient(to bottom,rgba(2,4,10,.08) 0%,transparent 15%,transparent 70%,rgba(2,4,10,.98) 100%)}
-    .hero-vig{position:absolute;inset:0;z-index:8;pointer-events:none;
-      background:radial-gradient(ellipse 130% 110% at 50% 50%,transparent 20%,rgba(3,6,10,.55) 75%,rgba(3,6,10,.85) 100%),
-        linear-gradient(to bottom,rgba(3,6,10,.1) 0%,transparent 18%,transparent 72%,rgba(3,6,10,.97) 100%)}
-
-    .hero-content{position:relative;z-index:20;padding:0 3rem 5rem}
-    .hero-eyebrow{display:flex;align-items:center;gap:1.25rem;margin-bottom:2rem}
-    .hero-eyebrow-line{width:1.5rem;height:1px;background:var(--accent);opacity:.8;flex-shrink:0}
-    .hero-eyebrow-text{font-size:.58rem;font-weight:300;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
-    .hero-h1{font-weight:200;font-size:clamp(2.2rem,4.5vw,4.5rem);line-height:1.05;
-      letter-spacing:-.025em;color:var(--paper);margin-bottom:1rem}
-    .hero-h1 em{font-family:'Fraunces',serif;font-style:italic;font-weight:400;color:rgba(238,236,234,.55)}
-    .hero-narrative{font-size:.88rem;font-weight:300;color:var(--muted);max-width:52ch;
-      line-height:1.85;margin-bottom:.75rem}
-    .hero-narrative strong{color:var(--paper);font-weight:400}
-    .hero-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:3rem;margin-top:2.5rem}
-    .hero-sub{font-size:.75rem;font-weight:300;color:rgba(238,236,234,.3);max-width:40ch;line-height:1.7;font-style:italic;font-family:'Fraunces',serif}
-    .hero-cta-group{display:flex;align-items:center;gap:1.5rem;flex-shrink:0}
-    .btn-primary{display:inline-block;font-size:.6rem;font-weight:400;letter-spacing:.2em;
-      text-transform:uppercase;text-decoration:none;padding:.85rem 1.75rem;
-      color:var(--ink);background:var(--paper);border:1px solid var(--paper);
-      transition:background .25s,border-color .25s,color .25s;cursor:pointer}
-    .btn-primary:hover{background:var(--accent);border-color:var(--accent);color:var(--paper)}
-    .btn-ghost{display:inline-block;font-size:.6rem;font-weight:400;letter-spacing:.2em;
-      text-transform:uppercase;text-decoration:none;padding:.85rem 1.75rem;
-      color:var(--paper);background:transparent;border:1px solid rgba(238,236,234,.25);
-      transition:border-color .25s;cursor:pointer}
-    .btn-ghost:hover{border-color:rgba(238,236,234,.7)}
-
-    /* ── HERO SLATE (designed film-slate overlay — replaces the stock clapperboard) ── */
-    #hero-section{position:relative;min-height:100vh;margin-top:-5rem;
-      display:flex;flex-direction:column;justify-content:flex-end}
-    .hero-scrim{position:absolute;inset:0;z-index:5;pointer-events:none;
-      background:
-        linear-gradient(to top,rgba(3,6,10,.94) 0%,rgba(3,6,10,.6) 26%,rgba(3,6,10,.12) 52%,transparent 72%),
-        linear-gradient(to right,rgba(3,6,10,.72) 0%,rgba(3,6,10,.2) 42%,transparent 66%)}
-    /* ── HERO WHITE CLAPPERBOARD SLATE (reads "Verite") ── */
-    .slate{position:absolute;z-index:19;right:3rem;top:5.9rem;width:clamp(296px,31vw,424px);
-      transform:rotate(-1.5deg);transform-origin:center;
-      filter:drop-shadow(0 42px 66px rgba(0,0,0,.62));
-      opacity:0;animation:slateIn 1s .45s cubic-bezier(.2,.7,.2,1) forwards}
-    @keyframes slateIn{from{opacity:0;transform:rotate(-1.5deg) translateY(20px)}
-      to{opacity:1;transform:rotate(-1.5deg) translateY(0)}}
-    .slate-arm{height:22px;transform:rotate(-6.5deg);transform-origin:left bottom;margin:0 34% -4px 5px;
-      background:repeating-linear-gradient(-62deg,#15130f 0 18px,#efece4 18px 36px);
-      border-radius:2px;box-shadow:0 5px 11px rgba(0,0,0,.4)}
-    .slate-stripes{display:flex;height:15px;overflow:hidden}
-    .slate-stripes i{flex:1;transform:skewX(-24deg) scaleX(1.6)}
-    .slate-stripes i:nth-child(6n+1){background:#2e8b57}
-    .slate-stripes i:nth-child(6n+2){background:#e0a500}
-    .slate-stripes i:nth-child(6n+3){background:#1f5fd0}
-    .slate-stripes i:nth-child(6n+4){background:#c0392b}
-    .slate-stripes i:nth-child(6n+5){background:#e7e4dc}
-    .slate-stripes i:nth-child(6n){background:#2a2a2a}
-    .slate-face{background:linear-gradient(180deg,#edebe4,#e2dfd7);color:#171512;padding:.85rem 1rem .95rem}
-    .slate-row{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid rgba(20,18,15,.22)}
-    .slate-cell{padding:.3rem .1rem .42rem;border-right:1px solid rgba(20,18,15,.16)}
-    .slate-cell:last-child{border-right:0}
-    .slate-cell .k{font-size:.4rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:rgba(20,18,15,.5)}
-    .slate-cell .v{font-family:'Fraunces',serif;font-size:1.22rem;line-height:1;color:#171512;margin-top:.26rem}
-    .slate-led{background:#0b0b0c;margin:.68rem 0;padding:.4rem .58rem;border-radius:2px;
-      display:flex;align-items:center;justify-content:space-between;box-shadow:inset 0 1px 5px rgba(0,0,0,.85)}
-    .slate-led .tc{font-family:ui-monospace,'SF Mono',Menlo,monospace;color:#ff3126;font-size:1.14rem;
-      letter-spacing:.09em;font-variant-numeric:tabular-nums;text-shadow:0 0 7px rgba(255,49,38,.55)}
-    .slate-led .fps{font-size:.42rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4)}
-    .slate-prod{display:flex;align-items:baseline;gap:.55rem;padding-top:.1rem}
-    .slate-prod .k{font-size:.42rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
-      color:rgba(20,18,15,.5);flex-shrink:0;padding-top:.32rem}
-    .slate-prod .v{font-family:'Fraunces',serif;font-size:1.34rem;line-height:1.02;color:#171512}
-    .slate-foot{display:flex;justify-content:space-between;margin-top:.5rem;font-size:.42rem;
-      font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:rgba(20,18,15,.5)}
-    .slate-foot b{color:rgba(20,18,15,.82)}
-    .slate-foot .rec::before{content:'';display:inline-block;width:5px;height:5px;border-radius:50%;
-      background:#c0392b;margin-right:.35rem;vertical-align:middle;animation:recblink 1.4s steps(1,end) infinite}
-    @keyframes recblink{0%,50%{opacity:1}51%,100%{opacity:.2}}
-
-    /* ── FILM GRAIN + FRAME MARKS (editorial "graded frame" treatment) ── */
-    .hero-grain{position:absolute;inset:0;z-index:17;pointer-events:none;opacity:.09;mix-blend-mode:overlay;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      background-size:190px 190px}
-    .hero-marks{position:absolute;left:1.6rem;right:1.6rem;top:5.4rem;bottom:1.6rem;z-index:21;pointer-events:none}
-    .hero-marks i{position:absolute;width:15px;height:15px;border:1px solid rgba(238,236,234,.4)}
-    .hero-marks i:nth-child(1){top:0;left:0;border-right:0;border-bottom:0}
-    .hero-marks i:nth-child(2){top:0;right:0;border-left:0;border-bottom:0}
-    .hero-marks i:nth-child(3){bottom:0;left:0;border-right:0;border-top:0}
-    .hero-marks i:nth-child(4){bottom:0;right:0;border-left:0;border-top:0}
-
-    /* ── SECTION HEADERS ── */
-    .page-header{padding:4rem 3rem 3rem;border-bottom:1px solid var(--rule)}
-    .page-header-eyebrow{font-size:.58rem;font-weight:400;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
-    .page-header-title{font-weight:200;font-size:clamp(2rem,4vw,3.5rem);letter-spacing:-.025em;color:var(--paper);line-height:1.05;margin-bottom:.75rem}
-    .page-header-title em{font-family:'Fraunces',serif;font-style:italic;font-weight:400;color:rgba(238,236,234,.5)}
-    .page-header-desc{font-size:.82rem;font-weight:300;color:var(--muted);max-width:58ch;line-height:1.85}
-    .page-header-desc strong{color:var(--paper);font-weight:400}
-
-    /* ── GET IN TOUCH HERO (full-bleed) ── */
-    .git-hero{position:relative;min-height:clamp(560px,80vh,820px);margin-top:-5rem;
-      display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;background:#02040a}
-    .git-hero-bg{position:absolute;inset:0;z-index:0}
-    .git-hero-bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 42%;
-      filter:brightness(.94) contrast(1.04)}
-    .git-hero-scrim{position:absolute;inset:0;z-index:1;background:
-      linear-gradient(to top,rgba(3,6,10,.94) 0%,rgba(3,6,10,.55) 34%,rgba(3,6,10,.12) 62%,rgba(3,6,10,.42) 100%),
-      linear-gradient(to right,rgba(3,6,10,.72) 0%,rgba(3,6,10,.18) 52%,transparent 78%)}
-    .git-hero-content{position:relative;z-index:2;padding:0 3rem 4.5rem;max-width:60rem}
-    .git-hero-h1{font-weight:200;font-size:clamp(2.4rem,5.2vw,4.6rem);line-height:1.03;
-      letter-spacing:-.03em;color:var(--paper);margin:1.2rem 0 1.4rem;text-shadow:0 2px 18px rgba(2,4,8,.55)}
-    .git-hero-h1 em{font-family:'Fraunces',serif;font-style:italic;font-weight:400;color:rgba(238,236,234,.6)}
-    .git-hero-sub{font-size:.9rem;font-weight:300;color:var(--muted);max-width:50ch;line-height:1.85;margin-bottom:2rem;text-shadow:0 1px 12px rgba(2,4,8,.6)}
-    .btn-accent{display:inline-block;font-size:.6rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;
-      text-decoration:none;padding:.9rem 1.9rem;color:var(--paper);background:var(--accent);
-      border:1px solid var(--accent);transition:opacity .25s,transform .2s;cursor:pointer}
-    .btn-accent:hover{opacity:.9;transform:translateY(-1px)}
-
-    /* ── WORK GRID ── */
-    .work-grid-wrap{padding:2.5rem 3rem 5rem}
-    .work-note-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem}
-    .work-note{font-family:'Fraunces',serif;font-style:italic;font-size:.78rem;color:var(--muted)}
-    .work-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:3px}
-    .wc{position:relative;overflow:hidden;cursor:default}
-    .wc:nth-child(1){grid-column:span 7;aspect-ratio:16/9}
-    .wc:nth-child(2){grid-column:span 5;aspect-ratio:4/3}
-    .wc:nth-child(3){grid-column:span 4;aspect-ratio:1/1}
-    .wc:nth-child(4){grid-column:span 4;aspect-ratio:1/1}
-    .wc:nth-child(5){grid-column:span 4;aspect-ratio:1/1}
-    .wc:nth-child(6){grid-column:span 8;aspect-ratio:2.39/1}
-    .wc:nth-child(7){grid-column:span 4;aspect-ratio:16/10}
-    .wc-frame{position:absolute;inset:0;transition:transform .8s cubic-bezier(.16,1,.3,1);
-      background:radial-gradient(ellipse 95% 95% at 50% 42%,#0b0f15 0%,#070a0f 62%,#05080c 100%)}
-    .wc:hover .wc-frame{transform:scale(1.02)}
-    .wc-vig{position:absolute;inset:0;background:radial-gradient(ellipse 100% 100% at 50% 50%,transparent 40%,rgba(3,6,10,.55) 100%);pointer-events:none;z-index:2}
-    /* Monochrome brand marks (silhouette) */
-    .wc-logo{color:rgba(238,236,234,.6);transition:color .4s}
-    .wc-logo svg{display:block;margin:0 auto;width:auto;height:clamp(30px,4.2vw,54px);fill:currentColor}
-    .wc:hover .wc-logo{color:rgba(238,236,234,.85)}
-    .wc:nth-child(1) .wc-logo svg{height:clamp(30px,3.4vw,44px)}
-    .wc-client{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:6;text-align:center;pointer-events:none;transition:opacity .4s}
-    .wc:hover .wc-client{opacity:0}
-    .wc-client-name{font-weight:300;font-size:clamp(.75rem,1.4vw,1.1rem);letter-spacing:.14em;text-transform:uppercase;color:rgba(238,236,234,.82);white-space:nowrap}
-    .wc-client-name.serif{font-family:'Fraunces',serif;font-style:italic;font-weight:400;letter-spacing:.06em;text-transform:none;font-size:clamp(.9rem,1.6vw,1.25rem)}
-    .wc-client-divider{width:1.5rem;height:1px;background:rgba(238,236,234,.25);margin:.6rem auto}
-    .wc-client-cat{font-size:.52rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:rgba(238,236,234,.3)}
-    .wc-label{position:absolute;bottom:0;left:0;right:0;padding:2.5rem 1.5rem 1.25rem;
-      background:linear-gradient(to top,rgba(3,6,10,.92) 0%,transparent 100%);
-      transform:translateY(100%);transition:transform .4s cubic-bezier(.16,1,.3,1);z-index:5}
-    .wc:hover .wc-label{transform:translateY(0)}
-    .wc-cat{font-size:.55rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:.3rem}
-    .wc-title{font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:.95rem;color:var(--paper);line-height:1.3}
-    .wc-nda{position:absolute;top:1rem;right:1rem;z-index:5;font-size:.5rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:rgba(238,236,234,.25);border:1px solid rgba(238,236,234,.15);padding:.2rem .45rem}
-
-    /* Client strip */
-    .client-strip{border-top:1px solid var(--rule);padding:2rem 3rem;display:flex;align-items:center;gap:.75rem}
-    .client-strip-label{font-size:.55rem;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:rgba(238,236,234,.2);white-space:nowrap;margin-right:1.25rem}
-    .client-logos{display:flex;align-items:center;gap:2.5rem;flex-wrap:wrap}
-    .cl{font-size:.75rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(238,236,234,.28);white-space:nowrap;transition:color .2s;cursor:default}
-    .cl:hover{color:rgba(238,236,234,.65)}
-    .cl-serif{font-family:'Fraunces',serif;font-size:.85rem;font-weight:400;font-style:italic;letter-spacing:.04em;color:rgba(238,236,234,.28);transition:color .2s;cursor:default}
-    .cl-serif:hover{color:rgba(238,236,234,.65)}
-    .cdot{width:2px;height:2px;border-radius:50%;background:rgba(238,236,234,.15);flex-shrink:0}
-
-    /* ── BEHIND THE SCENES (on-set gallery) ── */
-    .bts{padding:5rem 3rem 5.5rem;border-top:1px solid var(--rule)}
-    .bts-head{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;margin-bottom:2.5rem;flex-wrap:wrap}
-    .bts-eyebrow{font-size:.58rem;font-weight:400;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
-    .bts-title{font-weight:200;font-size:clamp(1.6rem,3vw,2.6rem);letter-spacing:-.02em;color:var(--paper);line-height:1.08}
-    .bts-title em{font-family:'Fraunces',serif;font-style:italic;font-weight:400;color:rgba(238,236,234,.5)}
-    .bts-note{font-family:'Fraunces',serif;font-style:italic;font-size:.78rem;color:var(--muted);max-width:32ch;text-align:right;line-height:1.6}
-    /* contact sheet */
-    .cs{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
-    .cs-cell{position:relative;overflow:hidden;background:#05080e;aspect-ratio:4/3;cursor:zoom-in}
-    .cs-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-      filter:brightness(.82) contrast(1.03);transition:transform .8s cubic-bezier(.16,1,.3,1),filter .5s}
-    .cs-cell:hover .cs-img{transform:scale(1.04);filter:brightness(1) contrast(1.03)}
-    .cs-cell::after{content:'';position:absolute;top:.7rem;right:.7rem;width:13px;height:13px;z-index:2;
-      border-top:1px solid rgba(238,236,234,.85);border-right:1px solid rgba(238,236,234,.85);
-      opacity:0;transition:opacity .3s}
-    .cs-cell:hover::after{opacity:.9}
-
-    /* ── LIGHTBOX ── */
-    .lb{position:fixed;inset:0;z-index:500;display:flex;align-items:center;justify-content:center;
-      background:rgba(2,4,8,.94);backdrop-filter:blur(4px);opacity:0;visibility:hidden;
-      transition:opacity .3s ease,visibility .3s ease}
-    .lb.open{opacity:1;visibility:visible}
-    body.lb-open #nav{opacity:0;pointer-events:none}
-    .lb-stage{position:relative;z-index:1;display:flex;align-items:center;justify-content:center}
-    .lb-stage img{max-width:92vw;max-height:86vh;object-fit:contain;cursor:pointer;
-      box-shadow:0 30px 80px rgba(0,0,0,.6);opacity:0;transition:opacity .25s}
-    .lb-stage img.ready{opacity:1}
-    .lb-close,.lb-prev,.lb-next{position:absolute;z-index:3;background:none;border:none;cursor:pointer;
-      color:rgba(238,236,234,.7);transition:color .2s,background .2s;-webkit-tap-highlight-color:transparent}
-    .lb-close:hover,.lb-prev:hover,.lb-next:hover{color:var(--paper)}
-    .lb-close{top:1.4rem;right:1.6rem;font-size:1.8rem;line-height:1;width:2.4rem;height:2.4rem;z-index:5}
-    .lb-prev,.lb-next{top:0;bottom:0;width:16vw;min-width:64px;font-size:2.4rem;font-weight:200;
-      display:flex;align-items:center;justify-content:center}
-    .lb-prev{left:0;justify-content:flex-start;padding-left:1.5rem}
-    .lb-next{right:0;justify-content:flex-end;padding-right:1.5rem}
-    .lb-prev:hover,.lb-next:hover{background:linear-gradient(to var(--dir,right),rgba(3,6,10,.35),transparent)}
-    .lb-count{position:absolute;z-index:3;bottom:1.5rem;left:50%;transform:translateX(-50%);
-      font-size:.6rem;font-weight:400;letter-spacing:.24em;color:rgba(238,236,234,.5);
-      font-variant-numeric:tabular-nums}
-
-    /* ── SERVICES PAGE ── */
-    .services-wrap{padding:2.5rem 3rem 5rem}
-    .services-how{font-size:.58rem;font-weight:400;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);margin-bottom:2rem}
-    .service-row{display:flex;flex-direction:column;gap:.75rem;padding:3rem 0;border-bottom:1px solid var(--rule);transition:padding-left .3s}
-    .service-row:first-of-type{border-top:1px solid var(--rule)}
-    .service-row:hover{padding-left:.4rem}
-    .s-step{font-size:.6rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:.2rem}
-    .s-name{font-weight:200;font-size:clamp(1.6rem,2.8vw,2.4rem);letter-spacing:-.02em;color:var(--paper);line-height:1.1}
-    .s-name em{font-family:'Fraunces',serif;font-style:italic;font-weight:400;color:rgba(238,236,234,.4)}
-    .s-desc{font-size:.8rem;font-weight:300;color:var(--muted);line-height:1.9;max-width:54ch}
-
-    /* ── LOCATIONS ── */
-    .loc-head{padding:4.5rem 3rem 2rem}
-    .loc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);
-      border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
-    .loc-card{position:relative;overflow:hidden;background:var(--ink);min-height:270px;padding:2rem;
-      display:flex;flex-direction:column;justify-content:flex-end}
-    .loc-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
-      opacity:.5;filter:brightness(.72) saturate(.9);transition:transform .7s ease,opacity .35s}
-    .loc-card:hover .loc-img{transform:scale(1.06);opacity:.66}
-    .loc-card::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
-      background:linear-gradient(to top,rgba(3,6,10,.95) 0%,rgba(3,6,10,.5) 48%,rgba(3,6,10,.42) 100%)}
-    .loc-num,.loc-name,.loc-desc{position:relative;z-index:2}
-    .loc-num{font-size:.56rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:1.1rem}
-    .loc-name{font-weight:200;font-size:1.45rem;letter-spacing:-.01em;color:var(--paper);margin-bottom:.7rem;line-height:1.15}
-    .loc-name em{font-family:'Fraunces',serif;font-style:italic;font-weight:400;color:rgba(238,236,234,.45)}
-    .loc-desc{font-size:.76rem;font-weight:300;color:var(--muted);line-height:1.85}
-
-    /* ── PAGE HERO (full-bleed image header on inner pages) ── */
-    .page-hero{position:relative;min-height:56vh;margin-top:-5rem;overflow:hidden;
-      display:flex;flex-direction:column;justify-content:flex-end}
-    .page-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
-      filter:brightness(.5) contrast(1.05) saturate(.9)}
-    .page-hero::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
-      background:linear-gradient(to top,rgba(3,6,10,.96) 0%,rgba(3,6,10,.5) 42%,rgba(3,6,10,.55) 100%)}
-    .page-hero .page-header{position:relative;z-index:2;border-bottom:0;padding-bottom:2.75rem}
-
-    /* ── WEATHER ── */
-    .wx-wrap{padding:4.5rem 3rem 2rem}
-    .wx-lede{font-size:.82rem;font-weight:300;color:var(--muted);line-height:1.9;max-width:60ch;margin:1.25rem 0 1.5rem}
-    .wx-clock-line{font-size:.6rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:rgba(238,236,234,.4);margin:0 0 2.25rem;display:flex;align-items:baseline;gap:.7rem;flex-wrap:wrap}
-    .wx-clock{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:.92rem;letter-spacing:.05em;color:var(--accent);text-transform:none;font-variant-numeric:tabular-nums}
-    .wx-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule)}
-    .wx-card{background:var(--ink);padding:1.9rem 1.5rem}
-    .wx-loc{font-size:.56rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(238,236,234,.55);margin-bottom:.15rem}
-    .wx-region{font-family:'Fraunces',serif;font-style:italic;font-size:.8rem;color:rgba(238,236,234,.35);margin-bottom:1.15rem}
-    .wx-temp{font-weight:200;font-size:2.7rem;line-height:1;color:var(--paper);font-variant-numeric:tabular-nums}
-    .wx-temp sup{font-size:.34em;vertical-align:super;color:var(--muted);font-weight:300}
-    .wx-cond{display:flex;align-items:center;gap:.5rem;margin-top:.75rem;font-size:.72rem;font-weight:300;color:var(--muted)}
-    .wx-ico{font-size:1.05rem;filter:grayscale(.15)}
-    .wx-seasons{display:flex;gap:2.5rem;flex-wrap:wrap;margin-top:2.5rem;padding-top:2rem;border-top:1px solid var(--rule)}
-    .wx-season{flex:1;min-width:190px}
-    .wx-season-k{font-size:.56rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:.55rem}
-    .wx-season-v{font-size:.77rem;font-weight:300;color:var(--muted);line-height:1.8}
-    .wx-note{margin-top:1.75rem;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(238,236,234,.28)}
-    /* Climate + live-weather split */
-    .wx-split{display:grid;grid-template-columns:minmax(200px,.85fr) 1.3fr;gap:3.5rem;align-items:center;margin-top:1.75rem}
-    .wx-split .wx-grid{grid-template-columns:repeat(2,1fr)}
-    .wx-split .wx-note{margin-top:1.4rem}
-
-    /* ── NARRATIVE (Why Panama / Sustainability) ── */
-    .why{padding:6rem 3rem;border-top:1px solid var(--rule)}
-    .why-inner{max-width:60rem}
-    .why-eyebrow{font-size:.58rem;font-weight:400;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:1.6rem}
-    .why-lead{font-family:'Fraunces',serif;font-style:italic;font-weight:400;
-      font-size:clamp(1.5rem,3vw,2.35rem);line-height:1.32;color:var(--paper);letter-spacing:-.01em;margin-bottom:2.2rem;max-width:24ch}
-    .why-p{font-size:.9rem;font-weight:300;color:var(--muted);line-height:2;max-width:66ch;margin-bottom:1.4rem}
-    .why-p:last-child{margin-bottom:0}
-    .why-p strong{color:var(--paper);font-weight:400}
-    .why-p em{font-style:italic;color:rgba(238,236,234,.7)}
-
-    /* ── HOME · OFFERINGS ── */
-    .offer{padding:6.5rem 3rem 5.5rem}
-    .offer-head{max-width:60rem;margin-bottom:2.75rem}
-    .offer-eyebrow{font-size:.58rem;font-weight:500;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:1.3rem}
-    .offer-title{font-weight:200;font-size:clamp(1.9rem,3.6vw,3rem);letter-spacing:-.02em;color:var(--paper);line-height:1.08;margin-bottom:1.4rem}
-    .offer-title em{font-family:'Fraunces',serif;font-style:italic;font-weight:400;color:rgba(238,236,234,.5)}
-    .offer-sub{font-size:.9rem;font-weight:300;color:var(--muted);line-height:1.95;max-width:56ch}
-    .offer-sub strong{color:var(--paper);font-weight:400}
-    .offer-list{display:grid;grid-template-columns:1fr 1fr;column-gap:4rem}
-    .offer-item{display:flex;align-items:flex-start;gap:1.4rem;width:100%;text-align:left;
-      padding:2.1rem 0;background:none;border:none;border-top:1px solid var(--rule);cursor:pointer;
-      font-family:inherit;transition:padding-left .35s cubic-bezier(.16,1,.3,1)}
-    .offer-item:hover{padding-left:.6rem}
-    .offer-n{font-size:.62rem;font-weight:500;letter-spacing:.14em;color:var(--accent);padding-top:.45rem;font-variant-numeric:tabular-nums;flex-shrink:0}
-    .offer-body{display:flex;flex-direction:column;gap:.5rem;flex:1}
-    .offer-k{font-weight:300;font-size:1.15rem;letter-spacing:-.01em;color:var(--paper)}
-    .offer-d{font-size:.78rem;font-weight:300;color:var(--muted);line-height:1.75}
-    .offer-go{color:rgba(238,236,234,.25);font-size:1rem;padding-top:.3rem;flex-shrink:0;transition:color .25s,transform .25s}
-    .offer-item:hover .offer-go{color:var(--accent);transform:translateX(4px)}
-
-    /* ── HOME · ARTICLE TEASER ── */
-    .teaser{padding:2rem 3rem 6.5rem}
-    .teaser-inner{max-width:62rem}
-    .teaser-credit{display:inline-block;font-size:.58rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);text-decoration:none;margin-bottom:1.6rem;padding-bottom:2px;border-bottom:1px solid transparent;transition:border-color .2s,opacity .2s}
-    .teaser-credit:hover{border-color:var(--accent);opacity:.85}
-    .teaser-p strong{color:var(--paper);font-weight:400}
-    .teaser-lead{font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:clamp(1.7rem,3.2vw,2.5rem);line-height:1.28;color:var(--paper);letter-spacing:-.01em;margin-bottom:1.9rem;max-width:20ch}
-    .teaser-p{font-size:.92rem;font-weight:300;color:var(--muted);line-height:2.05;max-width:66ch;margin-bottom:2.2rem}
-    .teaser-p em{font-family:'Fraunces',serif;font-style:italic;color:rgba(238,236,234,.75)}
-    .teaser-p .tlink{color:var(--paper);border-bottom:1px solid var(--accent);cursor:pointer;transition:color .2s,opacity .2s}
-    .teaser-p .tlink:hover{color:var(--accent)}
-
-    /* ── INCENTIVES (tax rebate detail) ── */
-    .inc{padding:6.5rem 3rem;border-top:1px solid var(--rule)}
-    .inc-teaser{padding:5.5rem 3rem;border-top:1px solid var(--rule)}
-    .inc-teaser-p{font-size:.9rem;font-weight:300;color:var(--muted);line-height:2;max-width:60ch;margin:1.25rem 0 2.5rem}
-    .inc-teaser-p strong{color:var(--paper);font-weight:400}
-    .inc-lead{font-family:'Fraunces',serif;font-style:italic;font-weight:400;
-      font-size:clamp(1.7rem,3.3vw,2.7rem);line-height:1.22;color:var(--paper);letter-spacing:-.015em;
-      max-width:18ch;margin:1.5rem 0 1.7rem}
-    .inc-intro{font-size:.9rem;font-weight:300;color:var(--muted);line-height:2;max-width:66ch;margin-bottom:3.5rem}
-    .inc-intro strong{color:var(--paper);font-weight:400}
-    .inc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);
-      border:1px solid var(--rule);margin-bottom:3.5rem}
-    .inc-item{background:var(--ink);padding:2rem 1.6rem}
-    .inc-item .k{font-weight:200;font-size:2.1rem;line-height:1;letter-spacing:-.03em;color:var(--paper);
-      margin-bottom:.85rem;font-variant-numeric:tabular-nums}
-    .inc-item .k sup{font-size:.42em;vertical-align:super;color:var(--accent);font-weight:300}
-    .inc-item .t{font-size:.55rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(238,236,234,.55);margin-bottom:.75rem}
-    .inc-item .d{font-size:.74rem;font-weight:300;color:var(--muted);line-height:1.8}
-    .inc-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:2.5rem}
-    .inc-step{padding-top:1.3rem;border-top:1px solid var(--accent)}
-    .inc-step .n{font-family:'Fraunces',serif;font-style:italic;font-size:.95rem;color:var(--accent);margin-bottom:1rem}
-    .inc-step .st{font-weight:400;font-size:.98rem;color:var(--paper);margin-bottom:.6rem;letter-spacing:-.01em}
-    .inc-step .sd{font-size:.74rem;font-weight:300;color:var(--muted);line-height:1.8}
-    .inc-detail{margin-top:3.5rem;padding-top:3rem;border-top:1px solid var(--rule)}
-    .inc-cols{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem}
-    .inc-col-k{font-size:.56rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1.4rem}
-    .inc-list{list-style:none;display:flex;flex-direction:column;gap:.85rem}
-    .inc-list li{font-size:.78rem;font-weight:300;color:var(--muted);line-height:1.55;padding-left:1.1rem;position:relative}
-    .inc-list li::before{content:'';position:absolute;left:0;top:.5rem;width:5px;height:1px;background:var(--accent)}
-    .inc-list li strong{color:var(--paper);font-weight:400}
-    .inc-eg{margin-top:2.75rem;display:flex;align-items:baseline;gap:1.1rem;flex-wrap:wrap}
-    .inc-eg .eg-k{font-size:.56rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(238,236,234,.4)}
-    .inc-eg .eg-v{font-family:'Fraunces',serif;font-style:italic;font-size:1.15rem;color:var(--paper)}
-    .inc-eg .eg-v b{color:var(--accent);font-style:normal;font-weight:400}
-
-    /* Stats band */
-    .stats-band{position:relative;overflow:hidden;margin:4rem 0 0}
-    .stats-bg{position:absolute;inset:0;
-      background:radial-gradient(ellipse 120% 80% at 20% 50%,rgba(10,20,14,.9) 0%,transparent 55%),
-        radial-gradient(ellipse 80% 100% at 80% 30%,rgba(18,10,6,.85) 0%,transparent 55%),
-        linear-gradient(160deg,#0b1610 0%,#090c0b 40%,#100a08 70%,#0a0908 100%)}
-    .stats-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 100% 100% at 50% 50%,transparent 30%,rgba(3,6,10,.6) 100%)}
-    .stats-grid{position:relative;z-index:5;display:grid;grid-template-columns:repeat(2,1fr);
-      gap:1px;background:rgba(238,236,234,.04);
-      border-top:1px solid rgba(238,236,234,.06);border-bottom:1px solid rgba(238,236,234,.06)}
-    .stat{padding:4rem 3rem}
-    .stat-n{font-weight:200;font-size:clamp(3rem,6vw,5.5rem);line-height:.9;letter-spacing:-.04em;color:var(--paper);margin-bottom:1.5rem}
-    .stat-n sup{font-size:.4em;vertical-align:super;color:var(--accent);font-weight:300}
-    .stat-label{font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:.95rem;color:rgba(238,236,234,.65);margin-bottom:.6rem;line-height:1.3}
-    .stat-detail{font-size:.72rem;font-weight:300;color:var(--muted);line-height:1.8;max-width:26ch}
-
-    /* ── RESOURCES PAGE ── */
-    .resources-wrap{padding:2.5rem 3rem 5rem}
-    .resources-intro{font-size:.82rem;font-weight:300;color:var(--muted);max-width:58ch;line-height:1.85;margin-bottom:3rem}
-    .resources-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
-    .resource-card{background:var(--ink);padding:2.25rem 2rem;display:flex;flex-direction:column;gap:1rem;transition:background .2s}
-    .resource-card:hover{background:#0a0d10}
-    .resource-card-cat{font-size:.55rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}
-    .resource-card-title{font-weight:300;font-size:1.05rem;letter-spacing:-.01em;color:var(--paper);line-height:1.3}
-    .resource-card-desc{font-size:.75rem;font-weight:300;color:var(--muted);line-height:1.75;flex:1}
-    .resource-card-footer{display:flex;align-items:center;justify-content:space-between;padding-top:1rem;border-top:1px solid var(--rule)}
-    .resource-card-meta{font-size:.58rem;font-weight:300;letter-spacing:.08em;color:rgba(238,236,234,.2)}
-    .resource-dl{font-size:.58rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
-      color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:.4rem;
-      transition:opacity .2s;cursor:pointer;background:none;border:none;padding:0}
-    .resource-dl:hover{opacity:.65}
-    .resource-dl svg{width:.75rem;height:.75rem}
-
-    /* ── DOWNLOAD GATE (lead capture) ── */
-    .gate{position:fixed;inset:0;z-index:400;display:flex;align-items:center;justify-content:center;
-      padding:1.5rem;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s ease}
-    .gate.open{opacity:1;visibility:visible}
-    .gate-backdrop{position:absolute;inset:0;background:rgba(2,4,8,.82);backdrop-filter:blur(6px)}
-    .gate-card{position:relative;z-index:1;width:100%;max-width:430px;background:#080b10;
-      border:1px solid var(--rule);padding:2.75rem 2.5rem 2.5rem;
-      transform:translateY(12px);transition:transform .35s cubic-bezier(.16,1,.3,1)}
-    .gate.open .gate-card{transform:translateY(0)}
-    .gate-x{position:absolute;top:1.1rem;right:1.2rem;background:none;border:none;cursor:pointer;
-      font-size:1.4rem;line-height:1;color:rgba(238,236,234,.35);transition:color .2s;padding:.2rem}
-    .gate-x:hover{color:var(--paper)}
-    .gate-eyebrow{font-size:.55rem;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin-bottom:.9rem}
-    .gate-title{font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:1.4rem;
-      line-height:1.25;color:var(--paper);margin-bottom:.85rem}
-    .gate-desc{font-size:.76rem;font-weight:300;color:var(--muted);line-height:1.75;margin-bottom:1.75rem}
-    .gate-form{display:flex;flex-direction:column;gap:.85rem}
-    .gate-input{width:100%;background:rgba(238,236,234,.03);border:1px solid var(--rule);
-      color:var(--paper);font-family:inherit;font-size:.82rem;font-weight:300;padding:.8rem .9rem;
-      transition:border-color .2s}
-    .gate-input::placeholder{color:rgba(238,236,234,.3)}
-    .gate-input:focus{outline:none;border-color:rgba(238,236,234,.4)}
-    .gate-submit{margin-top:.5rem;width:100%;justify-content:center;border:none;cursor:pointer;
-      font-family:inherit;display:inline-flex;align-items:center;font-size:.6rem;font-weight:400;
-      letter-spacing:.2em;text-transform:uppercase;padding:.95rem 1.75rem;color:var(--ink);
-      background:var(--paper);transition:background .25s,color .25s}
-    .gate-submit:hover{background:var(--accent);color:var(--paper)}
-    .gate-fine{margin-top:1rem;font-size:.6rem;font-weight:300;color:rgba(238,236,234,.28);line-height:1.6}
-    .gate-success{text-align:center;padding:1rem 0 .5rem}
-    .gate-success .tick{width:2.5rem;height:2.5rem;border:1px solid var(--accent);border-radius:50%;
-      display:flex;align-items:center;justify-content:center;color:var(--accent);margin:0 auto 1.25rem;font-size:1.1rem}
-    .gate-success-t{font-family:'Fraunces',serif;font-style:italic;font-size:1.15rem;color:var(--paper);margin-bottom:.6rem}
-    .gate-success-p{font-size:.76rem;font-weight:300;color:var(--muted);line-height:1.75;max-width:32ch;margin:0 auto}
-
-    /* ── CONTACT PAGE ── */
-    .contact-wrap{padding:2.5rem 3rem 5rem}
-    .contact-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:5rem;align-items:start}
-    .contact-info{display:flex;flex-direction:column;gap:2rem}
-    .contact-info-block{display:flex;flex-direction:column;gap:.4rem}
-    .contact-info-label{font-size:.55rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
-    .contact-info-value{font-size:.88rem;font-weight:300;color:var(--paper);line-height:1.6}
-    .contact-info-value a{color:var(--paper);text-decoration:none;border-bottom:1px solid rgba(238,236,234,.15);padding-bottom:1px;transition:border-color .2s}
-    .contact-info-value a:hover{border-color:var(--paper)}
-    .contact-info-note{font-size:.72rem;font-weight:300;color:var(--muted);line-height:1.7;font-style:italic;font-family:'Fraunces',serif}
-    .rfq-form{display:grid;grid-template-columns:1fr 1fr;background:var(--rule);border:1px solid var(--rule)}
-    .ff{background:var(--ink);padding:1.75rem 1.5rem 1.25rem;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);display:flex;flex-direction:column;gap:.6rem}
-    .ff:nth-child(even){border-right:none}
-    .ff-full{grid-column:span 2;border-right:none!important}
-    .ff label{font-size:.55rem;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
-    .ff input,.ff select,.ff textarea{background:transparent;border:none;border-bottom:1px solid rgba(238,236,234,.1);color:var(--paper);font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:300;padding:.4rem 0 .5rem;outline:none;width:100%;-webkit-appearance:none;appearance:none;transition:border-color .2s;resize:none}
-    .ff select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='rgba(238,236,234,0.3)' stroke-width='1.2'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 0 center;padding-right:1.25rem;cursor:pointer}
-    .ff input:focus,.ff select:focus,.ff textarea:focus{border-color:rgba(238,236,234,.4)}
-    .ff input::placeholder,.ff textarea::placeholder{color:rgba(238,236,234,.15)}
-    .ff select option{background:#111}
-    .ff-submit{grid-column:span 2;background:var(--ink);border-top:1px solid var(--rule);padding:0}
-    .submit-btn{width:100%;font-family:'DM Sans',sans-serif;font-size:.6rem;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:var(--ink);background:var(--paper);border:none;padding:1.35rem 2rem;cursor:pointer;transition:background .25s,color .25s;display:block}
-    .submit-btn:hover{background:var(--accent);color:var(--paper)}
-
-    /* ── FOOTER ── */
-    footer{padding:1.75rem 3rem;border-top:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}
-    .footer-logo{font-size:.58rem;font-weight:300;letter-spacing:.28em;text-transform:uppercase;color:var(--muted)}
-    .footer-logo-img{height:136px;width:136px;display:block;opacity:1}
-    .footer-copy{font-size:.58rem;font-weight:300;color:rgba(238,236,234,.18);letter-spacing:.04em}
-    .footer-iq{display:flex;align-items:center;gap:.85rem;flex-shrink:0;text-decoration:none;cursor:pointer}
-    .footer-iq-logo{width:28px;height:28px;border-radius:50%;object-fit:cover;opacity:.75;transition:opacity .2s}
-    .footer-iq:hover .footer-iq-logo{opacity:1}
-    .footer-iq-text{font-size:.52rem;font-weight:300;letter-spacing:.12em;text-transform:uppercase;color:rgba(238,236,234,.2);line-height:1.5;max-width:18ch;transition:color .2s}
-    .footer-iq:hover .footer-iq-text{color:rgba(238,236,234,.4)}
-
-    /* ── REVEAL ── */
-    .reveal{opacity:0;transform:translateY(.8rem);transition:opacity .8s ease,transform .8s ease}
-    .reveal.in{opacity:1;transform:none}
-
-    /* ── MOBILE ── */
-    @media(max-width:768px){
-      #nav{padding:1.1rem 1.5rem}
-      #nav.scrolled{padding:.8rem 1.5rem}
-      .nav-logo img,#nav.scrolled .nav-logo img{height:72px;width:72px}
-      .footer-logo-img{height:112px;width:112px}
-      .nav-links{display:none}
-      .nav-toggle{display:flex}
-      .hero-marks{display:none}
-      .slate{position:static;right:auto;top:auto;width:auto;max-width:330px;margin:2.2rem auto .5rem;
-        animation:none;opacity:1;transform:rotate(-1deg)}
-      .hero-content{padding:0 1.5rem 2.5rem}
-      .git-hero{min-height:clamp(460px,72vh,640px)}
-      .git-hero-content{padding:0 1.5rem 3rem}
-      .hero-bottom{flex-direction:column;align-items:flex-start;gap:1.5rem}
-      .hero-cta-group{flex-direction:column;align-items:flex-start}
-      .page-header,.work-grid-wrap,.services-wrap,.resources-wrap,.contact-wrap{padding-left:1.5rem;padding-right:1.5rem}
-      .loc-head,.wx-wrap{padding-left:1.5rem;padding-right:1.5rem}
-      .why{padding:4rem 1.5rem}
-      .offer{padding:4rem 1.5rem 3rem}
-      .teaser{padding:1rem 1.5rem 4rem}
-      .offer-list{grid-template-columns:1fr;column-gap:0}
-      .page-hero{min-height:42vh}
-      .inc,.inc-teaser{padding:4rem 1.5rem}
-      .inc-grid{grid-template-columns:1fr 1fr}
-      .inc-steps{grid-template-columns:1fr 1fr;gap:1.8rem}
-      .inc-cols{grid-template-columns:1fr;gap:2.5rem}
-      .loc-grid{grid-template-columns:1fr 1fr}
-      .wx-grid{grid-template-columns:1fr 1fr}
-      .wx-split{grid-template-columns:1fr;gap:2rem}
-      .work-grid{grid-template-columns:1fr 1fr;gap:2px}
-      .wc{grid-column:span 1!important;aspect-ratio:4/3!important}
-      .wc:first-child{grid-column:span 2!important;aspect-ratio:16/9!important}
-      .wc-label{display:none}
-      .wc-client{opacity:1!important}
-      .bts{padding:3.5rem 1.5rem}
-      .bts-head{flex-direction:column;align-items:flex-start}
-      .bts-note{text-align:left}
-      .cs{grid-template-columns:1fr 1fr;gap:.9rem}
-      .lb-stage img{max-width:96vw;max-height:82vh}
-      .lb-prev,.lb-next{width:22vw;min-width:48px;font-size:1.9rem}
-      .lb-close{top:1rem;right:1rem}
-      .home-svc{grid-template-columns:1fr!important;padding:3rem 1.5rem!important}
-      .stat{padding:3rem 1.5rem}
-      .contact-grid{grid-template-columns:1fr;gap:2.5rem}
-      .rfq-form{grid-template-columns:1fr}
-      .ff-full,.ff-submit{grid-column:span 1}
-      .ff:nth-child(even){border-right:none}
-      footer{padding:1.25rem 1.5rem}
-      .client-strip{padding:2rem 1.5rem}
-    }
-    @media(prefers-reduced-motion:reduce){
-      .reveal,.ll1,.ll2,.ll3,.ll4,.ll5,.ll6,.hero-frame::before{animation:none}
-      .reveal{opacity:1;transform:none}
-    }
-
-    /* ══════════ EDITORIAL THEME · CINEMATIC BRANCH ONLY ══════════
-       Fewer hairline dividers and glass panels — whitespace, type and the
-       accent carry the structure. (Do not cherry-pick to clapperboard.) */
-    .why,.inc,.inc-teaser,.bts,.client-strip,.offer-item{border-top:0}
-    .page-header{border-bottom:0}
-    .service-row,.service-row:first-of-type{border-top:0;border-bottom:0}
-    .inc-detail,.wx-seasons{border-top:0}
-    footer{border-top:0}
-    /* offerings read as an editorial index, not a boxed grid */
-    .offer-list{column-gap:5rem;row-gap:1rem}
-    .offer-item{padding:1.7rem 0}
-    /* the disciplines breathe on the page instead of sitting between rules */
-    .service-row{padding:2.4rem 0}
-    /* stats become open display type, not a translucent band */
-    .stats-band{margin:5.5rem 0 1.5rem}
-    .stats-bg{display:none}
-    .stats-grid{background:none;border-top:0;border-bottom:0;gap:3rem 2.5rem}
-    .stat{padding:1.5rem 2.5rem 1.5rem 0}
-    @media(max-width:768px){
-      .offer-list{column-gap:0;row-gap:0}
-      .stats-grid{gap:2rem}
-      .stat{padding:1.5rem 0}
-    }
-    @media(max-width:540px){
-      .stats-grid{grid-template-columns:1fr}
-    }
-  </style>
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
 
 <!-- NAV -->
 <nav id="nav">
-  <a href="#" class="nav-logo" onclick="showPage('home');return false" aria-label="Shoot In Panama · Verite Producciones — home"><img src="assets/logo-badge.webp" alt="Shoot In Panama · Verite Producciones"></a>
+  <a href="#" class="nav-logo" data-page="home" aria-label="Shoot In Panama · Verite Producciones — home"><img src="assets/logo-badge.webp" alt="Shoot In Panama · Verite Producciones"></a>
   <div class="nav-links">
-    <button class="nav-link active" id="nav-home" onclick="showPage('home')">Home</button>
-    <button class="nav-link" id="nav-work" onclick="showPage('work')">Work</button>
-    <button class="nav-link" id="nav-services" onclick="showPage('services')">Services</button>
-    <button class="nav-link" id="nav-incentives" onclick="showPage('incentives')">Incentives</button>
-    <button class="nav-link" id="nav-resources" onclick="showPage('resources')">Resources</button>
-    <button class="nav-cta" id="nav-contact" onclick="showPage('contact')">Get in Touch</button>
+    <button class="nav-link active" id="nav-home" data-page="home">Home</button>
+    <button class="nav-link" id="nav-work" data-page="work">Work</button>
+    <button class="nav-link" id="nav-services" data-page="services">Services</button>
+    <button class="nav-link" id="nav-incentives" data-page="incentives">Incentives</button>
+    <button class="nav-link" id="nav-resources" data-page="resources">Resources</button>
+    <button class="nav-cta" id="nav-contact" data-page="contact">Get in Touch</button>
   </div>
-  <button class="nav-toggle" id="navToggle" onclick="toggleMenu()" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+  <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
     <span></span><span></span>
   </button>
 </nav>
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
-  <button class="mobile-link" onclick="showPage('home')">Home</button>
-  <button class="mobile-link" onclick="showPage('work')">Work</button>
-  <button class="mobile-link" onclick="showPage('services')">Services</button>
-  <button class="mobile-link" onclick="showPage('incentives')">Incentives</button>
-  <button class="mobile-link" onclick="showPage('resources')">Resources</button>
-  <button class="mobile-link mm-cta" onclick="showPage('contact')">Get in Touch</button>
+  <button class="mobile-link" data-page="home">Home</button>
+  <button class="mobile-link" data-page="work">Work</button>
+  <button class="mobile-link" data-page="services">Services</button>
+  <button class="mobile-link" data-page="incentives">Incentives</button>
+  <button class="mobile-link" data-page="resources">Resources</button>
+  <button class="mobile-link mm-cta" data-page="contact">Get in Touch</button>
 </div>
 
 <!-- ════════════════════ HOME ════════════════════ -->
@@ -738,7 +147,7 @@
           alt="Cinematographer with a cinema camera on set — Verite Producciones"
           width="1920" height="1280"
           fetchpriority="high" decoding="async"
-          style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:58% 45%;filter:brightness(.92) contrast(1.05) saturate(1.02)"
+          class="hero-img"
         >
       </picture>
       <!-- Legibility scrim (darkens bottom + left where the copy sits) -->
@@ -758,8 +167,8 @@
       <div class="hero-bottom">
         <p class="hero-sub">CBS · NBC · MTV · Netflix · Discovery · MrBeast</p>
         <div class="hero-cta-group">
-          <button class="btn-primary" onclick="showPage('contact')">Request a Quote</button>
-          <button class="btn-ghost" onclick="showPage('work')">View Work</button>
+          <button class="btn-primary" data-page="contact">Request a Quote</button>
+          <button class="btn-ghost" data-page="work">View Work</button>
         </div>
       </div>
     </div>
@@ -774,19 +183,19 @@
       <p class="offer-sub">We're the executive arm of your production in Panama. The same crew that scouts your location clears your permits, files your rebate and wraps your shoot — so your creative and production team stay focused on the work, not the paperwork.</p>
     </div>
     <div class="offer-list">
-      <button class="offer-item" onclick="showPage('services')">
+      <button class="offer-item" data-page="services">
         <span class="offer-body"><span class="offer-k">Production Services</span><span class="offer-d">Full crew, equipment and location management, from first scout to final wrap.</span></span>
         <span class="offer-go">&rarr;</span>
       </button>
-      <button class="offer-item" onclick="showPage('services')">
+      <button class="offer-item" data-page="services">
         <span class="offer-body"><span class="offer-k">Fixer &amp; Logistics</span><span class="offer-d">Permits, talent coordination, transport and on-ground support across the country.</span></span>
         <span class="offer-go">&rarr;</span>
       </button>
-      <button class="offer-item" onclick="showPage('services')">
+      <button class="offer-item" data-page="services">
         <span class="offer-body"><span class="offer-k">Executive Compliance</span><span class="offer-d">Legal setup, insurance, customs and regulatory clearance for foreign productions.</span></span>
         <span class="offer-go">&rarr;</span>
       </button>
-      <button class="offer-item" onclick="showPage('incentives')">
+      <button class="offer-item" data-page="incentives">
         <span class="offer-body"><span class="offer-k">Government Incentives</span><span class="offer-d">A 25% cash rebate on qualifying spend, 0% import duty — structured and filed for you.</span></span>
         <span class="offer-go">&rarr;</span>
       </button>
@@ -798,8 +207,8 @@
     <div class="teaser-inner">
       <p class="teaser-lead">Over 30 years making Panama work on camera.</p>
       <p class="teaser-p">Verite Producciones is the ground team behind international features, series and campaigns shooting in Panama — from <em>The Amazing Race</em> and <em>The Challenge</em> to MrBeast. More than 30 years of crews, permits, locations and logistics, so your production arrives ready to shoot.</p>
-      <p class="teaser-p">Why Panama? One small country that <a class="tlink" onclick="showPage('services')">doubles for a dozen on screen</a>, a <a class="tlink" onclick="showPage('incentives')">25% cash rebate</a> on qualifying spend, and the crew depth to keep a shoot on schedule — the Hub of the Americas, carbon-negative, discreet by design.</p>
-      <button class="btn-ghost" onclick="showPage('work')">See our work &rarr;</button>
+      <p class="teaser-p">Why Panama? One small country that <a class="tlink" data-page="services">doubles for a dozen on screen</a>, a <a class="tlink" data-page="incentives">25% cash rebate</a> on qualifying spend, and the crew depth to keep a shoot on schedule — the Hub of the Americas, carbon-negative, discreet by design.</p>
+      <button class="btn-ghost" data-page="work">See our work &rarr;</button>
     </div>
   </section>
 
@@ -855,7 +264,13 @@
         <div class="wc-client"><p class="wc-client-name">Discovery</p><div class="wc-client-divider"></div><p class="wc-client-cat">Survive the Raft</p></div>
         <div class="wc-label"><p class="wc-cat">Reality Television · Network</p><p class="wc-title">Discovery's Survive the Raft</p></div>
       </div>
-      <div class="wc reveal" onclick="showPage('contact')" style="cursor:pointer"><div class="wc-frame"></div><div class="wc-vig"></div>
+      <div class="wc wc-oas reveal"><div class="wc-frame"></div><div class="wc-vig"></div>
+        <div class="wc-client"><div class="wc-logo" role="img" aria-label="OAS 56th General Assembly, Panama 2026">
+          <picture><source srcset="assets/oas56-white.webp" type="image/webp"><img src="assets/oas56-white.png" alt="OAS 56th General Assembly — Panama 2026" loading="lazy" decoding="async"></picture>
+        </div></div>
+        <div class="wc-label"><p class="wc-cat">Institutional · Multilateral</p><p class="wc-title">OAS — 56th General Assembly, Panama 2026</p></div>
+      </div>
+      <div class="wc reveal" data-page="contact"><div class="wc-frame"></div><div class="wc-vig"></div>
         <div class="wc-client"><p class="wc-client-name serif">The Complete Reel</p><div class="wc-client-divider"></div><p class="wc-client-cat">Available Upon Request</p></div>
         <div class="wc-label"><p class="wc-cat">Full Reference List</p><p class="wc-title">The complete reel is available upon request.</p></div>
       </div>
@@ -969,7 +384,7 @@
     <p class="page-header-eyebrow">Government Incentives</p>
     <p class="inc-lead">25% of your Panama spend, back in cash.</p>
     <p class="inc-teaser-p">Panama's Film Law 16 returns 25% of qualifying in-country spend as cash — stacked with 0% equipment-import duty and single-window permits. As a licensed local partner, Verite Producciones structures the spend and files the claim so it actually lands.</p>
-    <button class="btn-primary" onclick="showPage('incentives')">Government incentives for international productions &rarr;</button>
+    <button class="btn-primary" data-page="incentives">Government incentives for international productions &rarr;</button>
   </div>
 
   <!-- ── LOCATIONS ── -->
@@ -1161,7 +576,7 @@
         <p class="resource-card-desc">Geography, seasons, crew depth and canal access — why one small country doubles for a dozen on screen.</p>
         <div class="resource-card-footer">
           <span class="resource-card-meta">PDF · 28 pages</span>
-          <button class="resource-dl" onclick="openGate('The International Producer&#39;s Guide to Panama')">
+          <button class="resource-dl" data-guide="The International Producer&#39;s Guide to Panama">
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8m0 0l-3-3m3 3l3-3M2 12h12"/></svg>
             Download
           </button>
@@ -1174,7 +589,7 @@
         <p class="resource-card-desc">Film Law 16 in plain English: who qualifies, what spend counts, and how to model the 25% rebate before you pitch it.</p>
         <div class="resource-card-footer">
           <span class="resource-card-meta">PDF · Incentive briefing</span>
-          <button class="resource-dl" onclick="openGate('The 25% Cash Rebate, Explained')">
+          <button class="resource-dl" data-guide="The 25% Cash Rebate, Explained">
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8m0 0l-3-3m3 3l3-3M2 12h12"/></svg>
             Download
           </button>
@@ -1187,7 +602,7 @@
         <p class="resource-card-desc">Caribbean to Pacific in an hour — jungle, Casco Viejo, the Canal and skyline, and what each backdrop doubles for.</p>
         <div class="resource-card-footer">
           <span class="resource-card-meta">PDF · Lookbook</span>
-          <button class="resource-dl" onclick="openGate('Panama On-Screen — A Location Lookbook')">
+          <button class="resource-dl" data-guide="Panama On-Screen — A Location Lookbook">
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8m0 0l-3-3m3 3l3-3M2 12h12"/></svg>
             Download
           </button>
@@ -1200,7 +615,7 @@
         <p class="resource-card-desc">The milestone timeline from greenlight to first call sheet — permits, visas, customs, scouting, crew.</p>
         <div class="resource-card-footer">
           <span class="resource-card-meta">PDF · Checklist</span>
-          <button class="resource-dl" onclick="openGate('90 Days to Camera — A Pre-Production Checklist')">
+          <button class="resource-dl" data-guide="90 Days to Camera — A Pre-Production Checklist">
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8m0 0l-3-3m3 3l3-3M2 12h12"/></svg>
             Download
           </button>
@@ -1213,7 +628,7 @@
         <p class="resource-card-desc">Benchmark ranges for crew, gear and locations — with rebate savings — to sanity-check a budget before you commit.</p>
         <div class="resource-card-footer">
           <span class="resource-card-meta">PDF · Starter guide</span>
-          <button class="resource-dl" onclick="openGate('Budgeting a Panama Shoot — A Starter Guide')">
+          <button class="resource-dl" data-guide="Budgeting a Panama Shoot — A Starter Guide">
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8m0 0l-3-3m3 3l3-3M2 12h12"/></svg>
             Download
           </button>
@@ -1226,7 +641,7 @@
         <p class="resource-card-desc">Low-footprint production in a carbon-negative nation — solar studio, green crew, financier-ready docs.</p>
         <div class="resource-card-footer">
           <span class="resource-card-meta">PDF · Briefing</span>
-          <button class="resource-dl" onclick="openGate('Shooting Carbon-Negative in Panama')">
+          <button class="resource-dl" data-guide="Shooting Carbon-Negative in Panama">
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8m0 0l-3-3m3 3l3-3M2 12h12"/></svg>
             Download
           </button>
@@ -1236,12 +651,12 @@
     </div>
 
     <!-- Request notice -->
-    <div style="margin-top:2.5rem;padding:2rem;border:1px solid var(--rule);display:flex;align-items:center;gap:1.5rem">
-      <div style="width:2px;height:3rem;background:var(--accent);flex-shrink:0"></div>
-      <p style="font-size:.78rem;font-weight:300;color:var(--muted);line-height:1.8">
+    <div class="contact-callout">
+      <div class="contact-callout-bar"></div>
+      <p class="contact-callout-p">
         We use your details only to send the guide and the occasional note on Panama production —
         no spam, unsubscribe anytime. Prefer to talk first? Reach Ricardo Barria at
-        <a href="mailto:rbarria@veriteproducciones.net" style="color:var(--paper);text-decoration:none;border-bottom:1px solid rgba(238,236,234,.2)">rbarria@veriteproducciones.net</a>.
+        <a href="mailto:rbarria@veriteproducciones.net" class="contact-callout-a">rbarria@veriteproducciones.net</a>.
       </p>
     </div>
   </div>
@@ -1273,7 +688,7 @@
       <div class="hero-eyebrow"><div class="hero-eyebrow-line"></div><span class="hero-eyebrow-text">Panama · Since 1993</span></div>
       <h1 class="git-hero-h1">The audiovisual house<br><em>of reference in Panama.</em></h1>
       <p class="git-hero-sub">Full-service logistics. For over 30 years, the ground team behind the country's largest international and local productions.</p>
-      <button class="btn-accent" onclick="document.getElementById('rfq').scrollIntoView({behavior:'smooth'})">Request a Quote</button>
+      <button class="btn-accent" data-scroll="rfq">Request a Quote</button>
     </div>
   </section>
 
@@ -1357,14 +772,14 @@
 
 <!-- Download gate (lead capture) -->
 <div class="gate" id="gate" aria-hidden="true">
-  <div class="gate-backdrop" onclick="closeGate()"></div>
+  <div class="gate-backdrop" data-gate-close></div>
   <div class="gate-card" role="dialog" aria-modal="true" aria-labelledby="gate-title">
-    <button class="gate-x" onclick="closeGate()" aria-label="Close">&times;</button>
+    <button class="gate-x" data-gate-close aria-label="Close">&times;</button>
     <div id="gate-body">
       <p class="gate-eyebrow">Complimentary Guide</p>
       <h3 class="gate-title" id="gate-title">Guide</h3>
       <p class="gate-desc">Tell us where to send it — your copy lands in your inbox.</p>
-      <form class="gate-form" id="gate-form" onsubmit="return submitGate(event)">
+      <form class="gate-form" id="gate-form">
         <input class="gate-input" name="fullname" type="text" placeholder="Full name" required autocomplete="name">
         <input class="gate-input" name="email" type="email" placeholder="Work email" required autocomplete="email">
         <input class="gate-input" name="company" type="text" placeholder="Production / company (optional)" autocomplete="organization">
@@ -1380,227 +795,6 @@
   </div>
 </div>
 
-<script>
-  // ── PAGE ROUTING ──
-  const pages = ['home','work','services','incentives','resources','contact'];
-
-  function showPage(id) {
-    pages.forEach(p => {
-      document.getElementById('page-' + p).classList.remove('active');
-      const btn = document.getElementById('nav-' + p);
-      if(btn) btn.classList.remove('active');
-    });
-    document.getElementById('page-' + id).classList.add('active');
-    const btn = document.getElementById('nav-' + id);
-    if(btn) btn.classList.add('active');
-    // Sync mobile menu highlight + close it on navigation
-    document.querySelectorAll('.mobile-link').forEach(l => l.classList.remove('active'));
-    const mIdx = pages.indexOf(id);
-    const mLinks = document.querySelectorAll('.mobile-link');
-    if(mIdx > -1 && mLinks[mIdx]) mLinks[mIdx].classList.add('active');
-    toggleMenu(false);
-    window.scrollTo({top:0,behavior:'instant'});
-    // Trigger reveals on new page
-    setTimeout(() => initReveal(), 50);
-    // Update URL hash
-    history.pushState(null, '', '#' + id);
-  }
-
-  // Handle back/forward
-  window.addEventListener('popstate', () => {
-    const hash = location.hash.replace('#','') || 'home';
-    if(pages.includes(hash)) showPage(hash);
-  });
-
-  // Init from URL hash
-  const initHash = location.hash.replace('#','') || 'home';
-  if(pages.includes(initHash)) showPage(initHash);
-
-  // ── LIVE WEATHER (Open-Meteo, keyless) ──
-  (function(){
-    const cards = [...document.querySelectorAll('#wx-grid .wx-card')];
-    if(!cards.length) return;
-    const lat = cards.map(c => c.dataset.lat).join(',');
-    const lon = cards.map(c => c.dataset.lon).join(',');
-    const url = 'https://api.open-meteo.com/v1/forecast?latitude=' + lat + '&longitude=' + lon +
-      '&current=temperature_2m,weather_code&timezone=auto';
-    const wmo = code => {
-      if(code === 0) return ['☀︎','Clear'];
-      if(code <= 2) return ['⛅︎','Partly cloudy'];
-      if(code === 3) return ['☁︎','Overcast'];
-      if(code <= 48) return ['🌫︎','Fog'];
-      if(code <= 57) return ['🌦︎','Drizzle'];
-      if(code <= 67) return ['🌧︎','Rain'];
-      if(code <= 82) return ['🌦︎','Showers'];
-      return ['⛈︎','Thunderstorm'];
-    };
-    fetch(url).then(r => r.ok ? r.json() : Promise.reject(r.status)).then(data => {
-      const arr = Array.isArray(data) ? data : [data];
-      cards.forEach((card, i) => {
-        const cur = arr[i] && arr[i].current;
-        if(!cur) return;
-        const [ico, label] = wmo(cur.weather_code);
-        card.querySelector('[data-temp]').innerHTML = Math.round(cur.temperature_2m) + '<sup>°C</sup>';
-        card.querySelector('[data-ico]').textContent = ico;
-        card.querySelector('[data-cond]').textContent = label;
-      });
-    }).catch(() => {
-      cards.forEach(card => { card.querySelector('[data-cond]').textContent = 'Live data unavailable'; });
-    });
-  })();
-
-  // ── MOBILE MENU ──
-  function toggleMenu(force) {
-    const menu = document.getElementById('mobileMenu');
-    const toggle = document.getElementById('navToggle');
-    const open = (typeof force === 'boolean') ? force : !menu.classList.contains('open');
-    menu.classList.toggle('open', open);
-    toggle.classList.toggle('open', open);
-    toggle.setAttribute('aria-expanded', open);
-    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-    document.body.style.overflow = open ? 'hidden' : '';
-  }
-  // Close menu on Escape
-  document.addEventListener('keydown', e => { if(e.key === 'Escape') toggleMenu(false); });
-
-  // ── NAV SCROLL ──
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60), {passive:true});
-
-  // ── REVEAL ON SCROLL ──
-  function initReveal() {
-    const els = document.querySelectorAll('.page.active .reveal:not(.in)');
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if(!e.isIntersecting) return;
-        const peers = [...e.target.parentElement.querySelectorAll('.reveal')];
-        e.target.style.transitionDelay = (peers.indexOf(e.target) * 0.07) + 's';
-        e.target.classList.add('in');
-        io.unobserve(e.target);
-      });
-    }, {threshold:.1, rootMargin:'0px 0px -30px 0px'});
-    els.forEach(el => io.observe(el));
-  }
-  initReveal();
-
-  // ── DOWNLOAD GATE (lead capture) ──
-  // Paste the Google Apps Script Web App /exec URL here to log leads to the sheet.
-  // Leave blank and the form falls back to an email request instead.
-  const LEAD_ENDPOINT = '';
-  const gate = document.getElementById('gate');
-  let gateDoc = '';
-  function openGate(name) {
-    gateDoc = name;
-    document.getElementById('gate-title').textContent = name;
-    document.getElementById('gate-body').hidden = false;
-    document.getElementById('gate-done').hidden = true;
-    document.getElementById('gate-form').reset();
-    gate.classList.add('open');
-    gate.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-    setTimeout(() => { const f = gate.querySelector('input[name=fullname]'); if (f) f.focus(); }, 320);
-  }
-  function closeGate() {
-    gate.classList.remove('open');
-    gate.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-  }
-  function submitGate(e) {
-    e.preventDefault();
-    const f = e.target;
-    const name = f.elements.fullname.value.trim();
-    const email = f.elements.email.value.trim();
-    const company = f.elements.company.value.trim();
-    const donePara = document.querySelector('#gate-done .gate-success-p');
-    if (LEAD_ENDPOINT) {
-      // Log the lead straight to the Google Sheet (no-cors avoids a preflight).
-      const params = new URLSearchParams({ guide: gateDoc, name, email, company, source: 'resources' });
-      fetch(LEAD_ENDPOINT, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: params.toString()
-      }).catch(() => {});
-      donePara.textContent = 'Thanks, ' + (name.split(' ')[0] || 'there') + ' — your copy of “' + gateDoc + '” is on its way to ' + email + '.';
-    } else {
-      // Fallback until the Sheet endpoint is set: email the request.
-      const subject = encodeURIComponent('Guide download — ' + gateDoc);
-      const body = encodeURIComponent(
-        'New guide request from the Resources page.\n\n' +
-        'Guide: ' + gateDoc + '\n' +
-        'Name: ' + name + '\n' +
-        'Email: ' + email + '\n' +
-        'Production / company: ' + (company || '—') + '\n'
-      );
-      window.location.href = 'mailto:rbarria@veriteproducciones.net?subject=' + subject + '&body=' + body;
-      donePara.textContent = 'Your mail app just opened with the request — send it and we\'ll email the guide straight back.';
-    }
-    document.getElementById('gate-body').hidden = true;
-    document.getElementById('gate-done').hidden = false;
-    return false;
-  }
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && gate.classList.contains('open')) closeGate(); });
-
-  // ── LIGHTBOX (Work contact sheet) ──
-  const lb = (function () {
-    const el = document.getElementById('lb');
-    const img = document.getElementById('lb-img');
-    const count = document.getElementById('lb-count');
-    const cells = [...document.querySelectorAll('#cs .cs-cell')];
-    const items = cells.map(c => ({ webp: c.dataset.full, jpg: c.dataset.fulljpg }));
-    cells.forEach((c, idx) => c.addEventListener('click', () => open(idx)));
-    let i = 0;
-    function show() {
-      const it = items[i];
-      img.classList.remove('ready');
-      img.onerror = () => { img.onerror = null; img.src = it.jpg; };
-      img.onload = () => img.classList.add('ready');
-      img.src = it.webp;
-      count.textContent = String(i + 1).padStart(2, '0') + ' / ' + items.length;
-      // preload neighbours
-      [items[(i + 1) % items.length], items[(i - 1 + items.length) % items.length]]
-        .forEach(n => { const p = new Image(); p.src = n.webp; });
-    }
-    function open(n) {
-      i = n; show();
-      el.classList.add('open');
-      el.setAttribute('aria-hidden', 'false');
-      document.body.classList.add('lb-open');
-      document.body.style.overflow = 'hidden';
-    }
-    function close() {
-      el.classList.remove('open');
-      el.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('lb-open');
-      document.body.style.overflow = '';
-    }
-    function next() { i = (i + 1) % items.length; show(); }
-    function prev() { i = (i - 1 + items.length) % items.length; show(); }
-    // Controls
-    el.querySelector('.lb-close').addEventListener('click', close);
-    el.querySelector('.lb-prev').addEventListener('click', prev);
-    el.querySelector('.lb-next').addEventListener('click', next);
-    // Click backdrop closes; click image advances
-    el.addEventListener('click', (e) => { if (e.target === el) close(); });
-    img.addEventListener('click', next);
-    document.addEventListener('keydown', (e) => {
-      if (!el.classList.contains('open')) return;
-      if (e.key === 'Escape') close();
-      else if (e.key === 'ArrowRight') next();
-      else if (e.key === 'ArrowLeft') prev();
-    });
-    return { open, close, next, prev };
-  })();
-
-  // Live Panama local time (America/Panama — no external calls)
-  (function () {
-    const el = document.getElementById('wx-clock');
-    if (!el) return;
-    const fmt = new Intl.DateTimeFormat('en-US', { timeZone: 'America/Panama', hour: 'numeric', minute: '2-digit', hour12: true });
-    const tick = () => { el.textContent = fmt.format(new Date()) + ' · GMT−5'; };
-    tick();
-    setInterval(tick, 15000);
-  })();
-</script>
+<script src="/app.js"></script>
 </body>
 </html>
