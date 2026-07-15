@@ -2,6 +2,7 @@
   const pages = ['home','work','services','incentives','resources','contact'];
 
   function showPage(id) {
+    document.querySelectorAll('.essay.active').forEach(el => el.classList.remove('active'));
     pages.forEach(p => {
       document.getElementById('page-' + p).classList.remove('active');
       const btn = document.getElementById('nav-' + p);
@@ -23,15 +24,42 @@
     history.pushState(null, '', '#' + id);
   }
 
+  // ── ESSAY READER (sub-pages under Resources) ──
+  function showEssay(slug) {
+    const el = document.getElementById('essay-' + slug);
+    if(!el) return;
+    pages.forEach(p => {
+      document.getElementById('page-' + p).classList.remove('active');
+      const btn = document.getElementById('nav-' + p);
+      if(btn) btn.classList.remove('active');
+    });
+    document.querySelectorAll('.essay.active').forEach(e => e.classList.remove('active'));
+    el.classList.add('active');
+    // Essays live under Resources — keep that nav item lit for orientation
+    const rb = document.getElementById('nav-resources');
+    if(rb) rb.classList.add('active');
+    document.querySelectorAll('.mobile-link').forEach(l => l.classList.remove('active'));
+    const mLinks = document.querySelectorAll('.mobile-link');
+    const rIdx = pages.indexOf('resources');
+    if(rIdx > -1 && mLinks[rIdx]) mLinks[rIdx].classList.add('active');
+    toggleMenu(false);
+    window.scrollTo({top:0,behavior:'instant'});
+    setTimeout(() => initReveal(), 50);
+    history.pushState(null, '', '#essay-' + slug);
+  }
+
+  function route(hash) {
+    if(hash.indexOf('essay-') === 0 && document.getElementById('essay-' + hash.slice(6))) { showEssay(hash.slice(6)); return; }
+    if(pages.includes(hash)) showPage(hash);
+  }
+
   // Handle back/forward
   window.addEventListener('popstate', () => {
-    const hash = location.hash.replace('#','') || 'home';
-    if(pages.includes(hash)) showPage(hash);
+    route(location.hash.replace('#','') || 'home');
   });
 
   // Init from URL hash
-  const initHash = location.hash.replace('#','') || 'home';
-  if(pages.includes(initHash)) showPage(initHash);
+  route(location.hash.replace('#','') || 'home');
 
   // ── LIVE WEATHER (Open-Meteo, keyless) ──
   (function(){
@@ -86,7 +114,7 @@
 
   // ── REVEAL ON SCROLL ──
   function initReveal() {
-    const els = document.querySelectorAll('.page.active .reveal:not(.in)');
+    const els = document.querySelectorAll('.page.active .reveal:not(.in), .essay.active .reveal:not(.in)');
     const io = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if(!e.isIntersecting) return;
@@ -223,6 +251,8 @@
 document.addEventListener('click', (e) => {
   const nav = e.target.closest('[data-page]');
   if (nav) { if (nav.tagName === 'A') e.preventDefault(); showPage(nav.dataset.page); return; }
+  const es = e.target.closest('[data-essay]');
+  if (es) { showEssay(es.dataset.essay); return; }
   const g = e.target.closest('[data-guide]');
   if (g) { openGate(g.dataset.guide); return; }
   const s = e.target.closest('[data-scroll]');

@@ -436,7 +436,44 @@
       color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:.4rem;
       transition:opacity .2s;cursor:pointer;background:none;border:none;padding:0}
     .resource-dl:hover{opacity:.65}
-    .resource-dl svg{width:.75rem;height:.75rem}
+    .resource-dl svg{width:.85rem;height:.85rem}
+
+    /* ── RESOURCE CATEGORIES ── */
+    .res-cat{margin-bottom:3.5rem}
+    .res-cat:last-of-type{margin-bottom:0}
+    .res-cat-head{margin-bottom:1.4rem}
+    .res-cat-kicker{display:block;font-size:.6rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:.6rem}
+    .res-cat-sub{font-size:.82rem;font-weight:300;color:var(--muted);line-height:1.7;max-width:58ch}
+    .resource-card[data-essay]{cursor:pointer}
+
+    /* ── ESSAY READER (sub-pages under Resources) ── */
+    .essay{display:none;min-height:100vh;padding-top:5rem}
+    .essay.active{display:block}
+    .essay-head{max-width:44rem;margin:0 auto;padding:2.5rem 2rem 0}
+    .essay-head .page-header{padding:0;border-bottom:0}
+    .essay-back{background:none;border:none;cursor:pointer;font-family:inherit;
+      font-size:.6rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+      color:var(--muted);padding:0;margin-bottom:1.1rem;transition:color .2s;display:inline-block}
+    .essay-back:hover{color:var(--paper)}
+    .essay-body{max-width:44rem;margin:0 auto;padding:3.5rem 2rem 5rem}
+    .essay-lead{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(1.15rem,2.2vw,1.5rem);
+      line-height:1.5;color:var(--paper);letter-spacing:-.01em;margin-bottom:3rem;
+      padding-bottom:2.5rem;border-bottom:1px solid var(--rule)}
+    .essay-section{margin-bottom:2.5rem}
+    .essay-section h3{font-weight:400;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;
+      color:var(--accent);margin-bottom:.9rem}
+    .essay-section p{font-size:.92rem;font-weight:300;color:rgba(238,236,234,.72);line-height:1.85}
+    .essay-cta{margin-top:3rem;padding-top:2.5rem;border-top:1px solid var(--rule)}
+    .essay-cta-p{font-family:'Fraunces',serif;font-style:italic;font-weight:400;
+      font-size:1.1rem;color:var(--paper);line-height:1.45;margin-bottom:1.5rem}
+    .essay-cta-row{display:flex;align-items:center;gap:1.6rem;flex-wrap:wrap}
+    .essay-cta-link{background:none;border:none;cursor:pointer;font-family:inherit;
+      font-size:.62rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+      color:var(--accent);padding:0;transition:opacity .2s;text-decoration:none;
+      display:inline-flex;align-items:center;gap:.4rem}
+    .essay-cta-link:hover{opacity:.65}
+    .essay-cta-link svg{width:.85rem;height:.85rem}
+    .essay-cta-sep{color:var(--rule);font-size:.7rem;user-select:none}
 
     /* ── DOWNLOAD GATE (lead capture) ── */
     .gate{position:fixed;inset:0;z-index:400;display:flex;align-items:center;justify-content:center;
