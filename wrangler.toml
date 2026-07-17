@@ -1,0 +1,18 @@
+name = "shootinpanama-verite"
+pages_build_output_dir = "public"
+compatibility_date = "2024-11-06"
+
+# KV store for lead submissions (functions/api/lead.js).
+[[kv_namespaces]]
+binding = "LEADS"
+id = "3d94515c1b3d4e70b7d983457fd33a47"
+
+# Email delivery + read-back are set as secrets/vars, not committed:
+#   npx wrangler pages secret put RESEND_API_KEY   (from Resend)
+#   npx wrangler pages secret put LEADS_TOKEN       (any random string, for /api/leads)
+# Optional plaintext vars (safe to set here if desired):
+#   LEAD_TO   = "rbarria@veriteproducciones.net"
+#   LEAD_FROM = "Shoot In Panama <leads@shootinginpanama.com>"
+[vars]
+LEAD_TO = "rbarria@veriteproducciones.net"
+LEAD_FROM = "Shoot In Panama <leads@shootinginpanama.com>"

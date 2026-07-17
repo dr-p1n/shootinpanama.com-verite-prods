@@ -264,26 +264,39 @@ if (_navToggle) _navToggle.addEventListener('click', function(){ toggleMenu(); }
 var _gateForm = document.getElementById('gate-form');
 if (_gateForm) _gateForm.addEventListener('submit', submitGate);
 
-/* ── RFQ (Get in Touch) form → email the enquiry ── */
+/* ── RFQ (Get in Touch) form → POST /api/lead, with mailto fallback ── */
 var _rfqBtn = document.querySelector('.submit-btn');
 if (_rfqBtn) _rfqBtn.addEventListener('click', function () {
   var g = function (id) { var el = document.getElementById(id); return el ? (el.value || '').trim() : ''; };
-  var name = g('fname'), email = g('email'), company = g('company'),
-      type = g('prod-type'), crew = g('crew-size'), dates = g('dates'), brief = g('message');
+  var lead = {
+    kind: 'rfq', name: g('fname'), email: g('email'), company: g('company'),
+    type: g('prod-type'), crew: g('crew-size'), dates: g('dates'), brief: g('message'),
+    lang: window.__lang || 'en', website: g('rfq-hp')
+  };
+  var es = (window.__lang === 'es');
   var emailField = document.getElementById('email');
-  if (!email && emailField) { emailField.focus(); emailField.style.borderColor = '#C9541E'; return; }
-  var subject = encodeURIComponent('Production enquiry — ' + (company || name || 'Shoot In Panama'));
-  var body = encodeURIComponent(
-    'New production enquiry from shootinginpanama.com\n\n' +
-    'Name: ' + name + '\n' +
-    'Company: ' + company + '\n' +
-    'Email: ' + email + '\n' +
-    'Production type: ' + type + '\n' +
-    'Crew size: ' + crew + '\n' +
-    'Estimated shoot dates: ' + dates + '\n\n' +
-    'Brief:\n' + (brief || '—') + '\n'
-  );
-  window.location.href = 'mailto:rbarria@veriteproducciones.net?subject=' + subject + '&body=' + body;
-  _rfqBtn.textContent = (window.__lang === 'es') ? 'Abriendo tu correo…' : 'Opening your email…';
+  if (!lead.email && emailField) { emailField.focus(); emailField.style.borderColor = '#C9541E'; return; }
+
+  function mailtoFallback() {
+    var subject = encodeURIComponent('Production enquiry — ' + (lead.company || lead.name || 'Shoot In Panama'));
+    var body = encodeURIComponent(
+      'New production enquiry from shootinginpanama.com\n\n' +
+      'Name: ' + lead.name + '\nCompany: ' + lead.company + '\nEmail: ' + lead.email + '\n' +
+      'Production type: ' + lead.type + '\nCrew size: ' + lead.crew + '\nEstimated shoot dates: ' + lead.dates + '\n\n' +
+      'Brief:\n' + (lead.brief || '—') + '\n'
+    );
+    window.location.href = 'mailto:rbarria@veriteproducciones.net?subject=' + subject + '&body=' + body;
+    _rfqBtn.textContent = es ? 'Abriendo tu correo…' : 'Opening your email…';
+  }
+
+  _rfqBtn.disabled = true;
+  _rfqBtn.textContent = es ? 'Enviando…' : 'Sending…';
+  fetch('/api/lead', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(lead) })
+    .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+    .then(function (d) {
+      if (d && d.ok) { _rfqBtn.textContent = es ? '¡Gracias! Te contactamos pronto.' : "Thank you — we'll be in touch."; }
+      else { _rfqBtn.disabled = false; mailtoFallback(); }
+    })
+    .catch(function () { _rfqBtn.disabled = false; mailtoFallback(); });
 });
 

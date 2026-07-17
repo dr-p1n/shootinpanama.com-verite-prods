@@ -36,6 +36,7 @@
     .lang-sep{opacity:.22;font-size:.55rem;color:var(--paper)}
     .lang-toggle-m{margin-top:2.25rem;gap:.6rem}
     .lang-toggle-m .lang-btn{font-size:.8rem;letter-spacing:.16em}
+    .hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;opacity:0}
 
     /* ── MOBILE NAV (hamburger + overlay) ── */
     .nav-toggle{display:none;flex-direction:column;justify-content:center;gap:6px;
