@@ -8,6 +8,9 @@
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#03060a">
   <link rel="canonical" href="https://www.shootinginpanama.com/">
+  <link rel="alternate" hreflang="en" href="https://www.shootinginpanama.com/">
+  <link rel="alternate" hreflang="es" href="https://www.shootinginpanama.com/es/">
+  <link rel="alternate" hreflang="x-default" href="https://www.shootinginpanama.com/">
   <title>Shoot In Panama · Verite Producciones</title>
 
   <!-- Favicons / app icons -->
@@ -26,6 +29,7 @@
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Shoot In Panama · Verite Producciones">
   <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="es_PA">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Shoot In Panama · Verite Producciones">
   <meta name="twitter:description" content="Full-service production partner for international film, advertising and documentary projects in Panama.">
@@ -116,6 +120,9 @@
     <button class="nav-link" id="nav-incentives" data-page="incentives">Incentives</button>
     <button class="nav-link" id="nav-resources" data-page="resources">Resources</button>
     <button class="nav-cta" id="nav-contact" data-page="contact">Get in Touch</button>
+    <div class="lang-toggle" role="group" aria-label="Language / Idioma">
+      <button class="lang-btn active" data-lang-btn="en">EN</button><span class="lang-sep" aria-hidden="true">/</span><button class="lang-btn" data-lang-btn="es">ES</button>
+    </div>
   </div>
   <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
     <span></span><span></span>
@@ -130,6 +137,9 @@
   <button class="mobile-link" data-page="incentives">Incentives</button>
   <button class="mobile-link" data-page="resources">Resources</button>
   <button class="mobile-link mm-cta" data-page="contact">Get in Touch</button>
+  <div class="lang-toggle lang-toggle-m" role="group" aria-label="Language / Idioma">
+    <button class="lang-btn active" data-lang-btn="en">EN</button><span class="lang-sep" aria-hidden="true">/</span><button class="lang-btn" data-lang-btn="es">ES</button>
+  </div>
 </div>
 
 <!-- ════════════════════ HOME ════════════════════ -->
@@ -353,17 +363,17 @@
   <div class="services-wrap">
     <div class="service-row reveal">
       <span class="s-step">We Scout</span>
-      <span class="s-name">Production <em>Services</em></span>
+      <span class="s-name" data-i18n="svc1">Production <em>Services</em></span>
       <p class="s-desc">Full crew, equipment and location management for international productions. We source talent, handle logistics and keep shoots on schedule from first scout to final wrap.</p>
     </div>
     <div class="service-row reveal">
       <span class="s-step">We Crew</span>
-      <span class="s-name">Fixer <em>&amp; Logistics</em></span>
+      <span class="s-name" data-i18n="svc2">Fixer <em>&amp; Logistics</em></span>
       <p class="s-desc">Permits, talent coordination, transport and on-ground support. We navigate local infrastructure so nothing surprises your team on day one.</p>
     </div>
     <div class="service-row reveal">
       <span class="s-step">We Clear</span>
-      <span class="s-name">Executive <em>Compliance</em></span>
+      <span class="s-name" data-i18n="svc3">Executive <em>Compliance</em></span>
       <p class="s-desc">Legal setup, insurance, customs and regulatory clearance for foreign productions. We protect your project — and your studio's liability — before the first frame rolls.</p>
     </div>
 
@@ -855,6 +865,7 @@
   </div>
 </div>
 
+<script src="/i18n.js"></script>
 <script src="/app.js"></script>
 </body>
 </html>

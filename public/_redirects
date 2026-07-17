@@ -1,0 +1,4 @@
+# Serve the SPA at /es/ so the Spanish variant has a real, crawlable URL for hreflang.
+/es       /index.html   200
+/es/      /index.html   200
+/es/*     /index.html   200

@@ -27,6 +27,15 @@
       border-bottom:1px solid rgba(238,236,234,.35);cursor:pointer;background:none;border-top:none;border-left:none;border-right:none;
       border-bottom:1px solid rgba(238,236,234,.35);transition:border-color .2s}
     .nav-cta:hover{border-color:var(--paper)}
+    /* language toggle */
+    .lang-toggle{display:flex;align-items:center;gap:.45rem}
+    .lang-btn{font-size:.58rem;font-weight:400;letter-spacing:.14em;text-transform:uppercase;
+      color:var(--paper);opacity:.32;background:none;border:none;padding:0;cursor:pointer;transition:opacity .2s}
+    .lang-btn:hover{opacity:.7}
+    .lang-btn.active{opacity:.9}
+    .lang-sep{opacity:.22;font-size:.55rem;color:var(--paper)}
+    .lang-toggle-m{margin-top:2.25rem;gap:.6rem}
+    .lang-toggle-m .lang-btn{font-size:.8rem;letter-spacing:.16em}
 
     /* ── MOBILE NAV (hamburger + overlay) ── */
     .nav-toggle{display:none;flex-direction:column;justify-content:center;gap:6px;
