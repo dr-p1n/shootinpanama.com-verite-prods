@@ -64,7 +64,7 @@ export async function onRequestPost(context) {
 
   if (!lead.email || !EMAIL_RE.test(lead.email)) return json({ ok: false, error: "email_required" }, 422);
 
-  let stored = false, emailed = false, emailErr = null;
+  let stored = false, emailed = false, sheeted = false, emailErr = null;
 
   // 1) Durable store — never lose a lead.
   if (env.LEADS) {
@@ -94,7 +94,20 @@ export async function onRequestPost(context) {
     } catch (e) { emailErr = "resend_exception"; }
   }
 
-  if (stored || emailed) return json({ ok: true, stored: stored, emailed: emailed, emailErr: emailErr });
+  // 3) Optional backup: append to a Google Sheet (Apps Script Web App).
+  //    Server-to-server, so no CSP/CORS concerns. Set SHEET_ENDPOINT to the /exec URL.
+  if (env.SHEET_ENDPOINT) {
+    try {
+      const res = await fetch(env.SHEET_ENDPOINT, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(lead),
+      });
+      sheeted = res.ok;
+    } catch (e) { /* ignore */ }
+  }
+
+  if (stored || emailed || sheeted) return json({ ok: true, stored: stored, emailed: emailed, sheeted: sheeted, emailErr: emailErr });
   // Nothing configured yet → tell the client to use the mailto fallback.
   return json({ ok: false, error: "unconfigured" }, 503);
 }
