@@ -203,6 +203,13 @@
       const list = (card.dataset.gallery || '').split(',').map(s => s.trim()).filter(Boolean)
         .map(b => ({ webp: '/assets/' + b + '.webp', jpg: '/assets/' + b + '.jpg' }));
       if (list.length) card.addEventListener('click', () => open(list, 0));
+      // Hint that a card holds multiple photos: one dot per image (multi-photo cards only).
+      if (list.length > 1) {
+        const dots = document.createElement('div');
+        dots.className = 'loc-count'; dots.setAttribute('aria-hidden', 'true');
+        for (let k = 0; k < list.length; k++) dots.appendChild(document.createElement('span')).className = 'loc-dot';
+        card.appendChild(dots);
+      }
     });
     let items = [];
     let i = 0;
