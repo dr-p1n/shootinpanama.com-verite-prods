@@ -309,6 +309,8 @@
     .loc-dot:first-child{background:var(--accent)}
     .loc-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
       opacity:.82;filter:brightness(.92) saturate(1.02);transition:transform .7s ease,opacity .35s}
+    /* Casco source is portrait — bias the landscape-card crop up so the church tower stays in frame */
+    .loc-card[data-gallery*="casco"] .loc-img{object-position:50% 30%}
     /* Hover lift only on real pointers, so a mobile tap can't leave a stuck/dimmed state */
     @media (hover:hover) and (pointer:fine){
       .loc-card:hover .loc-img{transform:scale(1.06);opacity:1}
