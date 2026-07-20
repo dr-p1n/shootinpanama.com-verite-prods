@@ -191,23 +191,28 @@
     const el = document.getElementById('lb');
     const img = document.getElementById('lb-img');
     const count = document.getElementById('lb-count');
-    const cells = [...document.querySelectorAll('#cs .cs-cell')];
-    const items = cells.map(c => ({ webp: c.dataset.full, jpg: c.dataset.fulljpg }));
-    cells.forEach((c, idx) => c.addEventListener('click', () => open(idx)));
+    // Two independent collections share this one overlay: BTS gallery + location cards.
+    // Each cycles within its own set; the counter reflects the active collection.
+    const build = (sel) => [...document.querySelectorAll(sel)]
+      .map(c => ({ el: c, webp: c.dataset.full, jpg: c.dataset.fulljpg }))
+      .filter(it => it.webp || it.jpg);
+    [build('#cs .cs-cell'), build('.loc-card')].forEach(list =>
+      list.forEach((it, idx) => it.el.addEventListener('click', () => open(list, idx))));
+    let items = [];
     let i = 0;
     function show() {
       const it = items[i];
       img.classList.remove('ready');
       img.onerror = () => { img.onerror = null; img.src = it.jpg; };
       img.onload = () => img.classList.add('ready');
-      img.src = it.webp;
+      img.src = it.webp || it.jpg;
       count.textContent = String(i + 1).padStart(2, '0') + ' / ' + items.length;
       // preload neighbours
       [items[(i + 1) % items.length], items[(i - 1 + items.length) % items.length]]
-        .forEach(n => { const p = new Image(); p.src = n.webp; });
+        .forEach(n => { const p = new Image(); p.src = n.webp || n.jpg; });
     }
-    function open(n) {
-      i = n; show();
+    function open(list, n) {
+      items = list; i = n; show();
       el.classList.add('open');
       el.setAttribute('aria-hidden', 'false');
       document.body.classList.add('lb-open');
@@ -219,8 +224,8 @@
       document.body.classList.remove('lb-open');
       document.body.style.overflow = '';
     }
-    function next() { i = (i + 1) % items.length; show(); }
-    function prev() { i = (i - 1 + items.length) % items.length; show(); }
+    function next() { if (!items.length) return; i = (i + 1) % items.length; show(); }
+    function prev() { if (!items.length) return; i = (i - 1 + items.length) % items.length; show(); }
     // Controls
     el.querySelector('.lb-close').addEventListener('click', close);
     el.querySelector('.lb-prev').addEventListener('click', prev);
