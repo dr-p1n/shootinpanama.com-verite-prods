@@ -13,7 +13,8 @@ id = "3d94515c1b3d4e70b7d983457fd33a47"
 #   npx wrangler pages secret put SHEET_ENDPOINT     (Google Apps Script /exec URL — see scripts/apps-script-leads.gs)
 # Optional plaintext vars (safe to set here if desired):
 #   LEAD_TO   = "rbarria@veriteproducciones.net"
-#   LEAD_FROM = "Shoot In Panama <leads@shootinginpanama.com>"
+#   LEAD_FROM = "Shoot In Panama <noreplymarketing@shootinginpanama.com>"
 [vars]
 LEAD_TO = "rbarria@veriteproducciones.net"
-LEAD_FROM = "Shoot In Panama <leads@shootinginpanama.com>"
+LEAD_FROM = "Shoot In Panama <noreplymarketing@shootinginpanama.com>"
+SHEET_VIEW_URL = "https://docs.google.com/spreadsheets/d/10sjV8IIA6WPnuwGa-9gfrJdTdKAgtClQy7-4ICjALCA/edit#gid=1181426352"

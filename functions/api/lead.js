@@ -13,24 +13,32 @@ function json(obj, status) {
 }
 function s(v) { return (v == null ? "" : String(v)).replace(/\s+/g, " ").trim().slice(0, 5000); }
 
-function renderText(l) {
+// Plain-text notification: a numbered list of the submitted fields, plus the Sheet link.
+// Plain text on purpose — antifragile across every mail client, nothing to render or break.
+function renderText(l, sheetUrl) {
+  const fields = [
+    ["Name", l.name],
+    ["Company", l.company],
+    ["Email", l.email],
+    ["Production type", l.type],
+    ["Crew size", l.crew],
+    ["Estimated dates", l.dates],
+    ["Guide", l.guide],
+    ["Site language", l.lang],
+    ["Brief", l.brief],
+  ].filter(function (f) { return f[1]; });
+
+  const list = fields.map(function (f, i) { return (i + 1) + ". " + f[0] + ": " + f[1]; });
+
   return [
-    "New " + (l.kind === "guide" ? "guide request" : "production enquiry") + " from shootinginpanama.com",
+    "New " + (l.kind === "guide" ? "guide request" : "production enquiry") + " — shootinginpanama.com",
     "",
-    "Name: " + l.name,
-    "Company: " + l.company,
-    "Email: " + l.email,
-    l.type ? "Production type: " + l.type : null,
-    l.crew ? "Crew size: " + l.crew : null,
-    l.dates ? "Estimated dates: " + l.dates : null,
-    l.guide ? "Guide: " + l.guide : null,
-    l.lang ? "Site language: " + l.lang : null,
+  ].concat(list).concat([
     "",
-    "Brief:",
-    l.brief || "—",
-    "",
+    sheetUrl ? "All leads (Google Sheet): " + sheetUrl : null,
+    "Reply to this email to respond to " + (l.name || l.email) + " directly.",
     "— sent " + l.ts + (l.ip ? " · " + l.ip : ""),
-  ].filter(function (x) { return x !== null; }).join("\n");
+  ]).filter(function (x) { return x !== null; }).join("\n");
 }
 
 export async function onRequestPost(context) {
@@ -77,25 +85,8 @@ export async function onRequestPost(context) {
     } catch (e) { /* fall through */ }
   }
 
-  // 2) Notify via Resend (only once the key is configured).
-  if (env.RESEND_API_KEY) {
-    try {
-      const from = env.LEAD_FROM || "Shoot In Panama <leads@shootinginpanama.com>";
-      const to = env.LEAD_TO || "rbarria@veriteproducciones.net";
-      const subject = (lead.kind === "guide" ? "Guide request" : "Production enquiry") +
-        " — " + (lead.company || lead.name || "shootinginpanama.com");
-      const res = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: { authorization: "Bearer " + env.RESEND_API_KEY, "content-type": "application/json" },
-        body: JSON.stringify({ from: from, to: [to], reply_to: lead.email, subject: subject, text: renderText(lead) }),
-      });
-      emailed = res.ok;
-      if (!res.ok) emailErr = "resend_" + res.status;
-    } catch (e) { emailErr = "resend_exception"; }
-  }
-
-  // 3) Optional backup: append to a Google Sheet (Apps Script Web App).
-  //    Server-to-server, so no CSP/CORS concerns. Set SHEET_ENDPOINT to the /exec URL.
+  // 2) Append to the Google Sheet first, so the notification links to an up-to-date sheet.
+  //    Server-to-server (Apps Script Web App /exec URL in SHEET_ENDPOINT) — no CSP/CORS concerns.
   if (env.SHEET_ENDPOINT) {
     try {
       const res = await fetch(env.SHEET_ENDPOINT, {
@@ -105,6 +96,28 @@ export async function onRequestPost(context) {
       });
       sheeted = res.ok;
     } catch (e) { /* ignore */ }
+  }
+
+  // 3) Notify via Resend (only once the key is configured) — HTML template + text fallback,
+  //    with a button to the leads Google Sheet (SHEET_VIEW_URL).
+  if (env.RESEND_API_KEY) {
+    try {
+      const from = env.LEAD_FROM || "Shoot In Panama <noreplymarketing@shootinginpanama.com>";
+      const to = env.LEAD_TO || "rbarria@veriteproducciones.net";
+      const sheetUrl = env.SHEET_VIEW_URL || "";
+      const subject = (lead.kind === "guide" ? "Guide request" : "Production enquiry") +
+        " — " + (lead.company || lead.name || "shootinginpanama.com");
+      const res = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: { authorization: "Bearer " + env.RESEND_API_KEY, "content-type": "application/json" },
+        body: JSON.stringify({
+          from: from, to: [to], reply_to: lead.email, subject: subject,
+          text: renderText(lead, sheetUrl),
+        }),
+      });
+      emailed = res.ok;
+      if (!res.ok) emailErr = "resend_" + res.status;
+    } catch (e) { emailErr = "resend_exception"; }
   }
 
   if (stored || emailed || sheeted) return json({ ok: true, stored: stored, emailed: emailed, sheeted: sheeted, emailErr: emailErr });
