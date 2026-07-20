@@ -335,6 +335,8 @@
 
     /* ── WEATHER ── */
     .wx-wrap{padding:4.5rem 3rem 2rem}
+    /* Playful clarifier under the "Shoot 365 days." heading */
+    .wx-leap{font-family:'Fraunces',serif;font-style:italic;font-size:.9rem;color:var(--muted);margin:-.35rem 0 0}
     .wx-lede{font-size:.82rem;font-weight:300;color:var(--muted);line-height:1.9;max-width:60ch;margin:1.25rem 0 1.5rem}
     .wx-clock-line{font-size:.6rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:rgba(238,236,234,.4);margin:0 0 2.25rem;display:flex;align-items:baseline;gap:.7rem;flex-wrap:wrap}
     .wx-clock{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:.92rem;letter-spacing:.05em;color:var(--accent);text-transform:none;font-variant-numeric:tabular-nums}
