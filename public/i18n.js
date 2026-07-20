@@ -130,7 +130,7 @@
     "Weather": "Clima",
     "Shoot": "Roda",
     "365 days.": "365 días.",
-    "366 days in leap years.": "366 días en años bisiestos.",
+    "(366 days in leap years)": "(366 en año bisiesto)",
     "Panama's privileged position keeps it away from most tropical weather — mainly hurricanes. Its weather oscillates between dry and wet… very wet (that's why they call it the rain-forest). Live conditions across our primary filming regions:": "La posición privilegiada de Panamá lo mantiene al margen de la mayoría del clima tropical extremo — sobre todo huracanes. Su clima oscila entre seco y húmedo… muy húmedo (por algo le dicen selva tropical). Condiciones en vivo en nuestras principales regiones de rodaje:",
     "Filming days per year": "Días de rodaje al año",
     "Tropical climate with minimal weather disruption — consistent natural light year-round.": "Clima tropical con mínima interrupción por el tiempo — luz natural consistente todo el año.",
