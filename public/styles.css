@@ -279,6 +279,8 @@
     .lb-count{position:absolute;z-index:3;bottom:1.5rem;left:50%;transform:translateX(-50%);
       font-size:.6rem;font-weight:400;letter-spacing:.24em;color:rgba(238,236,234,.5);
       font-variant-numeric:tabular-nums}
+    /* Single-photo set (e.g. a location with one image): no carousel chrome */
+    #lb.lb-single .lb-prev,#lb.lb-single .lb-next,#lb.lb-single .lb-count{display:none}
 
     /* ── SERVICES PAGE ── */
     .services-wrap{padding:2.5rem 3rem 5rem}

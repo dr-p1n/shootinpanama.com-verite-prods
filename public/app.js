@@ -191,13 +191,19 @@
     const el = document.getElementById('lb');
     const img = document.getElementById('lb-img');
     const count = document.getElementById('lb-count');
-    // Two independent collections share this one overlay: BTS gallery + location cards.
-    // Each cycles within its own set; the counter reflects the active collection.
-    const build = (sel) => [...document.querySelectorAll(sel)]
+    // Independent collections share this one overlay; each cycles within its own set.
+    // BTS gallery: one flat collection — a cell opens the whole set at its index.
+    const btsCells = [...document.querySelectorAll('#cs .cs-cell')]
       .map(c => ({ el: c, webp: c.dataset.full, jpg: c.dataset.fulljpg }))
       .filter(it => it.webp || it.jpg);
-    [build('#cs .cs-cell'), build('.loc-card')].forEach(list =>
-      list.forEach((it, idx) => it.el.addEventListener('click', () => open(list, idx))));
+    btsCells.forEach((it, idx) => it.el.addEventListener('click', () => open(btsCells, idx)));
+    // Location cards: each opens its OWN mini-gallery (main + alternates) as a carousel,
+    // built from data-gallery="basename,basename,…" (→ /assets/<basename>.webp|.jpg).
+    document.querySelectorAll('.loc-card').forEach(card => {
+      const list = (card.dataset.gallery || '').split(',').map(s => s.trim()).filter(Boolean)
+        .map(b => ({ webp: '/assets/' + b + '.webp', jpg: '/assets/' + b + '.jpg' }));
+      if (list.length) card.addEventListener('click', () => open(list, 0));
+    });
     let items = [];
     let i = 0;
     function show() {
@@ -207,6 +213,7 @@
       img.onload = () => img.classList.add('ready');
       img.src = it.webp || it.jpg;
       count.textContent = String(i + 1).padStart(2, '0') + ' / ' + items.length;
+      el.classList.toggle('lb-single', items.length <= 1); // hide nav/counter for 1-photo sets
       // preload neighbours
       [items[(i + 1) % items.length], items[(i - 1 + items.length) % items.length]]
         .forEach(n => { const p = new Image(); p.src = n.webp || n.jpg; });
@@ -233,6 +240,13 @@
     // Click backdrop closes; click image advances
     el.addEventListener('click', (e) => { if (e.target === el) close(); });
     img.addEventListener('click', next);
+    // Swipe to navigate the carousel on touch devices.
+    let tsx = 0, tsy = 0;
+    el.addEventListener('touchstart', (e) => { const t = e.changedTouches[0]; tsx = t.clientX; tsy = t.clientY; }, { passive: true });
+    el.addEventListener('touchend', (e) => {
+      const t = e.changedTouches[0], dx = t.clientX - tsx, dy = t.clientY - tsy;
+      if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) { dx < 0 ? next() : prev(); }
+    }, { passive: true });
     document.addEventListener('keydown', (e) => {
       if (!el.classList.contains('open')) return;
       if (e.key === 'Escape') close();
