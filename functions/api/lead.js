@@ -13,6 +13,13 @@ function json(obj, status) {
 }
 function s(v) { return (v == null ? "" : String(v)).replace(/\s+/g, " ").trim().slice(0, 5000); }
 
+// Timestamp in Panama local time. America/Panama is a fixed UTC-5 (no daylight saving),
+// so a straight -5h shift is always correct. Format: "2026-07-17 22:19:16 -05:00".
+function panamaTs(d) {
+  const local = new Date(d.getTime() - 5 * 60 * 60 * 1000);
+  return local.toISOString().slice(0, 19).replace("T", " ") + " -05:00";
+}
+
 // Plain-text notification: a numbered list of the submitted fields, plus the Sheet link.
 // Plain text on purpose — antifragile across every mail client, nothing to render or break.
 function renderText(l, sheetUrl) {
@@ -55,7 +62,7 @@ export async function onRequestPost(context) {
   if (s(raw.website)) return json({ ok: true, stored: false, emailed: false });
 
   const lead = {
-    ts: new Date().toISOString(),
+    ts: panamaTs(new Date()),
     kind: s(raw.kind) || "rfq",
     name: s(raw.name),
     email: s(raw.email),
