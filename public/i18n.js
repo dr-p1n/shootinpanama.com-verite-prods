@@ -358,6 +358,19 @@
     if (canon) canon.setAttribute("href", es ? base + "es/" : base);
     if (ogurl) ogurl.setAttribute("content", es ? base + "es/" : base);
     if (ogloc) ogloc.setAttribute("content", es ? "es_PA" : "en_US");
+    // Head title + description for the /es/ variant (Google renders JS, so it indexes these).
+    var MT = { en: "Panama Film Production Services & Fixers | Shoot In Panama",
+               es: "Servicios de Producción de Cine en Panamá | Shoot In Panama" };
+    var MD = { en: "Full-service production partner for international film, advertising and documentary shoots in Panama — fixers, crew, permits, locations and equipment.",
+               es: "Socio de producción integral para cine, publicidad y documental internacional en Panamá — fixers, crew, permisos, locaciones y equipo." };
+    var mt = es ? MT.es : MT.en, md = es ? MD.es : MD.en;
+    document.title = mt;
+    var setC = function (sel, v) { var el = document.querySelector(sel); if (el) el.setAttribute("content", v); };
+    setC('meta[name="description"]', md);
+    setC('meta[property="og:title"]', mt);
+    setC('meta[name="twitter:title"]', mt);
+    setC('meta[property="og:description"]', md);
+    setC('meta[name="twitter:description"]', md);
     try { localStorage.setItem("vrt_lang", lang); } catch (e) {}
   }
 
