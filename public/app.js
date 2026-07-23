@@ -20,8 +20,8 @@
     window.scrollTo({top:0,behavior:'instant'});
     // Trigger reveals on new page
     setTimeout(() => initReveal(), 50);
-    // Update URL hash
-    history.pushState(null, '', '#' + id);
+    // Update URL — home uses the clean canonical path (no #home); other views keep a hash.
+    history.pushState(null, '', id === 'home' ? location.pathname + location.search : '#' + id);
   }
 
   // ── ESSAY READER (sub-pages under Resources) ──
