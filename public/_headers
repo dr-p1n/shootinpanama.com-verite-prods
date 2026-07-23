@@ -1,6 +1,7 @@
 # Cloudflare Pages headers — https://developers.cloudflare.com/pages/configuration/headers/
 
 /*
+  X-Robots-Tag: index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin
