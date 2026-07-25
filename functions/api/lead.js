@@ -20,6 +20,22 @@ function panamaTs(d) {
   return local.toISOString().slice(0, 19).replace("T", " ") + " -05:00";
 }
 
+function firstName(l) {
+  return (l.name || "").split(" ")[0] || l.name || "";
+}
+
+// One-tap reply: a mailto: composed straight to the enquirer, so answering never depends on the
+// client honouring Reply-To (the From address has no inbox). Subject + a short greeting are
+// prefilled; long bodies get truncated by some clients, so keep it to the salutation.
+function replyMailto(l) {
+  const subject = "Re: your " + (l.kind === "guide" ? "guide request" : "production enquiry") +
+    " — Shoot In Panama";
+  const body = "Hi " + (firstName(l) || "there") + ",\n\n";
+  return "mailto:" + encodeURIComponent(l.email) +
+    "?subject=" + encodeURIComponent(subject) +
+    "&body=" + encodeURIComponent(body);
+}
+
 // Plain-text notification: a numbered list of the submitted fields, plus the Sheet link.
 // Plain text on purpose — antifragile across every mail client, nothing to render or break.
 function renderText(l, sheetUrl) {
@@ -40,10 +56,12 @@ function renderText(l, sheetUrl) {
   return [
     "New " + (l.kind === "guide" ? "guide request" : "production enquiry") + " — shootinginpanama.com",
     "",
+    "Reply to " + (l.name || l.email) + ": " + l.email,
+    "",
   ].concat(list).concat([
     "",
     sheetUrl ? "All leads (Google Sheet): " + sheetUrl : null,
-    "Reply to this email to respond to " + (l.name || l.email) + " directly.",
+    "Hitting Reply on this message also goes to " + l.email + ".",
     "— sent " + l.ts + (l.ip ? " · " + l.ip : ""),
   ]).filter(function (x) { return x !== null; }).join("\n");
 }
@@ -93,8 +111,17 @@ function renderHtml(l, sheetUrl) {
     ? '<div style="padding:14px 28px 0"><div style="color:#8a877f;font-size:12px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">Brief</div>' +
       '<div style="background:#ffffff;border-left:3px solid #C9541E;padding:12px 14px;font-size:14px;line-height:1.55;color:#2a2824">' + esc(l.brief) + '</div></div>' : "";
 
+  // Primary action: compose straight to the enquirer. Secondary: the Sheet, in outline style,
+  // so there is only ever one obvious thing to click.
+  const replyHtml =
+    '<div style="padding:20px 28px 0">' +
+      '<a href="' + esc(replyMailto(l)) + '" style="display:inline-block;background:#C9541E;color:#ffffff;text-decoration:none;font-size:15px;font-weight:bold;padding:13px 24px;border-radius:4px">Reply to ' + esc(firstName(l) || l.email) + ' &rarr;</a>' +
+      '<div style="color:#6a6862;font-size:13px;line-height:1.5;margin-top:10px">Opens a new message to ' +
+        '<a href="mailto:' + esc(l.email) + '" style="color:#03060a">' + esc(l.email) + '</a>. Hitting Reply on this notification goes to the same place.</div>' +
+    '</div>';
+
   const ctaHtml = sheetUrl
-    ? '<a href="' + esc(sheetUrl) + '" style="display:inline-block;background:#C9541E;color:#ffffff;text-decoration:none;font-size:14px;font-weight:bold;padding:12px 22px;border-radius:4px">Open all leads in Google Sheet &rarr;</a>' : "";
+    ? '<a href="' + esc(sheetUrl) + '" style="display:inline-block;background:transparent;color:#03060a;text-decoration:none;font-size:13px;font-weight:bold;padding:10px 18px;border:1px solid #b9b5b0;border-radius:4px">Open all leads in Google Sheet &rarr;</a>' : "";
 
   return '<!doctype html><html><body style="margin:0;padding:0;background:#e4e1de">' +
     '<div style="background:#e4e1de;padding:20px 12px">' +
@@ -111,11 +138,10 @@ function renderHtml(l, sheetUrl) {
         '<div style="font-family:Georgia,\'Times New Roman\',serif;font-size:24px;color:#03060a;margin-top:6px;line-height:1.15">' + esc(l.name || l.email) + '</div>' +
         companyHtml +
       '</div>' +
+      replyHtml +
       '<div style="padding:16px 28px 4px"><table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="font-size:14px;color:#03060a">' + rowsHtml + '</table></div>' +
       briefHtml +
-      '<div style="padding:22px 28px 6px">' + ctaHtml +
-        '<div style="color:#6a6862;font-size:13px;margin-top:14px">Reply to this email to respond to ' + esc(l.name || l.email) + ' directly.</div>' +
-      '</div>' +
+      '<div style="padding:22px 28px 6px">' + ctaHtml + '</div>' +
       '<div style="border-top:1px solid #ddd9d4;margin-top:16px;padding:14px 28px;color:#9a978f;font-size:11px;line-height:1.5">Sent ' + esc(l.ts) + (l.ip ? " &middot; " + esc(l.ip) : "") + '<br>shootinginpanama.com &mdash; automated lead notification</div>' +
     '</div></div></body></html>';
 }
