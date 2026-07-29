@@ -31,7 +31,11 @@ function replyMailto(l) {
   const subject = "Re: your " + (l.kind === "guide" ? "guide request" : "production enquiry") +
     " — Shoot In Panama";
   const body = "Hi " + (firstName(l) || "there") + ",\n\n";
-  return "mailto:" + encodeURIComponent(l.email) +
+  // The address must stay literal in the mailto path — Gmail web's handler does NOT
+  // percent-decode the recipient, so an encoded "@" (%40) or "+" (%2B) makes it drop the
+  // To field. Encode any genuinely unsafe chars but restore @ and + so real clients fill To.
+  const addr = encodeURIComponent(l.email).replace(/%40/g, "@").replace(/%2B/g, "+");
+  return "mailto:" + addr +
     "?subject=" + encodeURIComponent(subject) +
     "&body=" + encodeURIComponent(body);
 }
@@ -129,7 +133,7 @@ function renderHtml(l, sheetUrl) {
       '<div style="background:#03060a;padding:20px 28px">' +
         '<table width="100%" cellpadding="0" cellspacing="0" role="presentation"><tr>' +
           '<td style="vertical-align:middle"><img src="' + logo + '" width="38" height="38" alt="Shoot In Panama" style="display:block;border-radius:4px"></td>' +
-          '<td style="vertical-align:middle;text-align:right;color:#8a8f96;font-size:11px;letter-spacing:1.5px">SHOOT IN PANAMA<br><span style="color:#5f636a">Verit&eacute; Producciones</span></td>' +
+          '<td style="vertical-align:middle;text-align:right;color:#8a8f96;font-size:11px;letter-spacing:1.5px">SHOOT IN PANAMA<br><span style="color:#5f636a">Verite Producciones</span></td>' +
         '</tr></table>' +
       '</div>' +
       '<div style="height:3px;background:#C9541E"></div>' +
