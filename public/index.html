@@ -83,14 +83,18 @@
         "priceRange": "$$$",
         "parentOrganization": { "@id": "https://www.shootinginpanama.com/#organization" },
         "areaServed": { "@type": "Country", "name": "Panama" },
-        "serviceType": [
-          "Film production services",
-          "Line producing",
-          "Location scouting",
-          "Film permits",
-          "Crew and equipment",
-          "Fixer services"
-        ]
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Production Services",
+          "itemListElement": [
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Film production services" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Line producing" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Location scouting" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Film permits" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Crew and equipment" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Fixer services" } }
+          ]
+        }
       },
       {
         "@type": "WebSite",
