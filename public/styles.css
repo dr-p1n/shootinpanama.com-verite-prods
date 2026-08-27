@@ -436,6 +436,11 @@
     .inc-list li{font-size:.78rem;font-weight:400;color:var(--muted);line-height:1.55;padding-left:1.1rem;position:relative}
     .inc-list li::before{content:'';position:absolute;left:0;top:.5rem;width:5px;height:1px;background:var(--accent)}
     .inc-list li strong{color:var(--paper);font-weight:400}
+
+    .essay-list{list-style:none;display:flex;flex-direction:column;gap:.7rem;margin:0 0 1.1rem}
+    .essay-list li{font-size:.92rem;font-weight:400;color:var(--muted);line-height:1.7;padding-left:1.2rem;position:relative}
+    .essay-list li::before{content:'';position:absolute;left:0;top:.72rem;width:6px;height:1px;background:var(--accent)}
+    .essay-note{font-size:.85rem;font-style:italic;color:rgba(238,236,234,.62);border-left:2px solid var(--rule);padding-left:1rem;line-height:1.7;margin-bottom:1.1rem}
     .inc-eg{margin-top:2.75rem;display:flex;align-items:baseline;gap:1.1rem;flex-wrap:wrap}
     .inc-eg .eg-k{font-size:.56rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(238,236,234,.4)}
     .inc-eg .eg-v{font-family:'Fraunces',serif;font-style:italic;font-size:1.15rem;color:var(--paper)}
