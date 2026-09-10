@@ -44,10 +44,9 @@
         "@type": "Organization",
         "@id": "https://www.shootinginpanama.com/#organization",
         "name": "Verite Producciones",
-        "alternateName": "Shoot In Panama",
         "url": "https://www.shootinginpanama.com/",
         "logo": "https://www.shootinginpanama.com/assets/logo-badge-512.png",
-        "description": "Full-service production partner for international film, advertising and documentary projects in Panama.",
+        "description": "Full-service production partner for international film, advertising and documentary projects in Panama. Works alongside its sister company Shoot In Panama, with Ricardo Barria as the direct contact for both.",
         "email": "rbarria@veriteproducciones.net",
         "telephone": "+507-6612-7525",
         "memberOf": {
@@ -84,7 +83,10 @@
         "email": "rbarria@veriteproducciones.net",
         "telephone": "+507-6612-7525",
         "knowsLanguage": ["en", "es"],
-        "worksFor": { "@id": "https://www.shootinginpanama.com/#organization" },
+        "worksFor": [
+          { "@id": "https://www.shootinginpanama.com/#organization" },
+          { "@id": "https://www.shootinginpanama.com/#shootinpanama" }
+        ],
         "workLocation": {
           "@type": "Place",
           "address": {
@@ -94,6 +96,18 @@
             "addressCountry": "PA"
           }
         }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://www.shootinginpanama.com/#shootinpanama",
+        "name": "Shoot In Panama",
+        "url": "https://www.shootinginpanama.com/",
+        "logo": "https://www.shootinginpanama.com/assets/logo-badge-512.png",
+        "description": "Sister company of Verite Producciones. The two run international shoots in Panama together \u2014 crew, permits, customs, locations and the Film Law 16 cash rebate \u2014 with Ricardo Barria as the direct contact for both.",
+        "email": "rbarria@veriteproducciones.net",
+        "telephone": "+507-6612-7525",
+        "areaServed": { "@type": "Country", "name": "Panama" },
+        "employee": { "@id": "https://www.shootinginpanama.com/#ricardo-barria" }
       },
       {
         "@type": "ProfessionalService",
