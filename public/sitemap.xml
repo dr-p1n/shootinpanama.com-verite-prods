@@ -6,15 +6,179 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://www.shootinginpanama.com/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://www.shootinginpanama.com/es/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.shootinginpanama.com/"/>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.shootinginpanama.com/work</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.shootinginpanama.com/work"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.shootinginpanama.com/es/work"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.shootinginpanama.com/work"/>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.shootinginpanama.com/services</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.shootinginpanama.com/services"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.shootinginpanama.com/es/services"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.shootinginpanama.com/services"/>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.shootinginpanama.com/incentives</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.shootinginpanama.com/incentives"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.shootinginpanama.com/es/incentives"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.shootinginpanama.com/incentives"/>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.shootinginpanama.com/resources</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.shootinginpanama.com/resources"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.shootinginpanama.com/es/resources"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.shootinginpanama.com/resources"/>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.shootinginpanama.com/contact</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.shootinginpanama.com/contact"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.shootinginpanama.com/es/contact"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.shootinginpanama.com/contact"/>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.shootinginpanama.com/resources/panama-25-percent-cash-rebate</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.shootinginpanama.com/resources/panama-25-percent-cash-rebate"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.shootinginpanama.com/es/resources/panama-25-percent-cash-rebate"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.shootinginpanama.com/resources/panama-25-percent-cash-rebate"/>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.shootinginpanama.com/resources/international-producers-guide-to-panama</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.shootinginpanama.com/resources/international-producers-guide-to-panama"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.shootinginpanama.com/es/resources/international-producers-guide-to-panama"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.shootinginpanama.com/resources/international-producers-guide-to-panama"/>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.shootinginpanama.com/resources/tropical-weather-forecasting-panama</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.shootinginpanama.com/resources/tropical-weather-forecasting-panama"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.shootinginpanama.com/es/resources/tropical-weather-forecasting-panama"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.shootinginpanama.com/resources/tropical-weather-forecasting-panama"/>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.shootinginpanama.com/resources/a-man-a-plan-a-canal-panama</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.shootinginpanama.com/resources/a-man-a-plan-a-canal-panama"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.shootinginpanama.com/es/resources/a-man-a-plan-a-canal-panama"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.shootinginpanama.com/resources/a-man-a-plan-a-canal-panama"/>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.shootinginpanama.com/es/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.shootinginpanama.com/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://www.shootinginpanama.com/es/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.shootinginpanama.com/"/>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.shootinginpanama.com/es/work</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.shootinginpanama.com/work"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.shootinginpanama.com/es/work"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.shootinginpanama.com/work"/>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.shootinginpanama.com/es/services</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.shootinginpanama.com/services"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.shootinginpanama.com/es/services"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.shootinginpanama.com/services"/>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.shootinginpanama.com/es/incentives</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.shootinginpanama.com/incentives"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.shootinginpanama.com/es/incentives"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.shootinginpanama.com/incentives"/>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.shootinginpanama.com/es/resources</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.shootinginpanama.com/resources"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.shootinginpanama.com/es/resources"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.shootinginpanama.com/resources"/>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.shootinginpanama.com/es/contact</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.shootinginpanama.com/contact"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.shootinginpanama.com/es/contact"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.shootinginpanama.com/contact"/>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.shootinginpanama.com/es/resources/panama-25-percent-cash-rebate</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.shootinginpanama.com/resources/panama-25-percent-cash-rebate"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.shootinginpanama.com/es/resources/panama-25-percent-cash-rebate"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.shootinginpanama.com/resources/panama-25-percent-cash-rebate"/>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.shootinginpanama.com/es/resources/international-producers-guide-to-panama</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.shootinginpanama.com/resources/international-producers-guide-to-panama"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.shootinginpanama.com/es/resources/international-producers-guide-to-panama"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.shootinginpanama.com/resources/international-producers-guide-to-panama"/>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.shootinginpanama.com/es/resources/tropical-weather-forecasting-panama</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.shootinginpanama.com/resources/tropical-weather-forecasting-panama"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.shootinginpanama.com/es/resources/tropical-weather-forecasting-panama"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.shootinginpanama.com/resources/tropical-weather-forecasting-panama"/>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.shootinginpanama.com/es/resources/a-man-a-plan-a-canal-panama</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.shootinginpanama.com/resources/a-man-a-plan-a-canal-panama"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.shootinginpanama.com/es/resources/a-man-a-plan-a-canal-panama"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.shootinginpanama.com/resources/a-man-a-plan-a-canal-panama"/>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 </urlset>

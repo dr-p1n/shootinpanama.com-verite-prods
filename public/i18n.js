@@ -403,36 +403,63 @@
     // toggle button state (both nav + mobile instances)
     var btns = document.querySelectorAll("[data-lang-btn]");
     for (i = 0; i < btns.length; i++) btns[i].classList.toggle("active", btns[i].getAttribute("data-lang-btn") === lang);
-    // canonical / og for the /es/ variant
-    var canon = document.querySelector('link[rel="canonical"]');
-    var ogurl = document.querySelector('meta[property="og:url"]');
-    var ogloc = document.querySelector('meta[property="og:locale"]');
-    var base = "https://www.shootinginpanama.com/";
-    if (canon) canon.setAttribute("href", es ? base + "es/" : base);
-    if (ogurl) ogurl.setAttribute("content", es ? base + "es/" : base);
-    if (ogloc) ogloc.setAttribute("content", es ? "es_PA" : "en_US");
-    // Head title + description for the /es/ variant (Google renders JS, so it indexes these).
-    var MT = { en: "Panama Film Production Services & Fixers | Shoot In Panama",
-               es: "Servicios de Producción de Cine en Panamá | Shoot In Panama" };
-    var MD = { en: "Full-service production partner for international film, advertising and documentary shoots in Panama — fixers, crew, permits, locations and equipment.",
-               es: "Socio de producción integral para cine, publicidad y documental internacional en Panamá — fixers, crew, permisos, locaciones y equipo." };
-    var mt = es ? MT.es : MT.en, md = es ? MD.es : MD.en;
-    document.title = mt;
-    var setC = function (sel, v) { var el = document.querySelector(sel); if (el) el.setAttribute("content", v); };
-    setC('meta[name="description"]', md);
-    setC('meta[property="og:title"]', mt);
-    setC('meta[name="twitter:title"]', mt);
-    setC('meta[property="og:description"]', md);
-    setC('meta[name="twitter:description"]', md);
+    // Head metadata for this route, in this language. window.__ROUTE is injected
+    // per URL by functions/_middleware.js, so each page carries its own pair.
+    var R = routeMeta();
+    if (R) {
+      var m = es ? R.es : R.en;
+      document.title = m.title;
+      var setC = function (sel, v) { var el = document.querySelector(sel); if (el) el.setAttribute("content", v); };
+      var setA = function (sel, v) { var el = document.querySelector(sel); if (el) el.setAttribute("href", v); };
+      setA('link[rel="canonical"]', m.url);
+      setC('meta[name="description"]', m.desc);
+      setC('meta[property="og:url"]', m.url);
+      setC('meta[property="og:title"]', m.title);
+      setC('meta[name="twitter:title"]', m.title);
+      setC('meta[property="og:description"]', m.desc);
+      setC('meta[name="twitter:description"]', m.desc);
+      setC('meta[property="og:locale"]', es ? "es_PA" : "en_US");
+    }
+    localizeLinks(es);
     try { localStorage.setItem("vrt_lang", lang); } catch (e) {}
   }
 
-  function pathIsEs() { return location.pathname.indexOf("/es") === 0; }
+  // Per-route head metadata, injected as a JSON data block by functions/_middleware.js.
+  var _route;
+  function routeMeta() {
+    if (_route === undefined) {
+      var el = document.getElementById("route-meta");
+      try { _route = el ? JSON.parse(el.textContent) : null; } catch (e) { _route = null; }
+    }
+    return _route;
+  }
 
-  // Initial language: saved choice > /es/ path > English
-  var initial = "en";
-  try { var saved = localStorage.getItem("vrt_lang"); if (saved === "es" || saved === "en") initial = saved; else if (pathIsEs()) initial = "es"; }
-  catch (e) { if (pathIsEs()) initial = "es"; }
+  // Internal links are authored in English (/work). Point them at the matching
+  // Spanish URL (/es/work) while the page is in Spanish, and back again in English.
+  function localizeLinks(es) {
+    var links = document.querySelectorAll('a[data-page][href], a[data-essay][href]');
+    for (var i = 0; i < links.length; i++) {
+      var href = links[i].getAttribute("href") || "";
+      var bare = href.indexOf("/es/") === 0 ? href.slice(3) : (href === "/es" ? "/" : href);
+      if (bare.charAt(0) !== "/") continue;
+      links[i].setAttribute("href", es ? (bare === "/" ? "/es/" : "/es" + bare) : bare);
+    }
+  }
+
+  function pathIsEs() { return location.pathname === "/es" || location.pathname.indexOf("/es/") === 0; }
+
+  // Every URL now declares its own language, so the path decides what this page
+  // shows — otherwise a saved preference would render English at an /es/ URL whose
+  // canonical and title say Spanish. A returning Spanish reader who lands on an
+  // English URL is sent to its Spanish twin instead, so URL and content agree.
+  var saved = null;
+  try { saved = localStorage.getItem("vrt_lang"); } catch (e) {}
+  var initial = pathIsEs() ? "es" : "en";
+  if (initial === "en" && saved === "es") {
+    var R0 = routeMeta();
+    if (R0) { location.replace(new URL(R0.es.url, location.href).pathname); }
+    else initial = "es";
+  }
 
   // Toggle handler (delegated; works for nav + mobile instances)
   document.addEventListener("click", function (e) {
@@ -440,7 +467,9 @@
     if (!b) return;
     var lang = b.getAttribute("data-lang-btn");
     apply(lang);
-    try { history.replaceState(null, "", (lang === "es" ? "/es/" : "/") + location.hash); } catch (_) {}
+    var R = routeMeta();
+    var dest = R ? (lang === "es" ? R.es.url : R.en.url) : (lang === "es" ? "/es/" : "/");
+    try { history.replaceState(null, "", new URL(dest, location.href).pathname); } catch (_) {}
   });
 
   apply(initial);

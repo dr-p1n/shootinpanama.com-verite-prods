@@ -1,65 +1,20 @@
-  // ── PAGE ROUTING ──
-  const pages = ['home','work','services','incentives','resources','contact'];
-
-  function showPage(id) {
-    document.querySelectorAll('.essay.active').forEach(el => el.classList.remove('active'));
-    pages.forEach(p => {
-      document.getElementById('page-' + p).classList.remove('active');
-      const btn = document.getElementById('nav-' + p);
-      if(btn) btn.classList.remove('active');
-    });
-    document.getElementById('page-' + id).classList.add('active');
-    const btn = document.getElementById('nav-' + id);
-    if(btn) btn.classList.add('active');
-    // Sync mobile menu highlight + close it on navigation
-    document.querySelectorAll('.mobile-link').forEach(l => l.classList.remove('active'));
-    const mIdx = pages.indexOf(id);
-    const mLinks = document.querySelectorAll('.mobile-link');
-    if(mIdx > -1 && mLinks[mIdx]) mLinks[mIdx].classList.add('active');
-    toggleMenu(false);
-    window.scrollTo({top:0,behavior:'instant'});
-    // Trigger reveals on new page
-    setTimeout(() => initReveal(), 50);
-    // Update URL — home uses the clean canonical path (no #home); other views keep a hash.
-    history.pushState(null, '', id === 'home' ? location.pathname + location.search : '#' + id);
-  }
-
-  // ── ESSAY READER (sub-pages under Resources) ──
-  function showEssay(slug) {
-    const el = document.getElementById('essay-' + slug);
-    if(!el) return;
-    pages.forEach(p => {
-      document.getElementById('page-' + p).classList.remove('active');
-      const btn = document.getElementById('nav-' + p);
-      if(btn) btn.classList.remove('active');
-    });
-    document.querySelectorAll('.essay.active').forEach(e => e.classList.remove('active'));
-    el.classList.add('active');
-    // Essays live under Resources — keep that nav item lit for orientation
-    const rb = document.getElementById('nav-resources');
-    if(rb) rb.classList.add('active');
-    document.querySelectorAll('.mobile-link').forEach(l => l.classList.remove('active'));
-    const mLinks = document.querySelectorAll('.mobile-link');
-    const rIdx = pages.indexOf('resources');
-    if(rIdx > -1 && mLinks[rIdx]) mLinks[rIdx].classList.add('active');
-    toggleMenu(false);
-    window.scrollTo({top:0,behavior:'instant'});
-    setTimeout(() => initReveal(), 50);
-    history.pushState(null, '', '#essay-' + slug);
-  }
-
-  function route(hash) {
-    if(hash.indexOf('essay-') === 0 && document.getElementById('essay-' + hash.slice(6))) { showEssay(hash.slice(6)); return; }
-    if(pages.includes(hash)) showPage(hash);
-  }
-
-  // Handle back/forward
-  window.addEventListener('popstate', () => {
-    route(location.hash.replace('#','') || 'home');
-  });
-
-  // Init from URL hash
-  route(location.hash.replace('#','') || 'home');
+  // ── LEGACY HASH URLS ──
+  // The site used to be one document with #hash views; every section now has its
+  // own URL served by functions/_middleware.js. Send old links to the real page.
+  (function () {
+    var PAGE = { home: '/', work: '/work', services: '/services',
+                 incentives: '/incentives', resources: '/resources', contact: '/contact' };
+    var ESSAY = { rebate: '/resources/panama-25-percent-cash-rebate',
+                  guide: '/resources/international-producers-guide-to-panama',
+                  weather: '/resources/tropical-weather-forecasting-panama',
+                  overview: '/resources/a-man-a-plan-a-canal-panama' };
+    var h = location.hash.replace('#', '');
+    if (!h) return;
+    var dest = h.indexOf('essay-') === 0 ? ESSAY[h.slice(6)] : PAGE[h];
+    if (!dest) return;
+    var prefix = location.pathname.indexOf('/es') === 0 ? '/es' : '';
+    location.replace(prefix + (prefix && dest === '/' ? '/' : dest));
+  })();
 
   // ── LIVE WEATHER (Open-Meteo, keyless) ──
   (function(){
@@ -275,10 +230,6 @@
 
 /* ── Event wiring (replaces former inline handlers) ── */
 document.addEventListener('click', (e) => {
-  const nav = e.target.closest('[data-page]');
-  if (nav) { if (nav.tagName === 'A') e.preventDefault(); showPage(nav.dataset.page); return; }
-  const es = e.target.closest('[data-essay]');
-  if (es) { showEssay(es.dataset.essay); return; }
   const g = e.target.closest('[data-guide]');
   if (g) { openGate(g.dataset.guide); return; }
   const s = e.target.closest('[data-scroll]');

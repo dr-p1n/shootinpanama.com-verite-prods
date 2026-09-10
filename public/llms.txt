@@ -21,5 +21,17 @@ Caribbean and Pacific coasts about an hour apart (82 km at the narrowest); jungl
 Ricardo (Ricky) Barria — rbarria@veriteproducciones.net — +507 6612-7525 — Calle W, Parque Lefevre, Panamá, República de Panamá.
 
 ## Pages
-- English: https://www.shootinginpanama.com/
-- Español: https://www.shootinginpanama.com/es/
+Each subject has its own URL. Spanish mirrors live at the same path under /es/.
+
+- https://www.shootinginpanama.com/ — Home. What Verite does, who it has worked for, why Panama.
+- https://www.shootinginpanama.com/work — Selected work. The Amazing Race (CBS), Survive the Raft (Discovery), The Challenge (MTV), ARP (Netflix), Today Show (NBC), four MrBeast productions, the IMAX Canal feature "A Land Divided, A World United", and the OAS 56th General Assembly (Panama 2026).
+- https://www.shootinginpanama.com/services — Production services, fixer & logistics, executive compliance; location galleries (beaches, Panama City, rainforest, Casco Viejo, ports & canal, airports) and the year-round shooting calendar with live weather.
+- https://www.shootinginpanama.com/incentives — Film Law 16: the 25% cash rebate, 0% equipment import duty, single-window permitting, and the qualifying-spend rules.
+- https://www.shootinginpanama.com/resources — Index of the field notes below.
+- https://www.shootinginpanama.com/resources/panama-25-percent-cash-rebate — "The 25% Cash Rebate, Explained": who qualifies, what spend counts, how the money comes back.
+- https://www.shootinginpanama.com/resources/international-producers-guide-to-panama — "The International Producer's Guide to Panama": geography, weather, the shooting calendar, locations coast to coast, crew depth.
+- https://www.shootinginpanama.com/resources/tropical-weather-forecasting-panama — "Tropical Weather Forecasting: The Panama Field Guide": hurricane-safe latitude, two-ocean microclimates, 18-foot Pacific tides, scheduling around the downpour.
+- https://www.shootinginpanama.com/resources/a-man-a-plan-a-canal-panama — "A Man, a Plan, a Canal: Panama": the Hub of the Americas, Panama on screen, the rebate's fine print, the client list.
+- https://www.shootinginpanama.com/contact — Request a quote; direct contact for Ricardo Barria.
+
+Sitemap: https://www.shootinginpanama.com/sitemap.xml

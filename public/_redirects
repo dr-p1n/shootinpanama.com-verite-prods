@@ -1,4 +1,3 @@
-# Serve the SPA at /es/ so the Spanish variant has a real, crawlable URL for hreflang.
-/es       /index.html   200
-/es/      /index.html   200
-/es/*     /index.html   200
+# Routing lives in functions/_middleware.js: it serves every entry in
+# functions/routes.js — /work, /services, /resources/<essay>, and the /es/
+# mirrors — as its own page. Nothing to rewrite here.

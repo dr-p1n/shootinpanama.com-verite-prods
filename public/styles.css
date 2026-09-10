@@ -55,6 +55,11 @@
     .mobile-link:hover,.mobile-link.active{opacity:1}
     .mobile-link.mm-cta{margin-top:.75rem;font-family:'Fraunces',serif;font-style:italic;color:var(--accent);opacity:1}
 
+    /* Navigation is real links now (one URL per section), so these anchors have to
+       inherit the type they replaced rather than pick up browser link styling. */
+    .mobile-link,.offer-item,.essay-back,.teaser-p .tlink{text-decoration:none}
+    .offer-item,.resource-card,.wc[href]{text-decoration:none;color:inherit}
+
     /* ── PAGE SYSTEM ── */
     .page{display:none;min-height:100vh;padding-top:5rem}
     .page.active{display:block}
