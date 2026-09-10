@@ -17,10 +17,10 @@
     "Get in Touch": "Contáctanos",
 
     // ── Home · hero ──
-    "Verite Producciones · Panama City": "Verite Producciones · Ciudad de Panamá",
+    "Shoot In Panama · Panama City": "Shoot In Panama · Ciudad de Panamá",
     "Panama. Where your next": "Panamá. Donde vive tu",
     "production lives.": "próxima producción.",
-    "For over 30 years Ricardo Barria and Verite Producciones have been the ground team international productions trust in Panama — handling crew, permits, compliance and logistics so your team arrives ready to shoot, not ready to problem-solve.": "Desde hace más de 30 años Ricardo Barria y Verite Producciones son el equipo en tierra en el que confían las producciones internacionales en Panamá — gestionamos crew, permisos, cumplimiento y logística para que tu equipo llegue listo para rodar, no para resolver problemas.",
+    "For over 30 years Ricardo Barria, Shoot In Panama and sister company Verite Producciones have been the ground team international productions trust in Panama — handling crew, permits, compliance and logistics so your team arrives ready to shoot, not ready to problem-solve.": "Desde hace más de 30 años Ricardo Barria, Shoot In Panama y su empresa hermana Verite Producciones son el equipo en tierra en el que confían las producciones internacionales en Panamá — gestionamos crew, permisos, cumplimiento y logística para que tu equipo llegue listo para rodar, no para resolver problemas.",
     "Request a Quote": "Solicitar cotización",
     "View Work": "Ver proyectos",
 
