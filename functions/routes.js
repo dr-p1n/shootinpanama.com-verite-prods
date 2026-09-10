@@ -19,12 +19,12 @@ export const ROUTES = [
     image: '/assets/og-card.jpg',
     en: {
       title: 'Panama Film Production Services & Fixers | Shoot In Panama',
-      desc: 'Full-service production partner for international film, advertising and documentary shoots in Panama — fixers, crew, permits, locations and equipment.',
+      desc: 'Ricardo Barria and Verite Producciones — full-service production partner for international film, advertising and documentary shoots in Panama: fixers, crew, permits, locations and equipment.',
       name: 'Home'
     },
     es: {
       title: 'Servicios de Producción de Cine en Panamá | Shoot In Panama',
-      desc: 'Socio de producción integral para cine, publicidad y documental internacional en Panamá — fixers, crew, permisos, locaciones y equipo.',
+      desc: 'Ricardo Barria y Verite Producciones — socio de producción integral para cine, publicidad y documental internacional en Panamá: fixers, crew, permisos, locaciones y equipo.',
       name: 'Inicio'
     }
   },

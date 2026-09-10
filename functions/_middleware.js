@@ -13,6 +13,9 @@ import { ROUTES, SITE, matchRoute, urlFor } from './routes.js';
 
 const ORG = SITE + '/#organization';
 const WEBSITE = SITE + '/#website';
+// Defined in full in the base graph in public/index.html; referenced here so the
+// field notes are attributable to a named author, not just to the company.
+const PERSON = SITE + '/#ricardo-barria';
 
 // Productions listed on /work — emitted as structured data so an answer can cite
 // the page for a specific credit rather than for the site in general.
@@ -70,7 +73,7 @@ function jsonLd(route, lang) {
       image,
       inLanguage,
       mainEntityOfPage: { '@id': url + '#webpage' },
-      author: { '@id': ORG },
+      author: { '@id': PERSON },
       publisher: { '@id': ORG },
       isPartOf: { '@id': url + '#webpage' }
     });
@@ -103,6 +106,10 @@ function jsonLd(route, lang) {
         ? 'Panamá devuelve en efectivo el 25% del gasto elegible en el país bajo la Ley de Cine 16 (2012). Gasto mínimo elegible de $500,000 USD, tope de $25M por proyecto, auditoría de cumplimiento certificada por un CPA obligatoria, y desembolso de hasta 36 meses tras cerrar la auditoría.'
         : 'Panama returns 25% of qualifying in-country spend as cash under Film Law 16 (2012). Minimum qualifying spend $500,000 USD, $25M cap per project, a certified (CPA) compliance audit is mandatory, and disbursement can take up to 36 months after the audit closes.'
     });
+  }
+
+  if (route.slug === 'contact') {
+    graph[0].mainEntity = { '@id': PERSON };
   }
 
   if (route.slug === 'services') {
