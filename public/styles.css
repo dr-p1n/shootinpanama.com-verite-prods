@@ -55,6 +55,11 @@
     .mobile-link:hover,.mobile-link.active{opacity:1}
     .mobile-link.mm-cta{margin-top:.75rem;font-family:'Fraunces',serif;font-style:italic;color:var(--accent);opacity:1}
 
+    /* Outbound nav link (the sister company's own site) — a quiet mark so the
+       new tab is not a surprise. CSS content, so i18n's text walker ignores it. */
+    .nav-ext{white-space:nowrap}
+    .nav-ext::after{content:'\2197';margin-left:.35em;opacity:.5;font-size:.9em}
+
     /* Navigation is real links now (one URL per section), so these anchors have to
        inherit the type they replaced rather than pick up browser link styling. */
     .mobile-link,.offer-item,.essay-back,.teaser-p .tlink{text-decoration:none}
@@ -594,14 +599,20 @@
     .reveal{opacity:0;transform:translateY(.8rem);transition:opacity .8s ease,transform .8s ease}
     .reveal.in{opacity:1;transform:none}
 
+    /* The inline nav row needs ~1000px once the Verite link is in it (measured in
+       Spanish, the longest labels). Below that the hamburger takes over — it also
+       clears a collision with the logo that pre-dated the link, from ~900px down. */
+    @media(max-width:1000px){
+      .nav-links{display:none}
+      .nav-toggle{display:flex}
+    }
+
     /* ── MOBILE ── */
     @media(max-width:768px){
       #nav{padding:1.1rem 1.5rem}
       #nav.scrolled{padding:.8rem 1.5rem}
       .nav-logo img,#nav.scrolled .nav-logo img{height:72px;width:72px}
       .footer-logo-img{height:112px;width:112px}
-      .nav-links{display:none}
-      .nav-toggle{display:flex}
       .hero-marks{display:none}
       .slate{position:static;right:auto;top:auto;width:auto;max-width:330px;margin:2.2rem auto .5rem;
         animation:none;opacity:1;transform:rotate(-1deg)}
