@@ -11,7 +11,10 @@
 
 import { ROUTES, SITE, matchRoute, urlFor } from './routes.js';
 
-const ORG = SITE + '/#organization';
+// This site belongs to Shoot In Panama, so its pages are about that company and
+// the field notes are published by it. Verite Producciones, the parent company,
+// is #organization in the base graph in public/index.html.
+const ORG = SITE + '/#shootinpanama';
 const WEBSITE = SITE + '/#website';
 // Defined in full in the base graph in public/index.html; referenced here so the
 // field notes are attributable to a named author, not just to the company.
