@@ -603,6 +603,9 @@
       </div>
     </div>
 
+    <!-- Articles written in the admin (loaded from the Verite Worker feed; empty = nothing is drawn) -->
+    <div class="resources-grid" id="live-articles" hidden></div>
+
     <!-- Request notice -->
     <div class="contact-callout">
       <div class="contact-callout-bar"></div>
@@ -626,6 +629,21 @@
 </div>
 
 <!-- ════════════════════ ESSAYS ════════════════════ -->
+
+<!-- Essay · an article written in the admin (filled by app.js) -->
+<article id="essay-live" class="essay">
+  <div class="essay-head">
+    <div class="page-header">
+      <button class="essay-back" data-page="resources">← Resources</button>
+      <p class="page-header-eyebrow" id="live-date"></p>
+      <h2 class="page-header-title" id="live-title"></h2>
+    </div>
+  </div>
+  <div class="essay-body">
+    <img class="essay-cover" id="live-cover" alt="" hidden>
+    <div id="live-body"></div>
+  </div>
+</article>
 
 <!-- Essay · The 25% Cash Rebate, explained -->
 <article id="essay-rebate" class="essay">

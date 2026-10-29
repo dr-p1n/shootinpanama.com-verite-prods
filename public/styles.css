@@ -470,6 +470,9 @@
     .essay-lead{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(1.15rem,2.2vw,1.5rem);
       line-height:1.5;color:var(--paper);letter-spacing:-.01em;margin-bottom:3rem;
       padding-bottom:2.5rem;border-bottom:1px solid var(--rule)}
+    .essay-cover{display:block;width:100%;height:auto;margin:0 0 2.5rem}
+    #live-body p{font-size:.92rem;font-weight:300;color:rgba(238,236,234,.72);line-height:1.85;margin-bottom:1.25rem}
+    #live-body p.essay-lead{font-size:clamp(1.15rem,2.2vw,1.5rem);color:var(--paper);line-height:1.5;margin-bottom:3rem}
     .essay-section{margin-bottom:2.5rem}
     .essay-section h3{font-weight:400;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;
       color:var(--accent);margin-bottom:.9rem}
