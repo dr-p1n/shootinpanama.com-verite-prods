@@ -50,8 +50,60 @@
 
   function route(hash) {
     if(hash.indexOf('essay-') === 0 && document.getElementById('essay-' + hash.slice(6))) { showEssay(hash.slice(6)); return; }
+    if(hash.indexOf('article-') === 0) { whenArticles(() => { if(!showArticle(hash.slice(8))) showPage('resources'); }); return; }
     if(pages.includes(hash)) showPage(hash);
   }
+
+  // ── ARTICLES written in the admin (feed of the Verite Worker; plain text, drawn with textContent only) ──
+  const FEED = 'https://verite-sip.julioernestolv.workers.dev/api/articles?site=sip&lang=en';
+  let liveArticles = null, feedWaiters = [];
+  function whenArticles(fn) { if(liveArticles) fn(); else feedWaiters.push(fn); }
+  function el(tag, cls, text) { const n = document.createElement(tag); if(cls) n.className = cls; if(text != null) n.textContent = text; return n; }
+
+  function showArticle(slug) {
+    const a = (liveArticles || []).find(x => x.slug === slug);
+    if(!a) return false;
+    document.getElementById('live-date').textContent = a.date || '';
+    document.getElementById('live-title').textContent = a.title;
+    const img = document.getElementById('live-cover');
+    if(a.cover) { img.src = a.cover; img.alt = a.cover_alt || ''; img.hidden = false; } else { img.removeAttribute('src'); img.hidden = true; }
+    const body = document.getElementById('live-body');
+    body.replaceChildren();
+    let section = body, first = true;
+    String(a.body || '').replace(/\r\n?/g, '\n').split(/\n{2,}/).map(b => b.trim()).filter(Boolean).forEach(block => {
+      if(block.indexOf('## ') === 0) { section = el('div', 'essay-section'); section.appendChild(el('h3', null, block.slice(3).trim())); body.appendChild(section); return; }
+      const p = el('p', first ? 'essay-lead' : null);
+      block.split('\n').forEach((line, i) => { if(i) p.appendChild(document.createElement('br')); p.appendChild(document.createTextNode(line)); });
+      section.appendChild(p); first = false;
+    });
+    showEssay('live');
+    history.replaceState(null, '', '#article-' + slug);
+    return true;
+  }
+
+  function drawArticles() {
+    const box = document.getElementById('live-articles');
+    if(!box || !liveArticles.length) return;
+    liveArticles.forEach(a => {
+      const card = el('div', 'resource-card');
+      card.dataset.article = a.slug;
+      card.appendChild(el('p', 'resource-card-cat', a.date || 'Article'));
+      card.appendChild(el('p', 'resource-card-title', a.title));
+      if(a.excerpt) card.appendChild(el('p', 'resource-card-desc', a.excerpt));
+      const foot = el('div', 'resource-card-footer');
+      foot.appendChild(el('span', 'resource-dl', 'Read →'));
+      card.appendChild(foot);
+      box.appendChild(card);
+    });
+    box.hidden = false;
+  }
+
+  // A failed or empty feed leaves the two written essays exactly as they were.
+  fetch(FEED).then(r => r.ok ? r.json() : { articles: [] }).catch(() => ({ articles: [] })).then(d => {
+    liveArticles = Array.isArray(d.articles) ? d.articles : [];
+    drawArticles();
+    feedWaiters.splice(0).forEach(fn => fn());
+  });
 
   // Handle back/forward
   window.addEventListener('popstate', () => {
@@ -253,6 +305,8 @@ document.addEventListener('click', (e) => {
   if (nav) { if (nav.tagName === 'A') e.preventDefault(); showPage(nav.dataset.page); return; }
   const es = e.target.closest('[data-essay]');
   if (es) { showEssay(es.dataset.essay); return; }
+  const art = e.target.closest('[data-article]');
+  if (art) { showArticle(art.dataset.article); return; }
   const g = e.target.closest('[data-guide]');
   if (g) { openGate(g.dataset.guide); return; }
   const s = e.target.closest('[data-scroll]');
