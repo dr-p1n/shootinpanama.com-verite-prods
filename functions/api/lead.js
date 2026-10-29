@@ -1,6 +1,7 @@
 // POST /api/lead — receives RFQ / guide submissions.
-// Saves each lead to KV (binding: LEADS) and emails it via Resend (RESEND_API_KEY).
-// Returns { ok:true } if it stored or emailed; { ok:false } (503) if nothing is
+// Saves each lead to KV (binding: LEADS), emails it via Resend (RESEND_API_KEY) and forwards it to the
+// Verite Worker (LEAD_FORWARD_SECRET), which saves it in the admin database and in the Sheet tab "Shoot in Panama".
+// Returns { ok:true } if it stored, emailed or forwarded; { ok:false } (503) if nothing is
 // configured yet, so the front-end can fall back to a mailto: link.
 
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
@@ -10,6 +11,17 @@ function json(obj, status) {
     status: status || 200,
     headers: { "content-type": "application/json; charset=utf-8" },
   });
+}
+
+// A reference derived from the lead itself (time + e-mail), so sending the same lead again, or importing it later from
+// KV, always gives the same SIP-XXXXXX and the Worker never writes it twice. Same alphabet as the Worker (no O/0, I/1/L).
+const REF_CHARS = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
+async function leadRef(lead) {
+  const d = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(lead.ts + "|" + lead.email));
+  const b = new Uint8Array(d);
+  let out = "SIP-";
+  for (let i = 0; i < 6; i++) out += REF_CHARS[b[i] % REF_CHARS.length];
+  return out;
 }
 function s(v) { return (v == null ? "" : String(v)).replace(/\s+/g, " ").trim().slice(0, 5000); }
 
@@ -64,7 +76,7 @@ export async function onRequestPost(context) {
 
   if (!lead.email || !EMAIL_RE.test(lead.email)) return json({ ok: false, error: "email_required" }, 422);
 
-  let stored = false, emailed = false, sheeted = false, emailErr = null;
+  let stored = false, emailed = false, forwarded = false, sheeted = false, emailErr = null, forwardErr = null;
 
   // 1) Durable store — never lose a lead.
   if (env.LEADS) {
@@ -94,8 +106,28 @@ export async function onRequestPost(context) {
     } catch (e) { emailErr = "resend_exception"; }
   }
 
-  // 3) Optional backup: append to a Google Sheet (Apps Script Web App).
-  //    Server-to-server, so no CSP/CORS concerns. Set SHEET_ENDPOINT to the /exec URL.
+  // 3) Forward to the Verite Worker: it saves the lead in D1 (the admin shows it under Shoot in Panama) and writes
+  //    the row in the Sheet tab "Shoot in Panama". KV and the e-mail above already hold the lead, so a failure here loses
+  //    nothing; sending the same lead again is safe (same reference). IP and user agent are not forwarded.
+  if (env.LEAD_FORWARD_SECRET) {
+    try {
+      const url = env.LEAD_FORWARD_URL || "https://verite-sip.julioernestolv.workers.dev/api/sip-lead";
+      const res = await fetch(url, {
+        method: "POST",
+        headers: { "content-type": "application/json", "x-lead-secret": env.LEAD_FORWARD_SECRET },
+        body: JSON.stringify({
+          ref: await leadRef(lead), ts: lead.ts, kind: lead.kind, name: lead.name, email: lead.email, company: lead.company,
+          type: lead.type, crew: lead.crew, dates: lead.dates, brief: lead.brief, guide: lead.guide, lang: lead.lang,
+        }),
+        signal: AbortSignal.timeout(8000),
+      });
+      forwarded = res.ok;
+      if (!res.ok) forwardErr = "forward_" + res.status;
+    } catch (e) { forwardErr = "forward_exception"; }
+  }
+
+  // 4) Old backup, off unless SHEET_ENDPOINT is set: append to the previous Google Sheet (Apps Script Web App).
+  //    Server-to-server, so no CSP/CORS concerns. Leave it unset: the old Sheet's account ran out of storage.
   if (env.SHEET_ENDPOINT) {
     try {
       const res = await fetch(env.SHEET_ENDPOINT, {
@@ -107,7 +139,9 @@ export async function onRequestPost(context) {
     } catch (e) { /* ignore */ }
   }
 
-  if (stored || emailed || sheeted) return json({ ok: true, stored: stored, emailed: emailed, sheeted: sheeted, emailErr: emailErr });
+  if (stored || emailed || forwarded || sheeted) {
+    return json({ ok: true, stored: stored, emailed: emailed, forwarded: forwarded, sheeted: sheeted, emailErr: emailErr, forwardErr: forwardErr });
+  }
   // Nothing configured yet → tell the client to use the mailto fallback.
   return json({ ok: false, error: "unconfigured" }, 503);
 }
