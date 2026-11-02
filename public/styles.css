@@ -552,6 +552,9 @@
     .footer-logo{font-size:.58rem;font-weight:300;letter-spacing:.28em;text-transform:uppercase;color:var(--muted)}
     .footer-logo-img{height:136px;width:136px;display:block;opacity:1}
     .footer-copy{font-size:.58rem;font-weight:300;color:rgba(238,236,234,.18);letter-spacing:.04em}
+    .footer-doors{display:flex;flex-wrap:wrap;gap:.25rem 1.75rem}
+    .footer-doors a{display:inline-flex;align-items:center;min-height:44px;font-size:.62rem;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);text-decoration:none}
+    .footer-doors a:hover,.footer-doors a:focus-visible{text-decoration:underline;text-underline-offset:4px}
     .footer-iq{display:flex;align-items:center;gap:.85rem;flex-shrink:0;text-decoration:none;cursor:pointer}
     .footer-iq-logo{width:28px;height:28px;border-radius:50%;object-fit:cover;opacity:.75;transition:opacity .2s}
     .footer-iq:hover .footer-iq-logo{opacity:1}
