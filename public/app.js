@@ -16,6 +16,103 @@
     location.replace(prefix + (prefix && dest === '/' ? '/' : dest));
   })();
 
+  // ── ARTICLES written in the admin (feed of the Verite Worker; plain text, drawn with textContent only) ──
+  // Written in the Verite admin and listed in the Resources grid. Unlike the four
+  // hand-authored essays these have no entry in functions/routes.js, so they are
+  // not server-rendered pages: the feed reveals #essay-live in place and addresses
+  // each article with a #article-<slug> hash. The legacy-hash shim above leaves
+  // those hashes alone (it only maps the old page/essay names).
+  const FEED = 'https://verite-sip.julioernestolv.workers.dev/api/articles?site=sip&lang=en';
+  let liveArticles = null, feedWaiters = [];
+  function whenArticles(fn) { if (liveArticles) fn(); else feedWaiters.push(fn); }
+  function mkEl(tag, cls, text) { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
+
+  // The section functions/_middleware.js rendered as active for this URL. Kept so
+  // Back out of a live article restores the page the reader actually came from.
+  const serverNode = document.querySelector('.page.active, .essay.active');
+
+  function showLiveEssay() {
+    const live = document.getElementById('essay-live');
+    if (!live) return false;
+    document.querySelectorAll('.page.active, .essay.active').forEach(n => n.classList.remove('active'));
+    live.classList.add('active');
+    const rb = document.getElementById('nav-resources');
+    if (rb) rb.classList.add('active');
+    toggleMenu(false);
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    setTimeout(() => initReveal(), 50);
+    return true;
+  }
+
+  function restoreServerNode() {
+    const live = document.getElementById('essay-live');
+    if (live) live.classList.remove('active');
+    if (serverNode) serverNode.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }
+
+  function showArticle(slug, opts) {
+    const a = (liveArticles || []).find(x => x.slug === slug);
+    if (!a) return false;
+    document.getElementById('live-date').textContent = a.date || '';
+    document.getElementById('live-title').textContent = a.title;
+    const img = document.getElementById('live-cover');
+    if (a.cover) { img.src = a.cover; img.alt = a.cover_alt || ''; img.hidden = false; } else { img.removeAttribute('src'); img.hidden = true; }
+    const body = document.getElementById('live-body');
+    body.replaceChildren();
+    let section = body, first = true;
+    String(a.body || '').replace(/\r\n?/g, '\n').split(/\n{2,}/).map(b => b.trim()).filter(Boolean).forEach(block => {
+      if (block.indexOf('## ') === 0) { section = mkEl('div', 'essay-section'); section.appendChild(mkEl('h3', null, block.slice(3).trim())); body.appendChild(section); return; }
+      const p = mkEl('p', first ? 'essay-lead' : null);
+      block.split('\n').forEach((line, i) => { if (i) p.appendChild(document.createElement('br')); p.appendChild(document.createTextNode(line)); });
+      section.appendChild(p); first = false;
+    });
+    if (!showLiveEssay()) return false;
+    const url = '#article-' + slug;
+    if (opts && opts.push) history.pushState(null, '', url);
+    else history.replaceState(null, '', url);
+    return true;
+  }
+
+  function drawArticles() {
+    const box = document.getElementById('live-articles');
+    if (!box || !liveArticles.length) return;
+    liveArticles.forEach(a => {
+      const card = mkEl('div', 'resource-card');
+      card.dataset.article = a.slug;
+      card.appendChild(mkEl('p', 'resource-card-cat', a.date || 'Article'));
+      card.appendChild(mkEl('p', 'resource-card-title', a.title));
+      if (a.excerpt) card.appendChild(mkEl('p', 'resource-card-desc', a.excerpt));
+      const foot = mkEl('div', 'resource-card-footer');
+      foot.appendChild(mkEl('span', 'resource-dl', 'Read →'));
+      card.appendChild(foot);
+      box.appendChild(card);
+    });
+    box.hidden = false;
+  }
+
+  // Only the Resources page lists articles; every other URL has no grid to fill,
+  // so it skips the request unless it was opened on an article deep link.
+  const deepLink = location.hash.indexOf('#article-') === 0 ? location.hash.slice(9) : '';
+  if (document.getElementById('live-articles') || deepLink) {
+    // A failed or empty feed leaves the written essays exactly as they were.
+    fetch(FEED).then(r => r.ok ? r.json() : { articles: [] }).catch(() => ({ articles: [] })).then(d => {
+      liveArticles = Array.isArray(d.articles) ? d.articles : [];
+      drawArticles();
+      if (deepLink) showArticle(deepLink, { push: false });
+      feedWaiters.splice(0).forEach(fn => fn());
+    });
+  } else {
+    liveArticles = [];
+  }
+
+  // Back/forward across the in-place article views.
+  window.addEventListener('popstate', () => {
+    const h = location.hash.replace('#', '');
+    if (h.indexOf('article-') === 0) { whenArticles(() => showArticle(h.slice(8), { push: false })); return; }
+    restoreServerNode();
+  });
+
   // ── LIVE WEATHER (Open-Meteo, keyless) ──
   (function(){
     const cards = [...document.querySelectorAll('#wx-grid .wx-card')];
@@ -230,6 +327,10 @@
 
 /* ── Event wiring (replaces former inline handlers) ── */
 document.addEventListener('click', (e) => {
+  // Nav and the four written essays are ordinary links to real URLs now; only the
+  // admin-written articles are revealed in place.
+  const art = e.target.closest('[data-article]');
+  if (art) { showArticle(art.dataset.article, { push: true }); return; }
   const g = e.target.closest('[data-guide]');
   if (g) { openGate(g.dataset.guide); return; }
   const s = e.target.closest('[data-scroll]');

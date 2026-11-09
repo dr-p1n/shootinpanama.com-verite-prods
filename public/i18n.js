@@ -15,6 +15,8 @@
     "Incentives": "Incentivos",
     "Resources": "Recursos",
     "Get in Touch": "Contáctanos",
+    "Client portal ↗": "Portal de clientes ↗",
+    "Admin ↗": "Administración ↗",
 
     // ── Home · hero ──
     "Shoot In Panama · Panama City": "Shoot In Panama · Ciudad de Panamá",

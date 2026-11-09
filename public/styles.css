@@ -540,6 +540,9 @@
     .essay-lead{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(1.15rem,2.2vw,1.5rem);
       line-height:1.5;color:var(--paper);letter-spacing:-.01em;margin-bottom:var(--space-12);
       padding-bottom:2.5rem;border-bottom:1px solid var(--rule)}
+    .essay-cover{display:block;width:100%;height:auto;margin:0 0 2.5rem}
+    #live-body p{font-size:.92rem;font-weight:300;color:rgba(238,236,234,.72);line-height:1.85;margin-bottom:1.25rem}
+    #live-body p.essay-lead{font-size:clamp(1.15rem,2.2vw,1.5rem);color:var(--paper);line-height:1.5;margin-bottom:3rem}
     .essay-section{margin-bottom:2.5rem}
     .essay-section h3{font-weight:400;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;
       color:var(--accent);margin-bottom:.9rem}
@@ -619,6 +622,9 @@
     .footer-logo{font-size:.58rem;font-weight:300;letter-spacing:.28em;text-transform:uppercase;color:var(--muted)}
     .footer-logo-img{height:136px;width:136px;display:block;opacity:1}
     .footer-copy{font-size:.58rem;font-weight:300;color:rgba(238,236,234,.18);letter-spacing:.04em}
+    .footer-doors{display:flex;flex-wrap:wrap;gap:.25rem 1.75rem}
+    .footer-doors a{display:inline-flex;align-items:center;min-height:44px;font-size:.62rem;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);text-decoration:none}
+    .footer-doors a:hover,.footer-doors a:focus-visible{text-decoration:underline;text-underline-offset:4px}
     .footer-iq{display:flex;align-items:center;gap:.85rem;flex-shrink:0;text-decoration:none;cursor:pointer}
     .footer-iq-logo{width:28px;height:28px;border-radius:50%;object-fit:cover;opacity:.75;transition:opacity .2s}
     .footer-iq:hover .footer-iq-logo{opacity:1}
