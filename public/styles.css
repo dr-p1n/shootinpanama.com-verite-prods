@@ -1,6 +1,13 @@
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
       --ink:#03060a;--paper:#EEECEA;--accent:#C9541E;
+      /* The nav runs at 9px, far smaller than the eyebrows and labels --accent was
+         picked for, and it sits on translucent glass. --accent measures 4.4:1 there,
+         under the 4.5:1 minimum for text this size, and once the inactive tabs were
+         made legible it ended up dimmer than them. This is the orange Verite's own
+         nav uses (#F0733F, 7.0:1), so the two sister sites now share it. Body
+         eyebrows, labels and figures keep --accent. */
+      --accent-nav:#F0733F;
       --muted:rgba(238,236,234,0.55);--rule:rgba(238,236,234,0.08);
       --card:rgba(238,236,234,0.03);
 
@@ -64,27 +71,33 @@
     .nav-logo img{height:90px;width:90px;display:block;transition:height .4s,width .4s}
     #nav.scrolled .nav-logo img{height:68px;width:68px}
     .nav-links{display:flex;align-items:center;gap:var(--space-8)}
-    .nav-link{font-size:.58rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase;
-      color:var(--paper);text-decoration:none;opacity:.35;transition:opacity .2s,color .2s;cursor:pointer;background:none;border:none;padding:0}
-    .nav-link:hover{opacity:.9}
-    /* The section you are on, in the brand orange. Colour carries it; the rule
-       underneath is the same weight as before so the row keeps its alignment. */
-    .nav-link.active{opacity:1;color:var(--accent);border-bottom:1px solid var(--accent);padding-bottom:2px}
-    .nav-cta{font-size:.58rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase;
+    /* Weight 500 to match Verite's nav (Oswald 500 there, DM Sans 500 here — 500 is
+       the heaviest weight in the font request, so nothing is faux-bolded). The old
+       opacity of .35 put these at 2.8:1 against the bar, well under legible; .6 is
+       6.4:1 — a large gain, and still a step under the active tab's 7.0:1, so the
+       section you are on stays the brightest thing in the row. */
+    .nav-link{font-size:.58rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+      color:var(--paper);text-decoration:none;opacity:.6;transition:opacity .2s,color .2s;cursor:pointer;background:none;border:none;padding:0}
+    .nav-link:hover{opacity:1}
+    /* The section you are on. Colour carries it; the rule underneath is the same
+       weight as before so the row keeps its alignment. */
+    .nav-link.active{opacity:1;color:var(--accent-nav);border-bottom:1px solid var(--accent-nav);padding-bottom:2px}
+    .nav-cta{font-size:.58rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
       color:var(--paper);text-decoration:none;padding-bottom:2px;
-      border-bottom:1px solid rgba(238,236,234,.35);cursor:pointer;background:none;border-top:none;border-left:none;border-right:none;
-      border-bottom:1px solid rgba(238,236,234,.35);transition:border-color .2s}
+      cursor:pointer;background:none;border-top:none;border-left:none;border-right:none;
+      border-bottom:1px solid rgba(238,236,234,.55);transition:border-color .2s}
     .nav-cta:hover{border-color:var(--paper)}
     /* Contact is the CTA rather than a plain tab, but it is still a section —
        on /contact it takes the same orange as any other active tab. */
-    .nav-cta.active{color:var(--accent);border-bottom-color:var(--accent)}
+    .nav-cta.active{color:var(--accent-nav);border-bottom-color:var(--accent-nav)}
     /* language toggle */
     .lang-toggle{display:flex;align-items:center;gap:.45rem}
-    .lang-btn{font-size:.58rem;font-weight:400;letter-spacing:.14em;text-transform:uppercase;
-      color:var(--paper);opacity:.32;background:none;border:none;padding:0;cursor:pointer;transition:opacity .2s}
-    .lang-btn:hover{opacity:.7}
-    .lang-btn.active{opacity:.9}
-    .lang-sep{opacity:.22;font-size:.55rem;color:var(--paper)}
+    /* Same treatment as the tabs — these were the dimmest text in the bar at .32. */
+    .lang-btn{font-size:.58rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+      color:var(--paper);opacity:.5;background:none;border:none;padding:0;cursor:pointer;transition:opacity .2s}
+    .lang-btn:hover{opacity:1}
+    .lang-btn.active{opacity:1}
+    .lang-sep{opacity:.4;font-size:.55rem;color:var(--paper)}
     .lang-toggle-m{margin-top:2.25rem;gap:.6rem}
     .lang-toggle-m .lang-btn{font-size:.8rem;letter-spacing:.16em}
     /* Tap targets in the mobile menu: 44px minimum (spacing skill §4). The links
@@ -108,8 +121,10 @@
     .mobile-link{font-size:1.5rem;font-weight:200;letter-spacing:.02em;color:var(--paper);
       background:none;border:none;cursor:pointer;font-family:inherit;opacity:.75;transition:opacity .2s}
     .mobile-link:hover{opacity:1}
-    .mobile-link.active{opacity:1;color:var(--accent)}
-    .mobile-link.mm-cta{margin-top:var(--space-3);font-family:'Fraunces',serif;font-style:italic;color:var(--accent);opacity:1}
+    .mobile-link.active{opacity:1;color:var(--accent-nav)}
+    /* --accent-nav, not --accent: this sits in the same overlay as the active item,
+       and two different oranges a line apart read as a mistake. */
+    .mobile-link.mm-cta{margin-top:var(--space-3);font-family:'Fraunces',serif;font-style:italic;color:var(--accent-nav);opacity:1}
 
     /* Outbound nav link (the sister company's own site) — a quiet mark so the
        new tab is not a surprise. CSS content, so i18n's text walker ignores it. */
