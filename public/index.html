@@ -172,8 +172,10 @@
 <!-- NAV -->
 <nav id="nav">
   <a href="/" class="nav-logo" data-page="home" aria-label="Shoot In Panama · Verite Producciones — home"><img src="/assets/logo-badge.webp" alt="Shoot In Panama · Verite Producciones"></a>
+  <!-- No Home tab: the logo is the home link (it carries the "— home" aria-label).
+       routes.js still maps the home route to nav 'home'; the middleware's
+       #nav-home / #mnav-home selectors simply match nothing now. -->
   <div class="nav-links">
-    <a class="nav-link" id="nav-home" data-page="home" href="/">Home</a>
     <a class="nav-link" id="nav-work" data-page="work" href="/work">Work</a>
     <a class="nav-link" id="nav-services" data-page="services" href="/services">Services</a>
     <a class="nav-link" id="nav-incentives" data-page="incentives" href="/incentives">Incentives</a>
@@ -192,7 +194,6 @@
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
-  <a class="mobile-link" id="mnav-home" data-page="home" href="/">Home</a>
   <a class="mobile-link" id="mnav-work" data-page="work" href="/work">Work</a>
   <a class="mobile-link" id="mnav-services" data-page="services" href="/services">Services</a>
   <a class="mobile-link" id="mnav-incentives" data-page="incentives" href="/incentives">Incentives</a>
