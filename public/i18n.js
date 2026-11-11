@@ -446,6 +446,14 @@
       if (bare.charAt(0) !== "/") continue;
       links[i].setAttribute("href", es ? (bare === "/" ? "/es/" : "/es" + bare) : bare);
     }
+    // The sister site is a separate domain with its own /en/ and /es/ homes, so the
+    // rewrite above (which only touches internal paths) cannot reach it. Both URLs
+    // are authored on the element; pick the one matching the page.
+    var ext = document.querySelectorAll("a[data-ext-es][data-ext-en]");
+    for (var j = 0; j < ext.length; j++) {
+      var dest = ext[j].getAttribute(es ? "data-ext-es" : "data-ext-en");
+      if (dest) ext[j].setAttribute("href", dest);
+    }
   }
 
   function pathIsEs() { return location.pathname === "/es" || location.pathname.indexOf("/es/") === 0; }
