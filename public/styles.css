@@ -12,22 +12,26 @@
       --card:rgba(238,236,234,0.03);
 
       /* ── BACKGROUND ──
-         The body is black throughout; the footer is the one block with a colour of
-         its own. It is pinned to a swatch supplied as the reference — Forner 85382
-         ciemnoszary, measured at #262626, a dead-neutral dark grey — and taken
-         darker than it, as asked: #161616, neutral in the same way (R=G=B) at about
-         40% of the swatch's luminance (0.0080 against 0.0194).
-         Neutral is the point. Earlier rounds chased a warm, dirty cast against
-         Verite's footer (#2C2C2A), ending at #131210 with the blue pushed below the
-         red and green; the swatch has no such bias, so neither does this.
-         Rejected on the way: #1A2029 (blue well above red — a cold grey from
-         another family), #24231F and #1C1B17 (right hue, too light).
+         The body is black throughout, and the footer no longer fights that: it is
+         the nav bar's glass, mirrored, at the nav's own darkness. See the FOOTER
+         block for the recipe.
+         The long way round, so it isn't re-walked: the footer used to carry a
+         colour of its own, pitched first against Verite's footer (#2C2C2A), then
+         against a supplied swatch — Forner 85382 (#262626), later Charcoal Grey
+         #3C4142. Painted solid, the charcoal crashed against the pitch black (a
+         step from luminance 0.008 to 0.055 with nothing between). Used as a tint
+         inside the glass it worked — #202426, then #1A1E1F a step darker — but
+         each round only asked for darker again, and the honest end of that line
+         is the nav's own tint, which is the body black. So the two bars now share
+         one material instead of being matched by eye.
+         Also rejected: #131210 and #161616, near-blacks that read as more body
+         rather than as a bar.
          --surface is the background in force. Cards that sit on a 1px grid (loc,
          wx, inc, resources, the contact form) read it instead of pinning --ink, so
          the grid keeps --rule for its hairlines and each cell follows whatever
          block contains it. */
       --ground:#03060a;         /* black — the long-standing ink */
-      --footer-black:#161616;   /* matte neutral black — footer only */
+      --footer-solid:#0B0E11;   /* the footer glass, composited — fallback only */
       --surface:var(--ground);
 
       /* ── SPACING SCALE (DATRUM 8px grid) — shared, never extended ──
@@ -677,27 +681,47 @@
 
     /* ── FOOTER ── */
     footer{padding:1.75rem var(--space-12);border-top:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;gap:var(--space-6);flex-wrap:wrap}
-    .footer-logo{font-size:.58rem;font-weight:300;letter-spacing:.28em;text-transform:uppercase;color:var(--muted)}
+    .footer-logo{font-size:.58rem;font-weight:300;letter-spacing:.28em;text-transform:uppercase;color:var(--paper)}
     .footer-logo-img{height:136px;width:136px;display:block;opacity:1}
-    .footer-copy{font-size:.58rem;font-weight:300;color:rgba(238,236,234,.18);letter-spacing:.04em}
+    .footer-copy{font-size:.58rem;font-weight:300;color:var(--paper);letter-spacing:.04em}
     .footer-doors{display:flex;flex-wrap:wrap;gap:.25rem 1.75rem}
     .footer-doors a{display:inline-flex;align-items:center;min-height:44px;font-size:.62rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);text-decoration:none}
     .footer-doors a:hover,.footer-doors a:focus-visible{text-decoration:underline;text-underline-offset:4px}
     .footer-iq{display:flex;align-items:center;gap:.85rem;flex-shrink:0;text-decoration:none;cursor:pointer}
     .footer-iq-logo{width:28px;height:28px;border-radius:50%;object-fit:cover;opacity:.75;transition:opacity .2s}
     .footer-iq:hover .footer-iq-logo{opacity:1}
-    .footer-iq-text{font-size:.52rem;font-weight:300;letter-spacing:.12em;text-transform:uppercase;color:rgba(238,236,234,.2);line-height:1.5;max-width:18ch;transition:color .2s}
-    .footer-iq:hover .footer-iq-text{color:rgba(238,236,234,.4)}
+    .footer-iq-text{font-size:.52rem;font-weight:300;letter-spacing:.12em;text-transform:uppercase;color:var(--paper);line-height:1.5;max-width:18ch}
 
     /* ── REVEAL ── */
     .reveal{opacity:0;transform:translateY(.8rem);transition:opacity .8s ease,transform .8s ease}
     .reveal.in{opacity:1;transform:none}
 
     /* ── FOOTER ──
-       The one block with a background of its own. It redefines --surface as well as
-       the background so that a grid-backed card dropped in here later would follow
-       the footer rather than the body black behind it. */
-    footer{--surface:var(--footer-black);background:var(--surface)}
+       #nav.scrolled, mirrored across the page. Every value is the nav's, and the
+       geometry is flipped so the two bars are reflections rather than lookalikes:
+         · the same tint, blur and saturate — rgba(3,6,10,.55) at blur(22px)
+           saturate(180%). Over the body black that tint is nearly a no-op, so what
+           carries the footer is the wash and the edges, not a fill. That is the
+           point: the bar is as dark as the nav because it IS the nav's recipe.
+         · the white wash runs the other way — linear-gradient(0deg,…) puts the .07
+           end at the page's bottom edge, where the nav puts it at the top.
+         · the hairline stays on the content-facing edge (border-top here,
+           border-bottom there) and the specular inset moves to the screen edge
+           (inset 0 -1px), again the nav's arrangement reflected.
+         · the drop shadow lifts upward instead of down.
+       It redefines --surface too, so a grid-backed card dropped in here follows the
+       footer's composite rather than the body black behind it. */
+    footer{--surface:var(--footer-solid);
+      background-color:rgba(3,6,10,.55);
+      background-image:linear-gradient(0deg,rgba(238,236,234,.07),rgba(238,236,234,.02));
+      -webkit-backdrop-filter:blur(22px) saturate(180%);
+      backdrop-filter:blur(22px) saturate(180%);
+      border-top-color:rgba(238,236,234,.1);
+      box-shadow:inset 0 -1px 0 rgba(238,236,234,.12),0 calc(-1 * var(--space-2)) var(--space-8) rgba(3,6,10,.45)}
+    /* Same reasoning as the nav: with no blur to carry it, the tint goes opaque. */
+    @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+      footer{background-color:var(--footer-solid)}
+    }
 
     /* The inline nav row needs ~1000px once the Verite link is in it (measured in
        Spanish, the longest labels). Below that the hamburger takes over — it also
