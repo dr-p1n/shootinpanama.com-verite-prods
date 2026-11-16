@@ -12,18 +12,20 @@
       --card:rgba(238,236,234,0.03);
 
       /* ── BANDAS DE FONDO ──
-         Dos tonos que se alternan bloque a bloque: negro y gris oscuro. Un primer
-         intento con tres pasos cortos (#0A0F16, #121822) se leía como un mismo
-         negro respirando y no se notaba, así que el gris sube a #1A2029 — +23/+26/+31
-         por canal sobre el negro, diferencia que sí se ve sin salirse del tono
-         cinematográfico. Conserva el sesgo azulado del ink para que sea el mismo
-         gris frío de la casa y no un gris neutro pegado encima.
+         Dos tonos que se alternan bloque a bloque: negro y gris oscuro.
+         El gris se fijó contra el del footer de veriteproducciones.net (#2C2C2A),
+         pidiendo uno más oscuro y más sucio: #24231F baja ocho puntos de luz y
+         acentúa lo que ensucia al de Verite — el azul por DEBAJO del rojo y el
+         verde (44,44,42 allí; 36,35,31 aquí), que es lo que lo vuelve terroso en
+         vez de frío. Dos intentos previos fallaron por lo contrario: #0A0F16 y
+         #121822 eran pasos demasiado cortos y se leían como un mismo negro, y
+         #1A2029 tenía el azul muy por encima (26,32,41), un gris limpio y frío.
          --surface es la banda vigente. Las tarjetas que se apoyan en una rejilla
          de 1px (loc, wx, inc, resources, formulario) la heredan en vez de fijar
          --ink, de modo que la rejilla conserva --rule y cada celda sigue a su
          banda sola. Para cambiar el ritmo basta tocar el bloque del final. */
       --band-1:#03060a;    /* negro — el ink de siempre */
-      --band-2:#1A2029;    /* gris oscuro */
+      --band-2:#24231F;    /* gris oscuro sucio */
       --surface:var(--band-1);
 
       /* ── SPACING SCALE (DATRUM 8px grid) — shared, never extended ──
