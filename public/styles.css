@@ -12,17 +12,18 @@
       --card:rgba(238,236,234,0.03);
 
       /* ── BANDAS DE FONDO ──
-         El negro sólido corría de arriba abajo. Estas tres bandas se alternan por
-         bloque para dar ritmo sin salirse del tono cinematográfico: pasos parejos
-         (+7/+9/+12 por canal) y el mismo sesgo azulado del ink, así que leen como
-         un solo negro respirando, no como franjas de colores distintos.
+         Dos tonos que se alternan bloque a bloque: negro y gris oscuro. Un primer
+         intento con tres pasos cortos (#0A0F16, #121822) se leía como un mismo
+         negro respirando y no se notaba, así que el gris sube a #1A2029 — +23/+26/+31
+         por canal sobre el negro, diferencia que sí se ve sin salirse del tono
+         cinematográfico. Conserva el sesgo azulado del ink para que sea el mismo
+         gris frío de la casa y no un gris neutro pegado encima.
          --surface es la banda vigente. Las tarjetas que se apoyan en una rejilla
          de 1px (loc, wx, inc, resources, formulario) la heredan en vez de fijar
          --ink, de modo que la rejilla conserva --rule y cada celda sigue a su
          banda sola. Para cambiar el ritmo basta tocar el bloque del final. */
       --band-1:#03060a;    /* negro — el ink de siempre */
-      --band-2:#0A0F16;    /* negro elevado */
-      --band-3:#121822;    /* gris oscuro */
+      --band-2:#1A2029;    /* gris oscuro */
       --surface:var(--band-1);
 
       /* ── SPACING SCALE (DATRUM 8px grid) — shared, never extended ──
@@ -689,25 +690,34 @@
     .reveal.in{opacity:1;transform:none}
 
     /* ── RITMO DE BANDAS ──
-       Una línea por bloque, en el orden en que se leen. Los héroes no aparecen:
-       llevan foto a sangre y su fondo no se ve nunca. Los ensayos van enteros en
-       la banda 2 — son lectura larga y un solo tono los deja tranquilos.
-       .loc-head y .loc-grid comparten banda a propósito: titular y rejilla son
-       una sola pieza y partirlos en dos tonos se vería como un error. */
-    .offer         {--surface:var(--band-2);background:var(--surface)}  /* home */
-    .teaser        {--surface:var(--band-1);background:var(--surface)}
-    .work-grid-wrap{--surface:var(--band-2);background:var(--surface)}  /* work */
-    .bts           {--surface:var(--band-1);background:var(--surface)}
-    .services-wrap {--surface:var(--band-2);background:var(--surface)}  /* services */
-    .inc-teaser    {--surface:var(--band-3);background:var(--surface)}
-    .loc-head      {--surface:var(--band-1);background:var(--surface)}
-    .loc-grid      {--surface:var(--band-1)}  /* el fondo propio es --rule: son las hairlines */
-    .wx-wrap       {--surface:var(--band-2);background:var(--surface)}
-    .inc           {--surface:var(--band-2);background:var(--surface)}  /* incentives */
-    .resources-wrap{--surface:var(--band-2);background:var(--surface)}  /* resources */
-    .contact-wrap  {--surface:var(--band-2);background:var(--surface)}  /* contact */
-    .essay         {--surface:var(--band-2);background:var(--surface)}  /* ensayos */
-    footer         {--surface:var(--band-3);background:var(--surface)}
+       Una línea por bloque, en el orden en que se leen, alternando gris/negro sin
+       saltarse ninguno. Los héroes no aparecen: llevan foto a sangre y su fondo no
+       se ve nunca, así que el primer bloque de cada página abre en gris.
+       .loc-head y .loc-grid comparten banda a propósito: titular y rejilla son una
+       sola pieza y partirlos en dos tonos se vería como un error — por eso el pie
+       de Servicios cae en gris y el de Incentivos en negro: cada página alterna
+       desde su propio arranque en vez de forzar un pie igual en todas. */
+    .offer         {--surface:var(--band-2);background:var(--surface)}  /* home: gris */
+    .teaser        {--surface:var(--band-1);background:var(--surface)}  /*       negro */
+    #page-home footer{--surface:var(--band-2);background:var(--surface)}/*       gris */
+
+    .work-grid-wrap{--surface:var(--band-2);background:var(--surface)}  /* work: gris */
+    .bts           {--surface:var(--band-1);background:var(--surface)}  /*       negro */
+    #page-work footer{--surface:var(--band-2);background:var(--surface)}/*       gris */
+
+    .services-wrap {--surface:var(--band-2);background:var(--surface)}  /* services: gris */
+    .inc-teaser    {--surface:var(--band-1);background:var(--surface)}  /*           negro */
+    .loc-head      {--surface:var(--band-2);background:var(--surface)}  /*           gris */
+    .loc-grid      {--surface:var(--band-2)}  /* el fondo propio es --rule: son las hairlines */
+    .wx-wrap       {--surface:var(--band-1);background:var(--surface)}  /*           negro */
+    #page-services footer{--surface:var(--band-2);background:var(--surface)}
+
+    .inc           {--surface:var(--band-2);background:var(--surface)}  /* incentives: gris */
+    .resources-wrap{--surface:var(--band-2);background:var(--surface)}  /* resources:  gris */
+    .contact-wrap  {--surface:var(--band-2);background:var(--surface)}  /* contact:    gris */
+    .essay         {--surface:var(--band-2);background:var(--surface)}  /* ensayos:    gris */
+    /* Páginas de un solo bloque: el pie cierra en negro para que igual alterne. */
+    footer         {--surface:var(--band-1);background:var(--surface)}
 
     /* The inline nav row needs ~1000px once the Verite link is in it (measured in
        Spanish, the longest labels). Below that the hamburger takes over — it also
