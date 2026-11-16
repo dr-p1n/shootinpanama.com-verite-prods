@@ -11,21 +11,24 @@
       --muted:rgba(238,236,234,0.55);--rule:rgba(238,236,234,0.08);
       --card:rgba(238,236,234,0.03);
 
-      /* ── FONDO ──
-         El cuerpo va en negro. El gris sucio queda reservado al pie.
-         El gris se fijó contra el del footer de veriteproducciones.net (#2C2C2A),
-         pidiendo uno más oscuro y más sucio: lo que ensucia al de Verite es tener
-         el azul por DEBAJO del rojo y el verde (44,44,42), y #1C1B17 (28,27,23)
-         acentúa esa caída mientras baja a menos de la mitad de su luminancia
-         (0.0110 contra 0.0250). Intentos descartados: #1A2029 tenía el azul muy
-         por encima (26,32,41) — gris limpio y frío, de otra familia — y #24231F
-         ya tenía el tono pero se quedaba claro.
-         --surface es el fondo vigente. Las tarjetas que se apoyan en una rejilla
-         de 1px (loc, wx, inc, resources, formulario) lo heredan en vez de fijar
-         --ink, así la rejilla conserva --rule para sus hairlines y cada celda
-         sigue al bloque que la contiene. */
-      --ground:#03060a;        /* negro — el ink de siempre */
-      --footer-grey:#1C1B17;   /* gris oscuro sucio — solo el pie */
+      /* ── BACKGROUND ──
+         The body is black throughout; the footer is the one block with a colour of
+         its own. It was pitched against the footer on veriteproducciones.net
+         (#2C2C2A), asked for darker and dirtier each round, and landed on a matte
+         black rather than a grey: #131210, a quarter of Verite's luminance (0.0061
+         against 0.0250). What keeps it matte and not a flat neutral is the blue
+         sitting BELOW the red and green (19,18,16) — the same trait that makes
+         Verite's read earthy, pushed further. It clears the body black by 16 points
+         of red, so the seam reads without the footer looking lit.
+         Rejected on the way: #1A2029 had blue well above red (26,32,41), a clean
+         cold grey from another family; #24231F and #1C1B17 had the hue right but
+         still sat too light.
+         --surface is the background in force. Cards that sit on a 1px grid (loc,
+         wx, inc, resources, the contact form) read it instead of pinning --ink, so
+         the grid keeps --rule for its hairlines and each cell follows whatever
+         block contains it. */
+      --ground:#03060a;         /* black — the long-standing ink */
+      --footer-black:#131210;   /* matte black — footer only */
       --surface:var(--ground);
 
       /* ── SPACING SCALE (DATRUM 8px grid) — shared, never extended ──
@@ -691,11 +694,11 @@
     .reveal{opacity:0;transform:translateY(.8rem);transition:opacity .8s ease,transform .8s ease}
     .reveal.in{opacity:1;transform:none}
 
-    /* ── PIE ──
-       El único bloque con fondo propio. El cuerpo queda en negro; el pie lo cierra
-       en el gris sucio. Redefine --surface además del fondo para que, si algún día
-       entra ahí una tarjeta sobre rejilla, siga al pie y no al negro del cuerpo. */
-    footer{--surface:var(--footer-grey);background:var(--surface)}
+    /* ── FOOTER ──
+       The one block with a background of its own. It redefines --surface as well as
+       the background so that a grid-backed card dropped in here later would follow
+       the footer rather than the body black behind it. */
+    footer{--surface:var(--footer-black);background:var(--surface)}
 
     /* The inline nav row needs ~1000px once the Verite link is in it (measured in
        Spanish, the longest labels). Below that the hamburger takes over — it also
