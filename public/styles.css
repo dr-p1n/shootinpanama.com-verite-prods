@@ -11,6 +11,20 @@
       --muted:rgba(238,236,234,0.55);--rule:rgba(238,236,234,0.08);
       --card:rgba(238,236,234,0.03);
 
+      /* ── BANDAS DE FONDO ──
+         El negro sólido corría de arriba abajo. Estas tres bandas se alternan por
+         bloque para dar ritmo sin salirse del tono cinematográfico: pasos parejos
+         (+7/+9/+12 por canal) y el mismo sesgo azulado del ink, así que leen como
+         un solo negro respirando, no como franjas de colores distintos.
+         --surface es la banda vigente. Las tarjetas que se apoyan en una rejilla
+         de 1px (loc, wx, inc, resources, formulario) la heredan en vez de fijar
+         --ink, de modo que la rejilla conserva --rule y cada celda sigue a su
+         banda sola. Para cambiar el ritmo basta tocar el bloque del final. */
+      --band-1:#03060a;    /* negro — el ink de siempre */
+      --band-2:#0A0F16;    /* negro elevado */
+      --band-3:#121822;    /* gris oscuro */
+      --surface:var(--band-1);
+
       /* ── SPACING SCALE (DATRUM 8px grid) — shared, never extended ──
          4px is the only sub-8 step and is reserved for icon-to-label. */
       --space-1:0.25rem;   /* 4px  */
@@ -330,7 +344,7 @@
     .bts-note{font-family:'Fraunces',serif;font-style:italic;font-size:.78rem;color:var(--muted);max-width:32ch;text-align:right;line-height:1.6}
     /* contact sheet */
     .cs{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-6)}
-    .cs-cell{position:relative;overflow:hidden;background:#05080e;aspect-ratio:4/3;cursor:zoom-in}
+    .cs-cell{position:relative;overflow:hidden;background:var(--surface);aspect-ratio:4/3;cursor:zoom-in}
     /* Portrait exception: same cell size, image shown in full (letterboxed on the dark cell bg) */
     .cs-cell--fit .cs-img{object-fit:contain}
     .cs-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
@@ -381,7 +395,7 @@
     .loc-head{padding:var(--space-16) var(--gutter) var(--space-8)}
     .loc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);
       border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
-    .loc-card{position:relative;overflow:hidden;background:var(--ink);min-height:270px;padding:var(--space-8);
+    .loc-card{position:relative;overflow:hidden;background:var(--surface);min-height:270px;padding:var(--space-8);
       display:flex;flex-direction:column;justify-content:flex-end;cursor:zoom-in}
     /* The corner bracket that used to sit here (a tap-to-enlarge hint) is gone. What
        is left to say a card opens: cursor:zoom-in above for pointers, and the photo
@@ -425,7 +439,7 @@
     .wx-clock-line{font-size:.6rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:rgba(238,236,234,.4);margin:0 0 2.25rem;display:flex;align-items:baseline;gap:.7rem;flex-wrap:wrap}
     .wx-clock{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:.92rem;letter-spacing:.05em;color:var(--accent);text-transform:none;font-variant-numeric:tabular-nums}
     .wx-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule)}
-    .wx-card{background:var(--ink);padding:1.9rem var(--space-6)}
+    .wx-card{background:var(--surface);padding:1.9rem var(--space-6)}
     .wx-loc{font-size:.56rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(238,236,234,.55);margin-bottom:.15rem}
     .wx-region{font-family:'Fraunces',serif;font-style:italic;font-size:.8rem;color:rgba(238,236,234,.35);margin-bottom:1.15rem}
     .wx-temp{font-weight:200;font-size:2.7rem;line-height:1;color:var(--paper);font-variant-numeric:tabular-nums}
@@ -497,7 +511,7 @@
     .inc-intro strong{color:var(--paper);font-weight:400}
     .inc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);
       border:1px solid var(--rule);margin-bottom:3.5rem}
-    .inc-item{background:var(--ink);padding:var(--space-8) 1.6rem}
+    .inc-item{background:var(--surface);padding:var(--space-8) 1.6rem}
     .inc-item .k{font-weight:200;font-size:2.1rem;line-height:1;letter-spacing:-.03em;color:var(--paper);
       margin-bottom:.85rem;font-variant-numeric:tabular-nums}
     .inc-item .k sup{font-size:.42em;vertical-align:super;color:var(--accent);font-weight:300}
@@ -545,7 +559,7 @@
     .resources-wrap{padding:var(--space-8) var(--gutter) var(--section-y)}
     .resources-intro{font-size:.82rem;font-weight:300;color:var(--muted);max-width:58ch;line-height:1.85;margin-bottom:var(--space-12)}
     .resources-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
-    .resource-card{background:var(--ink);padding:2.25rem var(--space-8);display:flex;flex-direction:column;gap:var(--space-4);transition:background .2s}
+    .resource-card{background:var(--surface);padding:2.25rem var(--space-8);display:flex;flex-direction:column;gap:var(--space-4);transition:background .2s}
     .resource-card:hover{background:#0a0d10}
     .resource-card-cat{font-size:.55rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}
     .resource-card-title{font-weight:300;font-size:1.05rem;letter-spacing:-.01em;color:var(--paper);line-height:1.3}
@@ -643,7 +657,7 @@
     .contact-info-value a:hover{border-color:var(--paper)}
     .contact-info-note{font-size:.72rem;font-weight:300;color:var(--muted);line-height:1.7;font-style:italic;font-family:'Fraunces',serif}
     .rfq-form{display:grid;grid-template-columns:1fr 1fr;background:var(--rule);border:1px solid var(--rule)}
-    .ff{background:var(--ink);padding:1.75rem var(--space-6) 1.25rem;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);display:flex;flex-direction:column;gap:.6rem}
+    .ff{background:var(--surface);padding:1.75rem var(--space-6) 1.25rem;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);display:flex;flex-direction:column;gap:.6rem}
     .ff:nth-child(even){border-right:none}
     .ff-full{grid-column:span 2;border-right:none!important}
     .ff label{font-size:.55rem;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
@@ -652,7 +666,7 @@
     .ff input:focus,.ff select:focus,.ff textarea:focus{border-color:rgba(238,236,234,.4)}
     .ff input::placeholder,.ff textarea::placeholder{color:rgba(238,236,234,.15)}
     .ff select option{background:#111}
-    .ff-submit{grid-column:span 2;background:var(--ink);border-top:1px solid var(--rule);padding:0}
+    .ff-submit{grid-column:span 2;background:var(--surface);border-top:1px solid var(--rule);padding:0}
     .submit-btn{width:100%;font-family:'DM Sans',sans-serif;font-size:.6rem;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:var(--ink);background:var(--paper);border:none;padding:1.35rem var(--space-8);cursor:pointer;transition:background .25s,color .25s;display:block}
     .submit-btn:hover{background:var(--accent);color:var(--paper)}
 
@@ -673,6 +687,27 @@
     /* ── REVEAL ── */
     .reveal{opacity:0;transform:translateY(.8rem);transition:opacity .8s ease,transform .8s ease}
     .reveal.in{opacity:1;transform:none}
+
+    /* ── RITMO DE BANDAS ──
+       Una línea por bloque, en el orden en que se leen. Los héroes no aparecen:
+       llevan foto a sangre y su fondo no se ve nunca. Los ensayos van enteros en
+       la banda 2 — son lectura larga y un solo tono los deja tranquilos.
+       .loc-head y .loc-grid comparten banda a propósito: titular y rejilla son
+       una sola pieza y partirlos en dos tonos se vería como un error. */
+    .offer         {--surface:var(--band-2);background:var(--surface)}  /* home */
+    .teaser        {--surface:var(--band-1);background:var(--surface)}
+    .work-grid-wrap{--surface:var(--band-2);background:var(--surface)}  /* work */
+    .bts           {--surface:var(--band-1);background:var(--surface)}
+    .services-wrap {--surface:var(--band-2);background:var(--surface)}  /* services */
+    .inc-teaser    {--surface:var(--band-3);background:var(--surface)}
+    .loc-head      {--surface:var(--band-1);background:var(--surface)}
+    .loc-grid      {--surface:var(--band-1)}  /* el fondo propio es --rule: son las hairlines */
+    .wx-wrap       {--surface:var(--band-2);background:var(--surface)}
+    .inc           {--surface:var(--band-2);background:var(--surface)}  /* incentives */
+    .resources-wrap{--surface:var(--band-2);background:var(--surface)}  /* resources */
+    .contact-wrap  {--surface:var(--band-2);background:var(--surface)}  /* contact */
+    .essay         {--surface:var(--band-2);background:var(--surface)}  /* ensayos */
+    footer         {--surface:var(--band-3);background:var(--surface)}
 
     /* The inline nav row needs ~1000px once the Verite link is in it (measured in
        Spanish, the longest labels). Below that the hamburger takes over — it also
