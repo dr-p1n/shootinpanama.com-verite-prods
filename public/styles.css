@@ -11,22 +11,22 @@
       --muted:rgba(238,236,234,0.55);--rule:rgba(238,236,234,0.08);
       --card:rgba(238,236,234,0.03);
 
-      /* ── BANDAS DE FONDO ──
-         Dos tonos que se alternan bloque a bloque: negro y gris oscuro.
+      /* ── FONDO ──
+         El cuerpo va en negro. El gris sucio queda reservado al pie.
          El gris se fijó contra el del footer de veriteproducciones.net (#2C2C2A),
-         pidiendo uno más oscuro y más sucio: #24231F baja ocho puntos de luz y
-         acentúa lo que ensucia al de Verite — el azul por DEBAJO del rojo y el
-         verde (44,44,42 allí; 36,35,31 aquí), que es lo que lo vuelve terroso en
-         vez de frío. Dos intentos previos fallaron por lo contrario: #0A0F16 y
-         #121822 eran pasos demasiado cortos y se leían como un mismo negro, y
-         #1A2029 tenía el azul muy por encima (26,32,41), un gris limpio y frío.
-         --surface es la banda vigente. Las tarjetas que se apoyan en una rejilla
-         de 1px (loc, wx, inc, resources, formulario) la heredan en vez de fijar
-         --ink, de modo que la rejilla conserva --rule y cada celda sigue a su
-         banda sola. Para cambiar el ritmo basta tocar el bloque del final. */
-      --band-1:#03060a;    /* negro — el ink de siempre */
-      --band-2:#24231F;    /* gris oscuro sucio */
-      --surface:var(--band-1);
+         pidiendo uno más oscuro y más sucio: lo que ensucia al de Verite es tener
+         el azul por DEBAJO del rojo y el verde (44,44,42), y #1C1B17 (28,27,23)
+         acentúa esa caída mientras baja a menos de la mitad de su luminancia
+         (0.0110 contra 0.0250). Intentos descartados: #1A2029 tenía el azul muy
+         por encima (26,32,41) — gris limpio y frío, de otra familia — y #24231F
+         ya tenía el tono pero se quedaba claro.
+         --surface es el fondo vigente. Las tarjetas que se apoyan en una rejilla
+         de 1px (loc, wx, inc, resources, formulario) lo heredan en vez de fijar
+         --ink, así la rejilla conserva --rule para sus hairlines y cada celda
+         sigue al bloque que la contiene. */
+      --ground:#03060a;        /* negro — el ink de siempre */
+      --footer-grey:#1C1B17;   /* gris oscuro sucio — solo el pie */
+      --surface:var(--ground);
 
       /* ── SPACING SCALE (DATRUM 8px grid) — shared, never extended ──
          4px is the only sub-8 step and is reserved for icon-to-label. */
@@ -691,35 +691,11 @@
     .reveal{opacity:0;transform:translateY(.8rem);transition:opacity .8s ease,transform .8s ease}
     .reveal.in{opacity:1;transform:none}
 
-    /* ── RITMO DE BANDAS ──
-       Una línea por bloque, en el orden en que se leen, alternando gris/negro sin
-       saltarse ninguno. Los héroes no aparecen: llevan foto a sangre y su fondo no
-       se ve nunca, así que el primer bloque de cada página abre en gris.
-       .loc-head y .loc-grid comparten banda a propósito: titular y rejilla son una
-       sola pieza y partirlos en dos tonos se vería como un error — por eso el pie
-       de Servicios cae en gris y el de Incentivos en negro: cada página alterna
-       desde su propio arranque en vez de forzar un pie igual en todas. */
-    .offer         {--surface:var(--band-2);background:var(--surface)}  /* home: gris */
-    .teaser        {--surface:var(--band-1);background:var(--surface)}  /*       negro */
-    #page-home footer{--surface:var(--band-2);background:var(--surface)}/*       gris */
-
-    .work-grid-wrap{--surface:var(--band-2);background:var(--surface)}  /* work: gris */
-    .bts           {--surface:var(--band-1);background:var(--surface)}  /*       negro */
-    #page-work footer{--surface:var(--band-2);background:var(--surface)}/*       gris */
-
-    .services-wrap {--surface:var(--band-2);background:var(--surface)}  /* services: gris */
-    .inc-teaser    {--surface:var(--band-1);background:var(--surface)}  /*           negro */
-    .loc-head      {--surface:var(--band-2);background:var(--surface)}  /*           gris */
-    .loc-grid      {--surface:var(--band-2)}  /* el fondo propio es --rule: son las hairlines */
-    .wx-wrap       {--surface:var(--band-1);background:var(--surface)}  /*           negro */
-    #page-services footer{--surface:var(--band-2);background:var(--surface)}
-
-    .inc           {--surface:var(--band-2);background:var(--surface)}  /* incentives: gris */
-    .resources-wrap{--surface:var(--band-2);background:var(--surface)}  /* resources:  gris */
-    .contact-wrap  {--surface:var(--band-2);background:var(--surface)}  /* contact:    gris */
-    .essay         {--surface:var(--band-2);background:var(--surface)}  /* ensayos:    gris */
-    /* Páginas de un solo bloque: el pie cierra en negro para que igual alterne. */
-    footer         {--surface:var(--band-1);background:var(--surface)}
+    /* ── PIE ──
+       El único bloque con fondo propio. El cuerpo queda en negro; el pie lo cierra
+       en el gris sucio. Redefine --surface además del fondo para que, si algún día
+       entra ahí una tarjeta sobre rejilla, siga al pie y no al negro del cuerpo. */
+    footer{--surface:var(--footer-grey);background:var(--surface)}
 
     /* The inline nav row needs ~1000px once the Verite link is in it (measured in
        Spanish, the longest labels). Below that the hamburger takes over — it also
